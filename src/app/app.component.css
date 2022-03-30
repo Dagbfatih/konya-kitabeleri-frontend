@@ -1,0 +1,14 @@
+.row {
+  overflow-x: auto;
+  min-height: 95vh;
+}
+
+.col {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* :host{
+      overflow: hidden;
+      display: block;
+    } */

@@ -1,0 +1,42 @@
+.container {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+.card {
+  min-height: 30rem;
+}
+
+.card-body .card-text {
+  text-indent: 20px;
+}
+
+.carousel.slide {
+  height: 30rem;
+}
+
+.carousel-inner {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item {
+  position: relative;
+  height: 100%;
+}
+
+.carousel-img {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 30rem;
+}
+
+.info i {
+  margin-right: 0.3rem;
+}
+
+.info span {
+  margin-right: 0.7rem;
+}

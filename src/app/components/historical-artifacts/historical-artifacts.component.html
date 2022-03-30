@@ -1,0 +1,58 @@
+<div class="container">
+    <h1 class="h1">{{getTranslate('historicalArtifacts')}}</h1>
+
+    <hr>
+
+    <div class="row pt-3 justify-content-md-center">
+        <div *ngFor="let artifact of artifacts; let i = index;" class="col-11 mb-3">
+            <div class="card h-100">
+                <!-- Card -->
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <!-- Col -->
+                        <div [id]="'carouselIndicators'+i" class="carousel slide align-items-center"
+                            data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button *ngFor="let img of artifact.artifactImages; let j = index;" type="button"
+                                    [attr.data-bs-target]="'#carouselIndicators'+i" [ngClass]="(j === 0) ? 'active' : ''"
+                                    [attr.data-bs-slide-to]="j" aria-current="true" aria-label="Slide 1"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item align-middle"
+                                    *ngFor="let img of artifact.artifactImages; let j = index;"
+                                    [ngClass]="(j === 0) ? 'active' : ''">
+                                    <img [src]="img.path" class="carousel-img d-block w-100" alt="...">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                [attr.data-bs-target]="'#carouselIndicators'+i" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                [attr.data-bs-target]="'#carouselIndicators'+i" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+    
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>{{artifact.artifact.name}}</strong></h5>
+                            <p class="card-text">{{artifact.artifact.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <p class="card-text">
+                        <small class="info text-muted">
+                            <i class="fa fa-calendar"></i><span>{{getDate(artifact.artifact.date)}}</span>
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
