@@ -10,7 +10,7 @@ import { HistoricalArtifactsComponent } from './components/historical-artifacts/
 import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    CommonModule,
+    NgbCarouselModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
