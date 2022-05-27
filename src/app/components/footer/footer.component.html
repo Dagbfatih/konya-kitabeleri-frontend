@@ -1,5 +1,5 @@
 <footer>
-    <div class="bd-footer py-5" style="background-color: rgb(161, 161, 161);">
+    <div class="bd-footer py-5 bg-light">
         <!-- bg-light -->
         <div class="container py-5">
             <div class="row">
@@ -8,6 +8,7 @@
                         <!-- text-muted -->
                         <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/"
                             aria-label="Bootstrap">
+                            <i class="fa fa-leaf me-2" style="font-size: 32px;"></i>
                             <span class="fs-5">Tarih Eserleri Projesi</span>
                         </a>
                         <li class="mb-2">
@@ -24,7 +25,17 @@
                 <div class="col-6 col-lg-1 offset-lg-1 mb-3">
                     <h5>{{getTranslate("links")}}</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="link-dark link" href="/soruluk-frontend/give-feedback">Feedback</a>
+                        <li class="mb-2">
+                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Anasayfa</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Konya</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Konya Kitabeleri</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Sanal Gezi</a>
                         </li>
                     </ul>
                 </div>
@@ -58,6 +69,34 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                        <i class="fa fa-leaf" style="font-size: 28px;"></i>
+                    </a>
+                    <span class="text-muted">© 2021 Company, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fa fa-instagram" style="font-size: 24px;"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fa fa-twitter" style="font-size: 24px;"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-muted" href="#">
+                            <i class="fa fa-facebook" style="font-size: 24px;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </footer>

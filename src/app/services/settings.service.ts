@@ -1,3 +1,4 @@
+import { LanguageService } from './language.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class SettingsService {
 
-  constructor() { }
+  constructor(private languageService:LanguageService) { }
 
   getLanguageCodeFromLocalStorage(): string {
     let code = localStorage.getItem('code');
@@ -15,6 +16,12 @@ export class SettingsService {
     } else {
       return code;
     }
+  }
+
+  getCurrentLanguage() {
+    return this.languageService.getByCode(
+      this.getLanguageCodeFromLocalStorage()
+    );
   }
 
   setLanguage(languageCode: string) {

@@ -1,5 +1,6 @@
 export interface Language {
-  id?:number;
-  languageName:string;
-  code:string;
+  id?: number;
+  languageName: string;
+  code: string;
+  flagCode: string;
 }

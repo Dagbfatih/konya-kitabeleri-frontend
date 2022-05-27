@@ -1,42 +1,103 @@
-.container {
-  margin-top: 2em;
-  margin-bottom: 4em;
+@media (min-width: 768px) {
+  .featurette-heading {
+    color: black;
+    font-weight: 400;
+    font-size: 50px;
+    margin-top: 5rem;
+  }
+
+  .featurette-heading-2 {
+    color: black;
+    font-weight: 400;
+    font-size: 50px;
+    margin-top: 3rem;
+  }
 }
 
-.card {
-  min-height: 30rem;
+@media (max-width: 768px) {
+  .featurette-heading {
+    color: black;
+    font-weight: 400;
+    font-size: 35px;
+    margin-top: 5rem;
+  }
+
+  .featurette-heading-2 {
+    color: black;
+    font-weight: 400;
+    font-size: 35px;
+    margin-top: 3rem;
+  }
 }
 
-.card-body .card-text {
-  text-indent: 20px;
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  color: rgb(175, 168, 158);
 }
 
-.carousel.slide {
-  height: 30rem;
+.bd-masthead {
+  background-color: rgb(119, 119, 119);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-.carousel-inner {
-  margin: auto;
-  width: 100%;
-  height: 100%;
+hr.featurette-divider {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
-.carousel-item {
-  position: relative;
-  height: 100%;
+.img-sm {
+  margin-bottom: 1rem;
+}
+
+ul li {
+  color: var(--text-muted);
+}
+
+.list-group .list-group-item {
+  background-color: var(--app-background-color);
+  color: var(--text-muted);
+  border-top: 1px solid #363738;
+}
+
+a.link {
+  text-decoration: none;
+}
+
+a.link:hover {
+  text-decoration: underline;
+}
+
+a.unlink {
+  text-decoration: none;
+}
+
+.gradient {
+  background: linear-gradient(
+    to right,
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0)
+  );
 }
 
 .carousel-img {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  height: 30rem;
-}
-
-.info i {
-  margin-right: 0.3rem;
-}
-
-.info span {
-  margin-right: 0.7rem;
+  height: 32rem;
+  width: auto;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 30%,
+    rgba(255, 0, 0, 1) 54%,
+    rgba(255, 0, 0, 1) 30%,
+    transparent 95%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 30%,
+    rgba(255, 0, 0, 1) 54%,
+    rgba(255, 0, 0, 1) 30%,
+    transparent 95%
+  );
 }

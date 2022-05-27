@@ -23,15 +23,25 @@ ul.friend-list li {
   transition: 0.3s;
 }
 
-.dropdown-toggle.dr-arrow {
-  display: flex;
-  align-items: center;
-  border-radius: 100px;
+.text-custom {
+  color: #ffffff;
 }
 
-.dropdown-toggle::after {
-  content: none;
+ul.friend-list {
+  margin: 0;
+  padding: 0;
 }
+
+.text-custom > li > a {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.text-custom > li > .active {
+  font-weight: 600;
+  color: #ffffff;
+}
+
 
 .dropdown-toggle.dr-arrow:hover {
   background: var(--app-navi-profile-hover-color);

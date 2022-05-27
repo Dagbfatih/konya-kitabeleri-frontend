@@ -1,0 +1,21 @@
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  color: #000;
+}
+
+h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}

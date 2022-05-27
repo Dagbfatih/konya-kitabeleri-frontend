@@ -3,4 +3,8 @@ export interface Artifact {
   name: string;
   date: Date;
   description: string;
+  epitaph:string;
+  epitaphImagePath:string;
+  artifactTypeId:number;
+  histPeriodId:number;
 }

@@ -12,6 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { KonyaComponent } from './components/konya/konya.component';
+import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
+import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,18 @@ import { CommonModule } from '@angular/common';
     SettingsComponent,
     FooterComponent,
     HomeComponent,
+    KonyaComponent,
+    KonyaKitabeComponent,
+    VirtualTourComponent,
+    AboutUsComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbCarouselModule,
+    NgbModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),

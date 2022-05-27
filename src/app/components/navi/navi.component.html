@@ -2,28 +2,69 @@
     <div class="container-xxl flex-wrap flex-md-nowrap">
         <a class="navbar-brand text-white" routerLink="/">
             <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
+            Ana Sayfa
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start">
+            <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
                 <!-- flex-row vardı -->
-                <li class="nav-item col-md-auto">
+                <!-- <li class="nav-item col-md-auto">
                     <a class="nav-link text-white" aria-current="page" routerLink="/historical-artifacts">
                         {{getTranslate("historicalArtifacts")}}
+                    </a>
+                </li> -->
+                <!-- <li class="nav-item col-md-auto">
+                    <a class="nav-link text-white" aria-current="page" routerLink="/cities">
+                        {{getTranslate("cities")}}
+                    </a>
+                </li> -->
+                <li class="nav-item col-md-auto">
+                    <!-- her birinde col 6 vardı -->
+                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/konya">
+                        Konya
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Konya Kitabeleri
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" style="white-space: normal;"
+                                (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">
+                                Selçuklu Dönemi
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <hr class="dropdown-divider">
+                        </li> -->
+                        <li>
+                            <a class="dropdown-item" style="white-space: normal;"
+                                (click)="navigate('/konya-kitabeleri/osmanli-donemi', 'osmanli-donemi')">
+                                Osmanlı Dönemi
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item col-md-auto">
+                    <!-- her birinde col 6 vardı -->
+                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/virtual-tours">
+                        Sanal Gezi
+                    </a>
+                </li>
+                <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/about-us">
+                        Hakkımızda
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
                     <!-- her birinde col 6 vardı -->
-                    <a class="nav-link text-white" aria-current="page" routerLink="/tests/details">
-                        {{getTranslate("cities")}}
-                    </a>
-                </li>
-                <li class="nav-item col-md-auto">
-                    <a class="nav-link text-white" aria-current="page" routerLink="/admin">
-                        {{getTranslate("aboutUs")}}
+                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/contact">
+                        İletişim
                     </a>
                 </li>
             </ul>
@@ -31,36 +72,24 @@
             <hr class="d-md-none text-white-50">
 
             <ul class="navbar-nav flex-row flex-wrap ms-md-auto ps-2 align-items-center text-start">
-                <li class="nav-item col-1 col-md-auto mb-1">
-                    <a class="nav-link text-white" aria-current="page" routerLink="/tests/details">
-                        <i class="fa fa-phone fa-lg"></i>
-                    </a>
-                </li>
-
-                <li class="nav-item col-1 col-md-auto mb-1">
-                    <a class="nav-link text-white" aria-current="page" routerLink="/tests/details">
-                        <i class="fa fa-github fa-lg"></i>
-                    </a>
-                </li>
-
-                <div class="nav-item dropdown dropdown-menu-end">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-cog mr-1"></i> {{getTranslate("settings")}}
+                
+                <!-- Language -->
+                <li class="nav-item dropdown dropdown-menu-end ">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="flag-icon flag-icon-{{getCurrentLanguage().flagCode}} flag-icon-squared"></span>
+                        {{getCurrentLanguage()!.languageName}}
                     </button>
 
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" routerLink="/settings">
-                                {{getTranslate("settings")}}
+                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDropdown">
+                        <li *ngFor="let language of languages">
+                            <a class="dropdown-item" (click)="setLanguage(language.code)">
+                                <span class="flag-icon flag-icon-{{language.flagCode}} flag-icon-squared"></span>
+                                {{language.languageName}}
                             </a>
                         </li>
-
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
                     </ul>
-                </div>
+                </li>          
             </ul>
         </div>
     </div>
