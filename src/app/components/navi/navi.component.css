@@ -42,7 +42,6 @@ ul.friend-list {
   color: #ffffff;
 }
 
-
 .dropdown-toggle.dr-arrow:hover {
   background: var(--app-navi-profile-hover-color);
   cursor: pointer;

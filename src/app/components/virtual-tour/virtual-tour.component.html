@@ -1,5 +1,5 @@
 <div class="container mt-5 w-100">
-    <h1 class="display-4">{{getTranslate('gallery')}}</h1>
+    <h1 class="display-4">Sanal Gezi</h1>
     <hr class="">
 
     <!-- LG -->
@@ -8,12 +8,12 @@
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div *ngFor="let artifact of artifactsDetails; let i = index;" class="col">
-                <div class="card text-white bg-dark h-100">
+                <div class="card  h-100"> <!-- text-white bg-dark -->
                     <!-- border-light -->
                     <img *ngIf="artifact.artifactImages[0]?.path" [src]="artifact.artifactImages[0].path"
-                        class="card-img-top" alt="..." (click)="open(artifact.artifactImages[0].path, content)">
+                        class="card-img-top img" alt="..." (click)="open(artifact.artifactImages[0].path, content)">
                     <img *ngIf="!artifact.artifactImages[0]" src="https://www.waterstation.com.tr/img/default.jpg"
-                        class="card-img-top" alt="..." (click)="open('', content)">
+                        class="card-img-top img" alt="..." (click)="open('', content)">
                     <div class="card-body">
                         <h5 class="card-title">
                             {{getTranslate(artifact.artifact.name)}}
@@ -52,6 +52,8 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <img [src]="currentPhotoPath" class="img-fluid" alt="...">
+        <div class="d-flex justify-content-center">
+            <img [src]="currentPhotoPath" class="img-fluid" alt="...">
+        </div>
     </div>
 </ng-template>

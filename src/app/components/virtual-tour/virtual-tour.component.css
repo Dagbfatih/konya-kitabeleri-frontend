@@ -1,0 +1,22 @@
+.img {
+  float: left;
+  width: 406px;
+  height: 406px;
+  object-fit: cover;
+}
+
+.card-img-top {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.card-img-top:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.modal-body {
+  padding: 0px;
+}

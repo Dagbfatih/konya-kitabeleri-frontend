@@ -1,5 +1,5 @@
 <!-- START THE LG  -->
-<div class="container-fluid pe-0 ps-0 w-100 d-none d-lg-block" id="konya">
+<div class="container-fluid pe-0 ps-0 w-100" id="konya">
 
     <!-- Carousel -->
     <div class="bd-masthead">
@@ -7,43 +7,13 @@
             <div class="row g-0">
                 <div class="col-12 d-flex justify-content-center">
 
-                    <!-- LG -->
-                    <!-- <div id="myCarousel" class="carousel slide " data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button *ngFor="let slide of slidesByLg; let i = index;" type="button"
-                                data-bs-target="#myCarousel" [ngClass]="(i === 0) ? 'active' : ''"
-                                [attr.data-bs-slide-to]="i" aria-current="true" aria-label="Slide 1"></button>
-                        </div>
-                        <div class="carousel-inner ">
-                            <div class="carousel-item" *ngFor="let slide of slidesByLg; let i = index;"
-                                [ngClass]="(i === 0) ? 'active' : ''" data-bs-interval="5000">
-                                <div class="gradient">
-                                    <img [src]="slide.path" class="carousel-img w-100 h-100" alt="...">
-                                </div>
-
-                                <div class="container">
-                                    <div class="carousel-caption text-start" style="bottom: initial; top: 40%;">
-                                        <h1 style="white-space: pre-line; max-width: 550px;">
-                                            {{getTranslate(slide.title)}}
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev carousel-control" type="button"
-                            data-bs-target="#myCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next carousel-control" type="button"
-                            data-bs-target="#myCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div> -->
-
                     <img src="https://www.konyadayatirim.gov.tr/assets/upload/slider/slider66.jpg"
-                        class="img-fluid w-100 h-100" alt="">
+                        class="img-fluid w-100 h-100 d-none d-lg-block" alt="">
+
+                    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg d-lg-none">
+                        <img src="https://www.konyadayatirim.gov.tr/assets/upload/slider/slider66.jpg"
+                            class="" alt="">
+                    </div>
 
                 </div>
             </div>
@@ -56,7 +26,7 @@
         <div class="row featurette mb-5" style="margin-top: 5%;">
             <div class="col-md-12">
                 <h1 class="display-4" id="0">
-                    Konyamız
+                    Konya Tarihçesi
                 </h1>
                 <p class="fst-italic text-muted">
                     Konya, tarih boyunca dünyanın en önemli kadim şehirlerinden biri olarak günümüze kadar
@@ -85,12 +55,12 @@
                     teknikleri ile meydana getirdikleri birçok sanat eserine sahip olmuştur. Konya'da Mısırlılardan önce
                     hiyeroglif yazının kullanıldığı tarihte (M.Ö.3500) ilk ev mimarî ve ilk kutsal yapı kalıntılarına
                     rastlanmaktadır. Hıristiyanlık devrinde ait Anadolu'daki en eski Hıristiyan yerleşimine ve en eski
-                    kiliselerine de bu bölgede rastlanmaktadır.                 
+                    kiliselerine de bu bölgede rastlanmaktadır.
                 </p>
             </div>
         </div>
 
-        <div class="row featurette" id="1">
+        <!-- <div class="row featurette" id="1">
             <div class="col-md-12 order-md-2">
                 <h2 class="fw-light" id="1">
                     Konyanın Kısa Tarihçesi
@@ -116,7 +86,7 @@
                     vakıf eserlerinin, tekke, zaviye, mektep ve medreselerin bulunduğu bir şehirdir.
                 </p>
             </div>
-        </div>
+        </div> -->
     </div>
 </div> <!-- /.container -->
 <!-- END THE LG  -->

@@ -5,6 +5,12 @@ import { allTranslates } from 'src/app/services/translation.service';
 import { environment } from 'src/environments/environment';
 import { Language } from 'src/app/models/entities/language';
 import { LanguageService } from 'src/app/services/language.service';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-navi',
@@ -14,16 +20,25 @@ import { LanguageService } from 'src/app/services/language.service';
 export class NaviComponent implements OnInit {
   baseUrl = environment.baseUrl;
   languages: Language[] = [];
+  searchEngineForm: FormGroup;
 
   constructor(
     private router: Router,
     private settingsService: SettingsService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getLanguages();
     this.runActiveStateManagement();
+    this.createSearchEngineForm();
+  }
+
+  createSearchEngineForm() {
+    this.searchEngineForm = this.formBuilder.group({
+      searchText: ['', Validators.required],
+    });
   }
 
   runActiveStateManagement() {
@@ -72,6 +87,10 @@ export class NaviComponent implements OnInit {
   setLanguage(languageCode: string) {
     this.settingsService.setLanguage(languageCode);
     location.reload();
+  }
+
+  search(){
+    
   }
 
   getTranslate(key: string) {

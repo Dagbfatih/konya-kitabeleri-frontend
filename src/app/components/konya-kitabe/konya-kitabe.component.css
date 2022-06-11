@@ -13,6 +13,10 @@ html {
   font-size: 1.5rem;
 }
 
+.btn-collapse{
+  font-size: 0.875rem;
+}
+
 main {
   height: 100vh;
   height: -webkit-fill-available;
@@ -21,16 +25,21 @@ main {
   overflow-y: hidden;
 }
 
+.form-search{
+  border-bottom: 2px solid rgba(0,0,0,.05);
+}
+
 .btn-toggle {
   padding: 0.25rem 0.5rem;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.65);
   background-color: transparent;
 }
+
 .btn-toggle:hover,
 .btn-toggle:focus {
   color: rgba(0, 0, 0, 0.85);
-  background-color: #d2f4ea;
+  background-color: var(--app-list-color);
 }
 
 .btn-toggle::before {
@@ -55,14 +64,15 @@ main {
 }
 .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
-  background-color: #d2f4ea;
+  background-color: var(--app-list-color);
 }
 
 .btn-toggle-nav a.active {
-  background-color: #d2f4ea;
+  background-color: var(--app-list-color);
+  font-weight: 600;
 }
-/* Page */
 
+/* Toc */
 
 .bd-main{
   min-height: 100vh;

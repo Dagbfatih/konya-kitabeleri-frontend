@@ -8,6 +8,12 @@ import { ArtifactService } from 'src/app/services/artifact.service';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -20,6 +26,7 @@ export class KonyaKitabeComponent implements OnInit {
   artifactDetails: ArtifactDetailsDto[] = [];
   currentArtifact: ArtifactDetailsDto = {} as ArtifactDetailsDto;
   currentRoute: string = '';
+  searchEngineForm: FormGroup;
 
   constructor(
     private artifactService: ArtifactService,
@@ -27,7 +34,8 @@ export class KonyaKitabeComponent implements OnInit {
     private artifactTypeService: ArtifactTypeService,
     private scrollService: ScrollService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +44,13 @@ export class KonyaKitabeComponent implements OnInit {
     this.getAllartifactTypes();
     this.setCurrentArtifact();
     this.runActiveStateManagement();
+    this.createSearchEngineForm();
+  }
+
+  createSearchEngineForm() {
+    this.searchEngineForm = this.formBuilder.group({
+      searchText: ['', Validators.required],
+    });
   }
 
   runActiveStateManagement() {
@@ -72,6 +87,8 @@ export class KonyaKitabeComponent implements OnInit {
   getAllHistPeriods() {
     this.histPeriods = this.histPeriodService.getAll().data;
   }
+
+  search() {}
 
   getArtifactsByTypeAndPeriod(typeId: number, periodId: number) {
     return this.artifactDetails.filter(
