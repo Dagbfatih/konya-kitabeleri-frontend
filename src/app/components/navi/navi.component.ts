@@ -31,8 +31,15 @@ export class NaviComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLanguages();
-    this.runActiveStateManagement();
+    this.runActiveStateManagementScript();
+    this.runCollapseScript();
     this.createSearchEngineForm();
+  }
+
+  runCollapseScript() {
+    $('.navbar-collapse .nav-item-link').on("click", function () {
+        (<any>$(".navbar-collapse")).collapse('hide');
+    });
   }
 
   createSearchEngineForm() {
@@ -41,7 +48,7 @@ export class NaviComponent implements OnInit {
     });
   }
 
-  runActiveStateManagement() {
+  runActiveStateManagementScript() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         $('.nav-link.nav-link-custom.active').removeClass('active');

@@ -38,6 +38,9 @@
     <div class="container marketing mb-5 mt-5" data-bs-spy="scroll" data-bs-target="#myCarousel" data-bs-offset="0"
         tabindex="0">
         <div class="row featurette" style="margin-top: 5%;">
+            <div class="col-md-5 order-md-1 d-flex align-items-center">
+                <img src="assets/images/konya.jpg" alt="" width="500" height="500" class="img-fluid">
+            </div>
             <div class="col-md-7 order-md-2">
                 <h2 class="featurette-heading" id="0">
                     Konyamız
@@ -52,37 +55,16 @@
                 <a class="btn btn-light px-5 rounded-pill shadow-sm" (click)="scrollTop('/konya', 'konya')">Daha
                     Fazla</a>
             </div>
-            <div class="col-md-5 order-md-1 d-flex align-items-center">
-                <img src="assets/images/konya.jpg" alt="" width="500" height="500" class="img-fluid">
-            </div>
+            
         </div>
-
-        <!-- <hr class="featurette-divider">
-
-        <div class="row featurette" id="1">
-            <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading-2" id="1">
-                    Kitabeler
-                </h2>
-                <p class="lead  text-muted">
-                    Genellikle dinî, sivil ve askerî binaların belirli yerlerine özenle işlenen kitâbe, verdiği
-                    bilgilerle ve yapının estetiğini tamamlayan dekoratif bir unsur olmasıyla önem taşıyan bir mimari
-                    elemandır. Çoğunlukla giriş kapıları üzerinde yer alan ve eserin kimin tarafından ne zaman
-                    yapıldığını bildirene “tarih kitâbesi”, tamiri hakkında bilgi verene “tamir kitâbesi” denilir;
-                    kemerlerle iç kapılar üstünde yazılı olanlara da “kitâbe levhası” adı verilir. Ayrıca yapının iç ve
-                    dış duvarlarında bulunan yazılar, okçulukta atılan okun düştüğü yere dikilen nişan taşı ile (menzil
-                    taşı) mezar, menzil ve mesafe taşlarına işlenmiş yazılar da kitâbe sayılır.
-                </p>
-            </div>
-            <div class="col-md-5 order-md-1 d-flex align-items-center">
-                <img src="assets/images/kitabe.jpg" alt="" width="500" height="500" class="img-fluid">
-            </div>
-        </div> -->
-
+        
         <hr class="featurette-divider">
 
         <div class="row featurette" style="margin-top: 5%;">
-            <div class="col-md-7">
+            <div class="col-md-5 order-md-2">
+                <img src="assets/images/sanal-gezi.png" alt="" width="500" height="500" class="img-fluid">
+            </div>
+            <div class="col-md-7 order-md-1">
                 <h2 class="featurette-heading" id="0">
                     Sanal Gezimiz
                 </h2>
@@ -92,102 +74,7 @@
                     elemandır. Çoğunlukla giriş kapıları üzerinde yer alan ve eserin kimin tarafından ne zaman
                 </p>
             </div>
-            <div class="col-md-5 d-flex align-items-center">
-                <img src="assets/images/sanal-gezi.png" alt="" width="500" height="500" class="img-fluid">
-            </div>
         </div>
     </div>
 </div> <!-- /.container -->
 <!-- END THE LG  -->
-
-<!-- ------------------------------------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------------------------------------ -->
-
-<!-- START THE SM  -->
-<div class="container-fluid pe-0 ps-0 mb-3 w-100 d-lg-none">
-
-    <!-- Carousel -->
-    <div class="bd-masthead">
-        <div class="container-fluid pe-0 ps-0">
-            <div class="row g-0">
-                <div class="col-12 d-flex justify-content-center">
-
-                    <!-- SM -->
-                    <div id="myCarouselForSm" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button *ngFor="let slide of slidesBySm; let i = index;" type="button"
-                                data-bs-target="#myCarouselForSm" [ngClass]="(i === 0) ? 'active' : ''"
-                                [attr.data-bs-slide-to]="i" aria-current="true" aria-label="Slide 1"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let slide of slidesBySm; let i = index;"
-                                [ngClass]="(i === 0) ? 'active' : ''" data-bs-interval="5000">
-                                <img [src]="slide.path" class="carousel-img w-100 h-100" alt="...">
-
-                                <div class="container d-none d-md-block d-lg-none">
-                                    <div class="carousel-caption text-center" style="bottom: auto; top: 130px;">
-                                        <h1>adasd</h1>
-                                    </div>
-                                </div>
-                                <div class="container d-md-none">
-                                    <div class="carousel-caption text-center" style="bottom: auto; top: 30px;">
-                                        <h1>asdsadad</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#myCarouselForSm"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#myCarouselForSm"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Overview -->
-    <div class="container marketing mt-5" data-bs-spy="scroll" data-bs-target="#myCarousel" data-bs-offset="0"
-        tabindex="0">
-        <div class="row featurette" style="margin-top: 5%;">
-            <div class="col-lg-5">
-                <img src="assets/images/home-page-p1.webp" alt="" width="500" height="500" class="img-fluid img-sm">
-            </div>
-            <div class="col-lg-7">
-                <h2 class="featurette-heading" id="0">
-                    dsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf
-                </h2>
-                <p class="lead text-muted">dsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf
-                </p>
-                <ul>
-                    <li>
-                        <p class="lead">dsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf</p>
-                    </li>
-                    <li>
-                        <p class="lead">dsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf</p>
-                    </li>
-                    <li>
-                        <p class="lead">dsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-        <!-- <hr class="featurette-divider"> -->
-    </div>
-</div><!-- /.container -->
-
-<!-- FOOTER -->
-<!-- <footer class="container" style="margin-bottom: 5rem;">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer> -->

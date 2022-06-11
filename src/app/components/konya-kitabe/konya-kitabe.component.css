@@ -111,8 +111,3 @@ main {
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  .bd-toc-collapse {
-    display: block !important;
-  }
-}

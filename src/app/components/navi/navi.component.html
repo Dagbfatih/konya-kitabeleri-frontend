@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark bd-navbar">
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
-        
+
         <div class="navbar-header">
             <a class="navbar-brand text-white d-none d-lg-block" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
@@ -27,7 +27,7 @@
                         {{getTranslate("cities")}}
                     </a>
                 </li> -->
-                <li class="nav-item col-md-auto">
+                <li class="nav-item nav-item-link col-md-auto">
                     <!-- her birinde col 6 vardı -->
                     <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/konya">
                         Konya
@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" style="white-space: normal;"
+                            <a class="dropdown-item nav-item-link" style="white-space: normal;"
                                 (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">
                                 Selçuklu Dönemi
                             </a>
@@ -49,25 +49,25 @@
                             <hr class="dropdown-divider">
                         </li> -->
                         <li>
-                            <a class="dropdown-item" style="white-space: normal;"
+                            <a class="dropdown-item nav-item-link" style="white-space: normal;"
                                 (click)="navigate('/konya-kitabeleri/osmanli-donemi', 'osmanli-donemi')">
                                 Osmanlı Dönemi
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item nav-item-link col-md-auto">
                     <!-- her birinde col 6 vardı -->
                     <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/virtual-tours">
                         Sanal Gezi
                     </a>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item nav-item-link col-md-auto">
                     <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/about-us">
                         Hakkımızda
                     </a>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item nav-item-link col-md-auto">
                     <!-- her birinde col 6 vardı -->
                     <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/contact">
                         İletişim
@@ -84,8 +84,8 @@
                 <!-- Search Form -->
                 <li class="nav-item me-5">
                     <form class="d-flex" [formGroup]="searchEngineForm" role="search">
-                        <input class="form-control me-2" formControlName="searchText"
-                            type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" formControlName="searchText" type="search" placeholder="Search"
+                            aria-label="Search">
                         <button class="btn btn-outline-light" type="submit" (click)="search()">Search</button>
                     </form>
                 </li>
@@ -107,7 +107,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
             </ul>
         </div>
     </div>
