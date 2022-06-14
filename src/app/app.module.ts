@@ -17,6 +17,7 @@ import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KitabeComponent } from './components/kitabe/kitabe.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VirtualTourComponent,
     AboutUsComponent,
     ContactComponent,
+    KitabeComponent,
   ],
   imports: [
     BrowserModule,
