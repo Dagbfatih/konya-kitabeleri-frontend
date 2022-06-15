@@ -18,7 +18,13 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KitabeComponent } from './components/kitabe/kitabe.component';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { ToastrModule } from 'ngx-toastr';
+import { AdminComponent } from './components/admin/admin.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +39,9 @@ import { KitabeComponent } from './components/kitabe/kitabe.component';
     AboutUsComponent,
     ContactComponent,
     KitabeComponent,
+    RegisterComponent,
+    LoginComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,10 +49,16 @@ import { KitabeComponent } from './components/kitabe/kitabe.component';
     FormsModule,
     NgbCarouselModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgbModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -18,7 +18,9 @@ export class HistoricalArtifactsComponent implements OnInit {
   }
 
   getAllArtifactsDetails() {
-    this.artifacts = this.artifactService.getAllDetails();
+    this.artifactService.getAllDetails().subscribe((response) => {
+      this.artifacts = response.data;
+    });
   }
 
   getDate(date: Date): string {

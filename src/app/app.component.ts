@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.translationService.getAllTranslatesByCode(this.getLanguageCode());
+    this.translationService.getAllByCode(this.getLanguageCode());
   }
 
   getLanguageCode(): string {

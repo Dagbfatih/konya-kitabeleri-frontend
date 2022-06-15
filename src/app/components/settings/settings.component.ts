@@ -33,7 +33,9 @@ export class SettingsComponent implements OnInit {
   }
 
   getLanguages() {
-    this.languages = this.languageService.getAll().data;
+    this.languageService.getAll().subscribe((response) => {
+      this.languages = response.data;
+    });
   }
 
   getTranslate(key: string) {

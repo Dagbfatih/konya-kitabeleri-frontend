@@ -94,14 +94,14 @@
                 <li class="nav-item dropdown dropdown-menu-end">
                     <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <span class="flag-icon flag-icon-{{getCurrentLanguage().flagCode}} flag-icon-squared"></span>
-                        {{getCurrentLanguage()!.languageName}}
+                        <span class="flag-icon flag-icon-{{getLanguageFlagCode(currentLanguage.code!)}} flag-icon-squared"></span>
+                        {{currentLanguage!.languageName}}
                     </button>
 
                     <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDropdown">
                         <li *ngFor="let language of languages">
-                            <a class="dropdown-item" (click)="setLanguage(language.code)">
-                                <span class="flag-icon flag-icon-{{language.flagCode}} flag-icon-squared"></span>
+                            <a class="dropdown-item" (click)="setLanguage(language.code!)">
+                                <span class="flag-icon flag-icon-{{getLanguageFlagCode(language.code!)}} flag-icon-squared"></span>
                                 {{language.languageName}}
                             </a>
                         </li>

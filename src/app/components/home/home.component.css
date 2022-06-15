@@ -52,6 +52,15 @@ hr.featurette-divider {
   margin-bottom: 1rem;
 }
 
+/* .img-shadow {
+  box-shadow: 0 0 10px 6px white inset;
+}
+
+.img-shadow img {
+  position: relative;
+  z-index: -1;
+} */
+
 ul li {
   color: var(--text-muted);
 }

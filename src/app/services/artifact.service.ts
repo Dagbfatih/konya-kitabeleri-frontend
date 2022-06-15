@@ -1,77 +1,24 @@
-import { HistPeriodService } from './hist-period.service';
-import { HistPeriod } from './../models/entities/histPeriod';
-import { ArtifactTypeService } from './artifact-type.service';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { ListResponseModel } from './../core/models/responseModels/ListResponseModel';
 import { ArtifactDetailsDto } from './../models/dtos/artifactDetailsDto';
-import { ArtifactImageService } from './artifact-image.service';
-import { ArtifactDbService } from '../database/artifact-db.service';
 import { HttpClient } from '@angular/common/http';
 import { Artifact } from './../models/entities/artifact';
 import { Injectable } from '@angular/core';
 import { ServiceRepositoryBase } from '../core/services/service.repository.base';
-import { ServiceRepositoryLocalBase } from '../core/services/local-database/service.repository.base.local';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ArtifactService extends ServiceRepositoryLocalBase<Artifact> {
-  constructor(
-    protected dbService: ArtifactDbService,
-    private articfactImageService: ArtifactImageService,
-    private artifactTypeService: ArtifactTypeService,
-    private histPeriodService: HistPeriodService
-  ) {
-    super(dbService);
+export class ArtifactService extends ServiceRepositoryBase<Artifact> {
+  apiUrl = environment.apiUrl + 'artifacts/';
+  constructor(protected httpClient: HttpClient) {
+    super('artifacts', httpClient);
   }
 
-  getAllDetails(): ArtifactDetailsDto[] {
-    let artifacts = this.getAll().data;
-    let artifactImages = this.articfactImageService.getAll().data;
-    let artifactTypes = this.artifactTypeService.getAll();
-    let histPeriods = this.histPeriodService.getAll();
-
-    return artifacts.map((artifact) => {
-      let artifactImagesById = artifactImages.filter(
-        (a) => a.artifactId === artifact.id
-      )!;
-
-      let newArtifact: ArtifactDetailsDto = {
-        artifact: artifact,
-        artifactImages: artifactImagesById,
-        artifactType: artifactTypes.data.find(
-          (a) => a.id === artifact.artifactTypeId
-        )!,
-        historicalPeriod: histPeriods.data.find(
-          (h) => h.id === artifact.histPeriodId
-        )!,
-      };
-      return newArtifact;
-    });
-  }
-
-  getAllDetailsByType(id: number): ArtifactDetailsDto[] {
-    let artifacts = this.getAll().data;
-    let artifactImages = this.articfactImageService.getAll().data;
-    let artifactTypes = this.artifactTypeService.getAll();
-    let histPeriods = this.histPeriodService.getAll();
-
-    return artifacts
-      .map((artifact) => {
-        let artifactImagesById = artifactImages.filter(
-          (a) => a.artifactId === artifact.id
-        )!;
-
-        let newArtifact: ArtifactDetailsDto = {
-          artifact: artifact,
-          artifactImages: artifactImagesById,
-          artifactType: artifactTypes.data.find(
-            (a) => a.id === artifact.artifactTypeId
-          )!,
-          historicalPeriod: histPeriods.data.find(
-            (h) => h.id === artifact.histPeriodId
-          )!,
-        };
-        return newArtifact;
-      })
-      .filter((a) => a.artifactType.id === id);
+  getAllDetails(): Observable<ListResponseModel<ArtifactDetailsDto>> {
+    return this.httpClient.get<ListResponseModel<ArtifactDetailsDto>>(
+      this.apiUrl + 'getalldetails'
+    );
   }
 }

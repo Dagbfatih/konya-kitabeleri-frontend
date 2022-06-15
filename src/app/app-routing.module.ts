@@ -1,3 +1,9 @@
+import { AdminGuard } from './guards/admin.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { LoginGuard } from './guards/login.guard';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { KitabeComponent } from './components/kitabe/kitabe.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
@@ -57,6 +63,23 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    path: 'kitabeler-hakkında',
+    component: KitabeComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];
 

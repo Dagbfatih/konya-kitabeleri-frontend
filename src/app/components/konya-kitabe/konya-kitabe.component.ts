@@ -81,11 +81,15 @@ export class KonyaKitabeComponent implements OnInit {
   }
 
   getAllartifactTypes() {
-    this.artifactTypes = this.artifactTypeService.getAll().data;
+    this.artifactTypeService.getAll().subscribe((response) => {
+      this.artifactTypes = response.data;
+    });
   }
 
   getAllHistPeriods() {
-    this.histPeriods = this.histPeriodService.getAll().data;
+    this.histPeriodService.getAll().subscribe((response) => {
+      this.histPeriods = response.data;
+    });
   }
 
   search() {}
@@ -97,7 +101,9 @@ export class KonyaKitabeComponent implements OnInit {
   }
 
   getAllArtifactsDetails() {
-    this.artifactDetails = this.artifactService.getAllDetails();
+    this.artifactService.getAllDetails().subscribe((response) => {
+      this.artifactDetails = response.data;
+    });
   }
 
   createRouteUrl(

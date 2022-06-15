@@ -21,6 +21,7 @@ export class NaviComponent implements OnInit {
   baseUrl = environment.baseUrl;
   languages: Language[] = [];
   searchEngineForm: FormGroup;
+  currentLanguage: Language = {} as Language;
 
   constructor(
     private router: Router,
@@ -34,11 +35,20 @@ export class NaviComponent implements OnInit {
     this.runActiveStateManagementScript();
     this.runCollapseScript();
     this.createSearchEngineForm();
+    this.getCurrentLanguage();
+  }
+
+  getCurrentLanguage() {
+    this.languageService
+      .getByCode(this.settingsService.getLanguageCodeFromLocalStorage())
+      .subscribe((response) => {
+        this.currentLanguage = response.data;
+      });
   }
 
   runCollapseScript() {
-    $('.navbar-collapse .nav-item-link').on("click", function () {
-        (<any>$(".navbar-collapse")).collapse('hide');
+    $('.navbar-collapse .nav-item-link').on('click', function () {
+      (<any>$('.navbar-collapse')).collapse('hide');
     });
   }
 
@@ -79,8 +89,11 @@ export class NaviComponent implements OnInit {
     });
   }
 
-  getCurrentLanguage(): Language {
-    return this.settingsService.getCurrentLanguage()!;
+  getLanguageFlagCode(code: string): string {
+    if (code === 'en-US') {
+      return 'us';
+    }
+    return code?.slice(0, 2);
   }
 
   getCurrentLanguageCode() {
@@ -88,7 +101,9 @@ export class NaviComponent implements OnInit {
   }
 
   getLanguages() {
-    this.languages = this.languageService.getAll().data;
+    this.languageService.getAll().subscribe((response) => {
+      this.languages = response.data;
+    });
   }
 
   setLanguage(languageCode: string) {
@@ -96,9 +111,7 @@ export class NaviComponent implements OnInit {
     location.reload();
   }
 
-  search(){
-    
-  }
+  search() {}
 
   getTranslate(key: string) {
     return allTranslates.get(key);

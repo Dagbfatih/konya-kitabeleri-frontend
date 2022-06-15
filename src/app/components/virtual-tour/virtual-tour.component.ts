@@ -23,7 +23,9 @@ export class VirtualTourComponent implements OnInit {
   }
 
   getAllArtifacts() {
-    this.artifactsDetails = this.artifactService.getAllDetails();
+    this.artifactService.getAllDetails().subscribe((response) => {
+      this.artifactsDetails = response.data;
+    });
   }
 
   open(path: string, content: any) {

@@ -1,12 +1,12 @@
 import { LanguageService } from './language.service';
 import { Injectable } from '@angular/core';
+import { Language } from '../models/entities/language';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingsService {
-
-  constructor(private languageService:LanguageService) { }
+  constructor(private languageService: LanguageService) {}
 
   getLanguageCodeFromLocalStorage(): string {
     let code = localStorage.getItem('code');
@@ -19,13 +19,25 @@ export class SettingsService {
   }
 
   getCurrentLanguage() {
-    return this.languageService.getByCode(
-      this.getLanguageCodeFromLocalStorage()
-    );
+    let language: Language = {} as Language;
+    this.languageService
+      .getByCode(this.getLanguageCodeFromLocalStorage())
+      .subscribe(
+        (response) => {
+          language = response.data;
+        },
+        (responseError) => {
+          language = {
+            code: 'en-US',
+            languageName: 'English',
+          };
+        }
+      );
+
+    return language;
   }
 
   setLanguage(languageCode: string) {
     localStorage.setItem('code', languageCode);
   }
-  
 }
