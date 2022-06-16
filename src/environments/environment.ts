@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://kitabelerindili.somee.com/api',
+  apiUrl: 'http://kitabelerindili.somee.com/api/',
   baseUrl: 'http://kitabelerindili.somee.com/',
 };
 
