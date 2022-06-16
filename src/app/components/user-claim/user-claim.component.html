@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">Kullanıcı Yetkileri</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismiss()"></button>
+</div>
+
+<div class="modal-body">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
+        <h5>{{user.firstName + ' ' + user.lastName}}</h5>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-dark" (click)="openAddModal(user)">Add</button>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Claim</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngFor="let userClaim of userOperationClaims; let i = index;">
+                <th scope="row">{{i}}</th>
+                <td>{{userClaim.user.firstName}}</td>
+                <td>{{userClaim.operationClaim.name}}</td>
+                <td>
+                    <button class="btn btn-outline-danger" (click)="deleteUserClaim(userClaim)">
+                        <fa-icon [icon]="faTrash" size="1x" class="fa"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">İptal</button>
+</div>

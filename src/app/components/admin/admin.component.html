@@ -1,196 +1,110 @@
 <body>
 
     <div class="container-fluid my-gutter my-md-4 my-layout">
-        <aside class="my-sidebar bg-primary">
+        <aside class="my-sidebar">
             <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <span class="fs-4">Sidebar</span>
+                    <fa-icon [icon]="faGauge" size="2x" class="me-2"></fa-icon>
+                    <span class="fs-4">Kitabelerin Dili</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">
+                        <a (click)="navigate('/admin/manage-users', 'manage-users')" class="nav-link link-dark"
+                            routerLinkActive="active" routerLink="/admin/manage-users">
+                            <fa-icon [icon]="faUsersCog" size="1x" class="fa me-2"></fa-icon>
                             Kullanıcılar
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
+                    <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-claims', 'manage-claims')" routerLinkActive="active"
+                            routerLink="/admin/manage-claims" class="nav-link link-dark">
+                            <fa-icon [icon]="faClipboardList" size="1x" class="fa me-2"></fa-icon>
                             Yetkiler
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
+                    <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-translates', 'manage-translates')" routerLinkActive="active"
+                            routerLink="/admin/manage-translates" class="nav-link link-dark">
+                            <fa-icon [icon]="faLanguage" size="1x" class="fa me-2"></fa-icon>
                             Çeviriler
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
+                    <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-languages', 'manage-languages')" routerLinkActive="active"
+                            routerLink="/admin/manage-languages" class="nav-link link-dark">
+                            <fa-icon [icon]="faGlobe" size="1x" class="fa me-2"></fa-icon>
+                            Diller
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-content', 'manage-content')" routerLinkActive="active"
+                            routerLink="/admin/manage-content" class="nav-link link-dark">
+                            <fa-icon [icon]="faCogs" size="1x" class="fa me-2"></fa-icon>
                             İçerikler
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
+                    <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-images', 'manage-images')" routerLinkActive="active"
+                            routerLink="/admin/manage-images" class="nav-link link-dark">
+                            <fa-icon [icon]="faImages" size="1x" class="fa me-2"></fa-icon>
                             Resimler
                         </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a (click)="navigate('/admin/manage-artifacts', 'manage-artifacts')" routerLinkActive="active"
+                            routerLink="/admin/manage-artifacts" class="nav-link link-dark">
+                            <fa-icon [icon]="faLandmark" size="1x" class="fa me-2"></fa-icon>
+                            Tarihi Eserler
+                        </a>
+                    </li> -->
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                            data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            <fa-icon [icon]="faLandmark" size="1x" class="fa me-2"></fa-icon>
+                            Tarihi Eserler
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li>
+                                    <a (click)="navigate('/admin/manage-artifacts', 'manage-artifacts')"
+                                        routerLinkActive="active" routerLink="/admin/manage-artifacts"
+                                        class="nav-link link-dark d-inline-flex text-decoration-none rounded">
+                                        Tarihi Eserler
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" (click)="navigate('/admin/manage-historical-periods', 'manage-historical-periods')"
+                                        routerLinkActive="active" routerLink="/admin/manage-historical-periods"
+                                        class="nav-link link-dark d-inline-flex text-decoration-none rounded">
+                                        Tarihi Dönemler
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" (click)="navigate('/admin/manage-artifact-types', 'manage-artifact-types')"
+                                        routerLinkActive="active" routerLink="/admin/manage-artifact-types"
+                                        class="nav-link link-dark d-inline-flex text-decoration-none rounded">
+                                        Eser Türleri
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" (click)="navigate('/admin/manage-virtual-tours', 'manage-virtual-tours')"
+                                        routerLinkActive="active" routerLink="/admin/manage-virtual-tours"
+                                        class="nav-link link-dark d-inline-flex text-decoration-none rounded">
+                                        Sanal Geziler
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
         </aside>
 
         <main class="my-main order-1 px-3">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
-                <h1 class="h2">Dashboard</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar" class="align-text-bottom"></span>
-                        This week
-                    </button>
-                </div>
-            </div>
-
-            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-            <h2>Section title</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,002</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,004</td>
-                            <td>text</td>
-                            <td>random</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,005</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                        </tr>
-                        <tr>
-                            <td>1,006</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,007</td>
-                            <td>placeholder</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>irrelevant</td>
-                        </tr>
-                        <tr>
-                            <td>1,008</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,009</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,010</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,011</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,012</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,013</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>visual</td>
-                        </tr>
-                        <tr>
-                            <td>1,014</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,015</td>
-                            <td>random</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>text</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <ng-container *ngComponentOutlet="currentComponent"></ng-container>
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
-        crossorigin="anonymous"></script>
-    <script src="dashboard.js"></script>
+
 </body>

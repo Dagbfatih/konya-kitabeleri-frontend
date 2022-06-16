@@ -1,0 +1,75 @@
+<body class="text-center">
+    <main class="form-signin w-100 m-auto">
+        <form [formGroup]="artifactAddForm">
+            <h2 class="mb-5">Tarihi Eser Ekle</h2>
+            <!-- Name -->
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="name">
+                    <label for="name">İsim</label>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="description" style="height: 130px" formControlName="description"
+                        rows="3" placeholder="Açıklama">
+                    </textarea>
+                    <label for="description">Açıklaması</label>
+                </div>
+            </div>
+
+            <!-- Kitabe Metni -->
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="originalEpitaph" style="height: 130px"
+                        formControlName="originalEpitaph" rows="3" placeholder="originalEpitaph">
+                    </textarea>
+                    <label for="originalEpitaph">Kitabe Metni</label>
+                </div>
+            </div>
+
+            <!-- Kitabenin Anlamı -->
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="epitaph" style="height: 130px" formControlName="epitaph" rows="3"
+                        placeholder="epitaph">
+                    </textarea>
+                    <label for="epitaph">Kitabe Anlamı</label>
+                </div>
+            </div>
+
+            <!-- Eser Türü -->
+            <div class="mb-3">
+                <div class="form-floating">
+                    <select class="form-select" formControlName="artifactTypeId" id="artifactTypeId">
+                        <option *ngFor="let artifactType of artifactTypes" [value]="artifactType.id">
+                            {{artifactType.name}}
+                        </option>
+                    </select>
+                    <label for="artifactTypeId">Eser Türü</label>
+                </div>
+            </div>
+
+            <!-- Tarihi Dönemi -->
+            <div class="mb-3">
+                <div class="form-floating">
+                    <select class="form-select" formControlName="histPeriodId" id="histPeriodId">
+                        <option *ngFor="let histPeriod of histPeriods" [value]="histPeriod.id">
+                            {{histPeriod.name}}
+                        </option>
+                    </select>
+                    <label for="histPeriodId">Tarihi Dönemi</label>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-group">
+            <button class="btn btn-fill btn-outline-dark w-50" (click)="add()">
+                Ekle
+            </button>
+        </div>
+    </main>
+
+</body>

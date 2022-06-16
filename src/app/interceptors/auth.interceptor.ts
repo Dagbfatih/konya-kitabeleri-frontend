@@ -72,7 +72,6 @@ export class AuthInterceptor implements HttpInterceptor {
     next.handle(refreshTokenRequest).subscribe(
       (response) => {
         if (response instanceof HttpResponse) {
-          console.log(response.body.data.accessToken.token);
           this.setToken(
             response.body.data.accessToken.token,
             response.body.data.refreshToken.token

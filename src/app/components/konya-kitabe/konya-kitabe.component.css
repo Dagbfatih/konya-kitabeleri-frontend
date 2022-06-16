@@ -13,7 +13,34 @@ html {
   font-size: 1.5rem;
 }
 
-.btn-collapse{
+.my-sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5rem;
+  display: block !important;
+  height: calc(100vh - 6rem);
+  padding-left: 0.25rem;
+  margin-left: -0.25rem;
+  overflow-y: auto;
+}
+
+.my-gutter {
+  --bs-gutter-x: 3;
+}
+
+@media (min-width: 992px) {
+  .my-layout {
+    display: grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 1fr 5fr;
+    gap: 1.5rem;
+  }
+}
+.my-sidebar {
+  grid-area: sidebar;
+}
+
+.btn-collapse {
   font-size: 0.875rem;
 }
 
@@ -25,8 +52,8 @@ main {
   overflow-y: hidden;
 }
 
-.form-search{
-  border-bottom: 2px solid rgba(0,0,0,.05);
+.form-search {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 .btn-toggle {
@@ -74,7 +101,7 @@ main {
 
 /* Toc */
 
-.bd-main{
+.bd-main {
   min-height: 100vh;
 }
 
@@ -110,4 +137,3 @@ main {
   display: flex;
   align-items: center;
 }
-

@@ -25,6 +25,27 @@ import { ToastrModule } from 'ngx-toastr';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserComponent } from './components/user/user.component';
+import { ClaimComponent } from './components/claim/claim.component';
+import { UserClaimComponent } from './components/user-claim/user-claim.component';
+import { TranslateComponent } from './components/translate/translate.component';
+import { ContentComponent } from './components/content/content.component';
+import { ImageComponent } from './components/image/image.component';
+import { ClaimAddComponent } from './components/claim-add/claim-add.component';
+import { UserClaimAddComponent } from './components/user-claim-add/user-claim-add.component';
+import { TranslateAddComponent } from './components/translate-add/translate-add.component';
+import { TranslateDeleteComponent } from './components/translate-delete/translate-delete.component';
+import { TranslateUpdateComponent } from './components/translate-update/translate-update.component';
+import { TranslateFastAddComponent } from './components/translate-fast-add/translate-fast-add.component';
+import { ArtifactComponent } from './components/artifact/artifact.component';
+import { LanguageComponent } from './components/language/language.component';
+import { LanguageAddComponent } from './components/language-add/language-add.component';
+import { LanguageDeleteComponent } from './components/language-delete/language-delete.component';
+import { LanguageUpdateComponent } from './components/language-update/language-update.component';
+import { ArtifactTypeComponent } from './components/artifact-type/artifact-type.component';
+import { HistoricalPeriodComponent } from './components/historical-period/historical-period.component';
+import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +63,26 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RegisterComponent,
     LoginComponent,
     AdminComponent,
+    UserComponent,
+    ClaimComponent,
+    UserClaimComponent,
+    TranslateComponent,
+    ContentComponent,
+    ImageComponent,
+    ClaimAddComponent,
+    UserClaimAddComponent,
+    TranslateAddComponent,
+    TranslateDeleteComponent,
+    TranslateUpdateComponent,
+    TranslateFastAddComponent,
+    ArtifactComponent,
+    LanguageComponent,
+    LanguageAddComponent,
+    LanguageDeleteComponent,
+    LanguageUpdateComponent,
+    ArtifactTypeComponent,
+    HistoricalPeriodComponent,
+    ArtifactAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +95,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
-    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

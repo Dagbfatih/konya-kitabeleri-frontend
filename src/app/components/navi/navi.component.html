@@ -4,7 +4,7 @@
         <div class="navbar-header">
             <a class="navbar-brand text-white d-none d-lg-block" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
-                Ana Sayfa
+                <!-- Kitabelerin Dili -->
             </a>
             <a class="navbar-brand text-white d-lg-none" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
@@ -98,7 +98,7 @@
                         {{currentLanguage!.languageName}}
                     </button>
 
-                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-light">
                         <li *ngFor="let language of languages">
                             <a class="dropdown-item" (click)="setLanguage(language.code!)">
                                 <span class="flag-icon flag-icon-{{getLanguageFlagCode(language.code!)}} flag-icon-squared"></span>

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44365/api/',
-  baseUrl: 'https://localhost:44365/',
+  apiUrl: 'http://kitabelerindili.somee.com/api',
+  baseUrl: 'http://kitabelerindili.somee.com/',
 };
 
 /*

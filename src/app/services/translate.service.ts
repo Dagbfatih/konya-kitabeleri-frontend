@@ -18,11 +18,7 @@ export class TranslateService extends ServiceRepositoryBase<Translate> {
     super('translates', httpClient);
   }
 
-  getAll(): Observable<ListResponseModel<Translate>> {
-    return this.httpClient.get<ListResponseModel<Translate>>(
-      this.apiUrl + 'getall'
-    );
-  }
+  
 
   // getAllDetails(): Observable<ListResponseModel<TranslateDetailsDto>> {
   //   return this.httpClient.get<ListResponseModel<TranslateDetailsDto>>(

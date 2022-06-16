@@ -1,3 +1,4 @@
+import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginGuard } from './guards/login.guard';
@@ -74,8 +75,17 @@ const routes: Routes = [
     canActivate: [AdminGuard, LoginGuard],
   },
   {
+    path: 'admin/:currentPage',
+    component: AdminComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
+  {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'admin/artifact/add',
+    component: ArtifactAddComponent,
   },
   {
     path: 'register',

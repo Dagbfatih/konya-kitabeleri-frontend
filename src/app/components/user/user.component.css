@@ -1,0 +1,9 @@
+.fa-icon {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+  transition: background 0.2s, color 0.2s;
+}
+
+.fa-icon:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #64bb5d;
+}
