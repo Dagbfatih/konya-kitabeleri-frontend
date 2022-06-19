@@ -1,3 +1,4 @@
+import { ResponseModel } from './../core/models/responseModels/responseModel';
 import { LanguageService } from './language.service';
 import { TranslateDbService } from '../database/translate-db.service';
 import { Translate } from './../models/entities/translate';
@@ -18,7 +19,12 @@ export class TranslateService extends ServiceRepositoryBase<Translate> {
     super('translates', httpClient);
   }
 
-  
+  addMultiple(translates: Translate[]): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(
+      this.apiUrl + 'addmultiple',
+      translates
+    );
+  }
 
   // getAllDetails(): Observable<ListResponseModel<TranslateDetailsDto>> {
   //   return this.httpClient.get<ListResponseModel<TranslateDetailsDto>>(

@@ -1,3 +1,5 @@
+import { ArtifactUpdateComponent } from './../artifact-update/artifact-update.component';
+import { ArtifactDeleteComponent } from './../artifact-delete/artifact-delete.component';
 import { Router } from '@angular/router';
 import { ArtifactDetailsDto } from './../../models/dtos/artifactDetailsDto';
 import { ArtifactAddComponent } from './../artifact-add/artifact-add.component';
@@ -5,7 +7,8 @@ import { ArtifactService } from './../../services/artifact.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Artifact } from './../../models/entities/artifact';
 import { Component, OnInit } from '@angular/core';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { allTranslates } from 'src/app/services/translation.service';
 
 @Component({
   selector: 'app-artifact',
@@ -14,6 +17,9 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 })
 export class ArtifactComponent implements OnInit {
   faEye = faEye;
+  faTrash = faTrash;
+  faEdit = faEdit;
+
   artifacts: ArtifactDetailsDto[] = [];
 
   constructor(
@@ -32,9 +38,14 @@ export class ArtifactComponent implements OnInit {
     });
   }
 
-  openAddForm() {
-    // var modalReferance = this.modalService.open(ArtifactAddComponent, {
-    //   size: 'm',
-    // });
+  openDeleteForm(artifact: Artifact) {
+    var modalReferance = this.modalService.open(ArtifactDeleteComponent, {
+      size: 'm',
+    });
+    modalReferance.componentInstance.artifact = artifact;
+  }
+
+  getTranslate(key: string) {
+    return allTranslates.get(key);
   }
 }

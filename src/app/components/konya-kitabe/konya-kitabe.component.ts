@@ -9,7 +9,6 @@ import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import {
-  FormControl,
   FormGroup,
   FormBuilder,
   Validators,
@@ -77,6 +76,7 @@ export class KonyaKitabeComponent implements OnInit {
           (a) => a.historicalPeriod.paramName === param['period']
         )!;
       }
+      console.log("artifact",this.currentArtifact)
     });
   }
 

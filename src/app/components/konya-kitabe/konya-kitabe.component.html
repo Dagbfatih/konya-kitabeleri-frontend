@@ -29,12 +29,12 @@
                                     {{artifactType.name}}
                                 </button>
                                 <div class="collapse bd-sidebar-collapse" [id]="artifactType.name+i"
-                                    [ngClass]="{'show': (currentArtifact.artifactType.id === artifactType.id) && (currentArtifact.historicalPeriod.id === period.id)}">
+                                    [ngClass]="{'show': (currentArtifact?.artifactType?.id === artifactType.id) && (currentArtifact?.historicalPeriod?.id === period.id)}">
                                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                         <li
                                             *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, period.id)">
                                             <a class="sub-link link-dark d-inline-flex text-decoration-none rounded"
-                                                [ngClass]="{'active': currentArtifact.artifact.id === artifact.artifact.id}"
+                                                [ngClass]="{'active': currentArtifact?.artifact?.id === artifact.artifact.id}"
                                                 [id]="createRouteUrl(period.paramName, artifactType.id, artifact.artifact.id!)"
                                                 (click)="selectArtifact(period.paramName, artifactType.id, artifact.artifact.id!)"
                                                 data-bs-toggle="collapse" data-bs-target="#menu">
@@ -74,16 +74,18 @@
                             {{artifactType.name}}
                         </button>
                         <div class="collapse bd-sidebar-collapse" [id]="artifactType.name+i"
-                            [ngClass]="{'show': (currentArtifact.artifactType.id === artifactType.id) && (currentArtifact.historicalPeriod.id === period.id)}">
+                            [ngClass]="{'show': (currentArtifact?.artifactType?.id === artifactType.id) && (currentArtifact?.historicalPeriod?.id === period.id)}">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
                                 <li *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, period.id)">
                                     <a class="sub-link link-dark d-inline-flex text-decoration-none rounded"
-                                        [ngClass]="{'active': currentArtifact.artifact.id === artifact.artifact.id}"
+                                        [ngClass]="{'active': currentArtifact?.artifact?.id === artifact.artifact.id}"
                                         [id]="createRouteUrl(period.paramName, artifactType.id, artifact.artifact.id!)"
                                         (click)="selectArtifact(period.paramName, artifactType.id, artifact.artifact.id!)">
                                         {{artifact.artifact.name}}
                                     </a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </li>
@@ -100,10 +102,10 @@
             <div class="col-md-10">
                 <div class="bd-intro ps-lg-2 mt-2">
                     <div class="d-md-flex text-start align-items-center justify-content-start">
-                        <h1 class="bd-title mb-0" id="approach-1">{{currentArtifact.artifact.name}}</h1>
+                        <h1 class="bd-title mb-0" id="approach-1">{{currentArtifact?.artifact?.name}}</h1>
                     </div>
                     <p class="bd-lead">
-                        {{currentArtifact.artifact.description}}
+                        {{currentArtifact?.artifact?.description}}
                     </p>
 
                     <div class="toc-collapse d-lg-none">
@@ -120,7 +122,7 @@
                                     <ul>
                                         <li>
                                             <a class="link"
-                                                (click)="scroll('approach-1')">{{currentArtifact.artifact.name}}</a>
+                                                (click)="scroll('approach-1')">{{currentArtifact?.artifact?.name}}</a>
                                             <ul>
                                                 <li>
                                                     <a class="link" (click)="scroll('approach-2')">Hakkında</a>
@@ -161,17 +163,17 @@
                                 [src]="currentArtifact.artifactImages[0].path" alt="" width="500" height="500"
                                 class="img-fluid">
                             <p class="mt-3" id="1">
-                                {{currentArtifact.artifact.epitaph}}
+                                {{currentArtifact?.artifact?.epitaph}}
                             </p>
                         </div>
                         <div class="mb-5">
                             <h2 id="approach-3">
                                 Kitabesi
                             </h2>
-                            <img [src]="currentArtifact.artifact.epitaphImagePath" alt="" width="500" height="500"
+                            <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
                                 class="img-fluid">
                             <p class="mt-4" id="2">
-                                {{currentArtifact.artifact.epitaph}}
+                                {{currentArtifact?.artifact?.epitaph}}
                                 <a class="link" data-bs-toggle="collapse" href="#originalEpitaph" role="button"
                                     aria-expanded="false" aria-controls="originalEpitaph">
                                     Orijinal Metin
@@ -180,7 +182,7 @@
 
                             <div class="collapse" id="originalEpitaph">
                                 <div class="card card-body">
-                                    {{currentArtifact.artifact.originalEpitaph}}
+                                    {{currentArtifact?.artifact?.originalEpitaph}}
                                 </div>
                             </div>
 
@@ -189,7 +191,7 @@
                             <h2 id="approach-4">
                                 Sanal Gezisi
                             </h2>
-                            <img [src]="currentArtifact.artifact.epitaphImagePath" alt="" width="500" height="500"
+                            <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
                                 class="img-fluid">
                         </div>
                         <div class="mb-5">
@@ -216,7 +218,7 @@
                         <nav id="TableOfContents">
                             <ul>
                                 <li>
-                                    <a class="link" (click)="scroll('approach-1')">{{currentArtifact.artifact.name}}</a>
+                                    <a class="link" (click)="scroll('approach-1')">{{currentArtifact?.artifact?.name}}</a>
                                     <ul>
                                         <li>
                                             <a class="link" (click)="scroll('approach-2')">Hakkında</a>

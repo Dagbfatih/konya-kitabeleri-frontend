@@ -3,8 +3,10 @@
     <h1 class="h2">Kullanıcılar</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <button class="btn shadow-none me-2">
+                <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh" (click)="getAllUsers();">
+                </fa-icon>
+            </button>
         </div>
         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar" class="align-text-bottom"></span>
@@ -24,19 +26,36 @@
             <th></th>
         </tr>
     </thead>
-    <tbody class="table-group-divider">
+    <tbody *ngIf="dataLoaded" class="table-group-divider">
         <tr *ngFor="let user of users">
             <th scope="row">{{user.id}}</th>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.status}}</td>
-            <td class="text-right">
-                <a><fa-icon [icon]="faCog" size="1x" class="fa-icon me-2" (click)="openEditUserModal(user)"></fa-icon></a>
+            <td>
+                <button class="btn shadow-none">
+                    <fa-icon *ngIf="user.status" [icon]="faDotCircle" size="1x" class="fa fa-icon-dot text-success">
+                    </fa-icon>
+                    <fa-icon *ngIf="!user.status" [icon]="faDotCircle" size="1x" class="fa fa-icon-dot text-danger">
+                    </fa-icon>
+                </button>
+            </td>
+            <td class="text-end">
+                <!-- <button class="btn shadow-none me-2" (click)="openEditUserModal(user)">
+                    <fa-icon [icon]="faCog" size="1x" class="fa fa-icon-cog"></fa-icon>
+                </button> -->
+                <button class="btn shadow-none" (click)="openEditClaimsModal(user)">
+                    <fa-icon [icon]="faClipboardCheck" size="1x" class="fa fa-icon-clipboard"></fa-icon>
+                </button>
             </td>
         </tr>
     </tbody>
 </table>
+<div *ngIf="!dataLoaded" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 <!-- <ng-template #usereditmodal let-modal>
     <div class="modal-header">

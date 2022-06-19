@@ -20,16 +20,14 @@
             <th scope="col">Name</th>
             <th scope="col">Code</th>
             <th scope="col"></th>
-            <th scope="col"></th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
         <tr *ngFor="let language of languages; let i = index;">
             <th scope="row">{{i+1}}</th>
             <td>{{language.languageName}}</td>
-            <td>{{language.code}}</td>
-            
-            <td class="d-flex justify-content-end">
+            <td>{{language.code}}</td>      
+            <td class="text-end">
                 <button class="btn shadow-none me-2" (click)="openUpdateForm(language)">
                     <fa-icon [icon]="faEdit" size="1x" class="fa-icon-edit me-2"></fa-icon>
                 </button>

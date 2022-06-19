@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LanguageUpdateComponent } from './language-update.component';
+import { ArtifactDeleteComponent } from './artifact-delete.component';
 
-describe('LanguageUpdateComponent', () => {
-  let component: LanguageUpdateComponent;
-  let fixture: ComponentFixture<LanguageUpdateComponent>;
+describe('ArtifactDeleteComponent', () => {
+  let component: ArtifactDeleteComponent;
+  let fixture: ComponentFixture<ArtifactDeleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LanguageUpdateComponent ]
+      declarations: [ ArtifactDeleteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LanguageUpdateComponent);
+    fixture = TestBed.createComponent(ArtifactDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

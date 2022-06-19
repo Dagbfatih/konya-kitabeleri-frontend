@@ -1,3 +1,4 @@
+import { UserClaimDeleteComponent } from './../user-claim-delete/user-claim-delete.component';
 import { ErrorService } from './../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserClaimAddComponent } from './../user-claim-add/user-claim-add.component';
@@ -8,7 +9,7 @@ import { UserOperationClaimDetailsDto } from './../../models/dtos/userOperationC
 import { UserOperationClaim } from './../../models/entities/userOperationClaim';
 import { Component, OnInit } from '@angular/core';
 import { allTranslates } from 'src/app/services/translation.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faRedoAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-user-claim',
@@ -16,10 +17,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./user-claim.component.css'],
 })
 export class UserClaimComponent implements OnInit {
-  faTrash=faTrash;
+  faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
   userOperationClaims: UserOperationClaimDetailsDto[] = [];
   user: User;
-
+  dataLoaded = false;
   constructor(
     private userOperationClaimService: UserOperationClaimService,
     private activeModal: NgbActiveModal,
@@ -41,37 +43,38 @@ export class UserClaimComponent implements OnInit {
   }
 
   getClaimsByUser() {
+    this.dataLoaded = false;
     this.userOperationClaimService
       .getAllDetailsByUser(this.user.id)
       .subscribe((response) => {
         this.userOperationClaims = response.data;
+        this.dataLoaded = true;
       });
   }
 
-  deleteUserClaim(userClaim: UserOperationClaimDetailsDto) {
+  openAddModal(user: User) {
+    let modalReference = this.modalService.open(UserClaimAddComponent, {
+      size: 'm',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+    modalReference.componentInstance.user = user;
+  }
+
+  openDeleteModal(userClaim: UserOperationClaimDetailsDto) {
+    let modalReference = this.modalService.open(UserClaimDeleteComponent, {
+      size: 'm',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+
     let deletedUserClaim: UserOperationClaim = {
       id: userClaim.userOperationClaimId,
       userId: userClaim.user.id,
       operationClaimId: userClaim.operationClaim.id,
     };
-    this.userOperationClaimService.delete(deletedUserClaim).subscribe(
-      (response) => {
-        this.toastrService.success(
-          response.message,
-          this.getTranslate('successful')
-        );
-      },
-      (responseError) => {
-        this.errorService.writeErrorMessages(responseError);
-      }
-    );
-  }
 
-  openAddModal(user: User) {
-    let modalReference = this.modalService.open(UserClaimAddComponent, {
-      size: 'xl',
-    });
-    modalReference.componentInstance.user = user;
+    modalReference.componentInstance.userClaim = deletedUserClaim;
+    modalReference.componentInstance.userClaimName =
+      userClaim.operationClaim.name;
   }
 
   getTranslate(key: string) {

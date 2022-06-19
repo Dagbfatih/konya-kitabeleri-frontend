@@ -6,7 +6,7 @@ import { TranslateService } from './../../services/translate.service';
 import { Translate } from './../../models/entities/translate';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faRedoAlt } from '@fortawesome/free-solid-svg-icons';
 import { TranslateUpdateComponent } from '../translate-update/translate-update.component';
 
 @Component({
@@ -18,7 +18,9 @@ export class TranslateComponent implements OnInit {
   translates: Translate[] = [];
   faEdit = faEdit;
   faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
   languages: Language[] = [];
+  dataLoaded = false;
 
   constructor(
     private translateService: TranslateService,
@@ -38,8 +40,10 @@ export class TranslateComponent implements OnInit {
   }
 
   getAll() {
+    this.dataLoaded = false;
     this.translateService.getAll().subscribe((response) => {
       this.translates = response.data;
+      this.dataLoaded = true;
     });
   }
 

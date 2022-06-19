@@ -1,1 +1,45 @@
-<p>artifact-type works!</p>
+<div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
+    <h1 class="h2">Eser Türleri</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-outline-secondary" (click)="openAddForm()">Ekle</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+        </div>
+        <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar" class="align-text-bottom"></span>
+            This week
+        </button> -->
+    </div>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">İsim</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody *ngIf="artifactTypes.length > 0" class="table-group-divider">
+        <tr *ngFor="let artifactType of artifactTypes; let i = index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{artifactType.name}}</td>
+            <td>{{artifactType.description}}</td>
+            <td class="text-end">
+                <button class="btn shadow-none me-3" (click)="openUpdateForm(artifactType)">
+                    <fa-icon [icon]="faEdit" size="1x" class="fa-icon-edit me-2"></fa-icon>
+                </button>
+                <button class="btn shadow-none" (click)="openDeleteForm(artifactType)">
+                    <fa-icon [icon]="faTrash" size="1x" class="fa-icon-trash me-2"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div  *ngIf="artifactTypes.length <= 0 && !dataLoaded" class="d-flex justify-content-center">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>

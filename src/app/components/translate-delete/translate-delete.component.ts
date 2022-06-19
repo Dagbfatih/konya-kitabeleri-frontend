@@ -1,20 +1,9 @@
 import { Translate } from './../../models/entities/translate';
 import { Component, OnInit } from '@angular/core';
-import { Language } from 'src/app/models/entities/language';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from 'src/app/services/error.service';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
 import { allTranslates } from 'src/app/services/translation.service';
-import { LanguageService } from 'src/app/services/language.service';
 import { TranslateService } from 'src/app/services/translate.service';
 
 @Component({

@@ -3,7 +3,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from './../../models/entities/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircle,
+  faClipboardCheck,
+  faClipboardList,
+  faCog,
+  faDotCircle,
+  faRedoAlt,
+} from '@fortawesome/free-solid-svg-icons';
 declare var bootstrap: any;
 
 @Component({
@@ -14,6 +21,11 @@ declare var bootstrap: any;
 export class UserComponent implements OnInit {
   users: User[] = [];
   faCog = faCog;
+  faClipboardCheck = faClipboardCheck;
+  faRedoAlt = faRedoAlt;
+  faDotCircle = faCircle;
+  dataLoaded = false;
+
   private tooltipList = new Array<any>();
 
   constructor(
@@ -23,19 +35,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
-    this.tooltipInitializition();
-  }
-
-  tooltipInitializition() {
-    const tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    const tooltipListNewTooltips = tooltipTriggerList.map(
-      (tooltipTriggerEl) => {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-      }
-    );
-    this.tooltipList.push(...tooltipListNewTooltips);
   }
 
   openEditUserModal(user: User) {
@@ -45,9 +44,18 @@ export class UserComponent implements OnInit {
     modalReference.componentInstance.user = user;
   }
 
+  openEditClaimsModal(user: User) {
+    let modalReference = this.modalService.open(UserClaimComponent, {
+      size: 'xl',
+    });
+    modalReference.componentInstance.user = user;
+  }
+
   getAllUsers() {
+    this.dataLoaded = false;
     this.userService.getAll().subscribe((response) => {
       this.users = response.data;
+      this.dataLoaded = true;
     });
   }
 }

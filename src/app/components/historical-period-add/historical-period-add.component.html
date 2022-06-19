@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h5 class="modal-title">Ekle</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismiss()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="histPeriodAddForm">
+        <div class="mb-3">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="name" class="form-control" id="name" placeholder="Name">
+                <label for="name">Historical Period Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="description" class="form-control" id="description"
+                    placeholder="Description">
+                <label for="description">Historical Period Description</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="paramName" class="form-control" id="paramName"
+                    placeholder="Parameter name">
+                <label for="paramName">Historical Period Parameter Name</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">İptal</button>
+    <button type="button" class="btn btn-primary" (click)="add()">Ekle</button>
+</div>

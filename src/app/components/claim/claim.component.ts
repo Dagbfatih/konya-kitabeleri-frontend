@@ -1,3 +1,5 @@
+import { ClaimDeleteComponent } from './../claim-delete/claim-delete.component';
+import { ClaimUpdateComponent } from './../claim-update/claim-update.component';
 import { ClaimAddComponent } from './../claim-add/claim-add.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OperationClaimService } from './../../services/operation-claim.service';
@@ -12,6 +14,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { faEdit, faRedoAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-claim',
@@ -19,8 +22,12 @@ import {
   styleUrls: ['./claim.component.css'],
 })
 export class ClaimComponent implements OnInit {
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
   operationClaims: OperationClaim[] = [];
   operationClaimAddForm: FormGroup;
+  dataLoaded = false;
 
   constructor(
     private operationClaimService: OperationClaimService,
@@ -33,8 +40,10 @@ export class ClaimComponent implements OnInit {
   }
 
   getAllClaims() {
+    this.dataLoaded = false;
     this.operationClaimService.getAll().subscribe((response) => {
       this.operationClaims = response.data;
+      this.dataLoaded = true;
     });
   }
 
@@ -42,5 +51,21 @@ export class ClaimComponent implements OnInit {
     var modalReferance = this.modalService.open(ClaimAddComponent, {
       size: 'm',
     });
+  }
+
+  openUpdateForm(claim: OperationClaim) {
+    var modalReferance = this.modalService.open(ClaimUpdateComponent, {
+      size: 'm',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+    modalReferance.componentInstance.claim = claim;
+  }
+
+  openDeleteForm(claim: OperationClaim) {
+    var modalReferance = this.modalService.open(ClaimDeleteComponent, {
+      size: 'm',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+    modalReferance.componentInstance.claim = claim;
   }
 }

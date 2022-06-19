@@ -44,7 +44,19 @@ import { LanguageDeleteComponent } from './components/language-delete/language-d
 import { LanguageUpdateComponent } from './components/language-update/language-update.component';
 import { ArtifactTypeComponent } from './components/artifact-type/artifact-type.component';
 import { HistoricalPeriodComponent } from './components/historical-period/historical-period.component';
-import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component'
+import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component';
+import { HistoricalPeriodAddComponent } from './components/historical-period-add/historical-period-add.component';
+import { HistoricalPeriodDeleteComponent } from './components/historical-period-delete/historical-period-delete.component';
+import { HistoricalPeriodUpdateComponent } from './components/historical-period-update/historical-period-update.component';
+import { ArtifactTypeAddComponent } from './components/artifact-type-add/artifact-type-add.component';
+import { ArtifactTypeDeleteComponent } from './components/artifact-type-delete/artifact-type-delete.component';
+import { ArtifactTypeUpdateComponent } from './components/artifact-type-update/artifact-type-update.component';
+import { ArtifactDeleteComponent } from './components/artifact-delete/artifact-delete.component';
+import { ArtifactUpdateComponent } from './components/artifact-update/artifact-update.component';
+import { ClaimDeleteComponent } from './components/claim-delete/claim-delete.component';
+import { ClaimUpdateComponent } from './components/claim-update/claim-update.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserClaimDeleteComponent } from './components/user-claim-delete/user-claim-delete.component'
 
 @NgModule({
   declarations: [
@@ -83,6 +95,18 @@ import { ArtifactAddComponent } from './components/artifact-add/artifact-add.com
     ArtifactTypeComponent,
     HistoricalPeriodComponent,
     ArtifactAddComponent,
+    HistoricalPeriodAddComponent,
+    HistoricalPeriodDeleteComponent,
+    HistoricalPeriodUpdateComponent,
+    ArtifactTypeAddComponent,
+    ArtifactTypeDeleteComponent,
+    ArtifactTypeUpdateComponent,
+    ArtifactDeleteComponent,
+    ArtifactUpdateComponent,
+    ClaimDeleteComponent,
+    ClaimUpdateComponent,
+    UserEditComponent,
+    UserClaimDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +119,7 @@ import { ArtifactAddComponent } from './components/artifact-add/artifact-add.com
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
+    BrowserAnimationsModule,
     FontAwesomeModule
   ],
   providers: [

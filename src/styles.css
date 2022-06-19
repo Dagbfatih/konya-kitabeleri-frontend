@@ -28,6 +28,40 @@
   }
 }
 
+.fa-icon-refresh {
+  color: rgb(0, 140, 255);
+  font-size: 24px;
+}
+
+.fa-icon-refresh:hover {
+  color: rgb(61, 194, 255);
+  transition: 0.2s;
+}
+
+.fa-icon-trash:hover {
+  color: red;
+  transition: 0.2s;
+}
+
+.fa-icon-edit:hover {
+  color: rgb(0, 194, 0);
+  transition: 0.2s;
+}
+
+.fa-icon-eye:hover {
+  color: rgb(0, 127, 247);
+  transition: 0.2s;
+}
+
+.fa-icon-cog:hover {
+  color: #b4b4b4;
+  transition: 0.2s;
+}
+
+.fa-icon-clipboard:hover {
+  color: #fdad00;
+  transition: 0.2s;
+}
 
 :root {
   --app-background-color: rgb(238, 238, 238);
@@ -38,4 +72,3 @@
   --btn-light-color: rgb(247, 247, 247);
   --app-list-color: #d2f4ea;
 }
-

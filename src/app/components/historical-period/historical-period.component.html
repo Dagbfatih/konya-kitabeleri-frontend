@@ -1,1 +1,42 @@
-<p>historical-period works!</p>
+<div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
+    <h1 class="h2">Tarihi Dönemler</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-outline-secondary" (click)="openAddForm()">Ekle</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+        </div>
+        <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar" class="align-text-bottom"></span>
+            This week
+        </button> -->
+    </div>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">İsim</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">Parameter Name</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr *ngFor="let histPeriod of histPeriods; let i = index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{histPeriod.name}}</td>
+            <td>{{histPeriod.description}}</td>
+            <td>{{histPeriod.paramName}}</td>
+            <td class="text-end">
+                <button class="btn shadow-none me-2" (click)="openUpdateForm(histPeriod)">
+                    <fa-icon [icon]="faEdit" size="1x" class="fa-icon-edit me-2"></fa-icon>
+                </button>
+                <button class="btn shadow-none" (click)="openDeleteForm(histPeriod)">
+                    <fa-icon [icon]="faTrash" size="1x" class="fa-icon-trash me-2"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
