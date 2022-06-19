@@ -80,3 +80,9 @@
   box-shadow: none;
   background-color: #d2f4ea;
 }
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+}

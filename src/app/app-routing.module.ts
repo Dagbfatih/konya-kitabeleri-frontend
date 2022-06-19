@@ -15,6 +15,7 @@ import { HistoricalArtifactsComponent } from './components/historical-artifacts/
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { ArtifactUpdateComponent } from './components/artifact-update/artifact-update.component';
 
 export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
@@ -86,6 +87,10 @@ const routes: Routes = [
   {
     path: 'admin/artifact/add',
     component: ArtifactAddComponent,
+  },
+  {
+    path: 'admin/artifact/update',
+    component: ArtifactUpdateComponent,
   },
   {
     path: 'register',

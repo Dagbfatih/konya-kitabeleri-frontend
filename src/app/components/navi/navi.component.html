@@ -38,7 +38,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Kitabeler
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item nav-item-link" style="white-space: normal;"
                                 (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">
@@ -91,21 +91,42 @@
                 </li>
 
                 <!-- Language -->
-                <li class="nav-item dropdown dropdown-menu-end">
+                <li class="nav-item dropdown">
                     <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <span class="flag-icon flag-icon-{{getLanguageFlagCode(currentLanguage.code!)}} flag-icon-squared"></span>
+                        <span
+                            class="flag-icon flag-icon-{{getLanguageFlagCode(currentLanguage.code!)}} flag-icon-squared"></span>
                         {{currentLanguage!.languageName}}
                     </button>
 
-                    <ul class="dropdown-menu dropdown-menu-light">
+                    <ul class="dropdown-menu dropdown-menu-dark">
                         <li *ngFor="let language of languages">
                             <a class="dropdown-item" (click)="setLanguage(language.code!)">
-                                <span class="flag-icon flag-icon-{{getLanguageFlagCode(language.code!)}} flag-icon-squared"></span>
+                                <span
+                                    class="flag-icon flag-icon-{{getLanguageFlagCode(language.code!)}} flag-icon-squared"></span>
                                 {{language.languageName}}
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item dropdown dropdown-menu-end" *ngIf="isAuthenticated()">
+
+                    <a class="nav-link d-block link-dark text-decoration-none dropdown-toggle" role="button"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32"> -->
+                        {{getUser().firstName + ' ' + getUser().lastName}}
+                    </a>
+
+                    <ul class="dropdown-menu text-small dropdown-menu-dark" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item disabled">Settings</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" (click)="signOut()">Sign out</a></li>
+                    </ul>
+
                 </li>
 
             </ul>

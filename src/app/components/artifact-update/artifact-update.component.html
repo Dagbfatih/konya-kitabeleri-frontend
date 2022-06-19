@@ -1,1 +1,149 @@
-<p>artifact-update works!</p>
+<body class="text-center">
+    <main class="my-form w-100 m-auto">
+        <form [formGroup]="artifactUpdateForm">
+            <div class="d-flex justify-content-between">
+                <button class="btn-back" (click)="goBack()">
+                    <fa-icon [icon]="faArrowLeft" class="fa-2x"></fa-icon>
+                </button>
+                <h1 class="fw-normal">Tarihi Eser Güncelle</h1>
+                <a class="btn btn-sm btn-outline-secondary rounded-2 align-self-start">
+                Nasıl yapılacağını öğrenin
+                </a>
+            </div>
+            <hr class="text-dark border-2 opacity-100 mb-5">
+
+            <div class="">
+                <!-- Eser Türü -->
+                <div class="mb-3 text-start">
+                    <label for="artifactTypeId" class="form-label">Eserin Türü</label>
+                    <select class="form-select" formControlName="artifactTypeId" id="artifactTypeId">
+                        <option value="" selected>{{getTranslate('choose')}}</option>
+                        <option *ngFor="let artifactType of artifactTypes" [value]="artifactType.id">
+                            {{artifactType.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Tarihi Dönemi -->
+                <div class="mb-3 text-start">
+                    <label for="histPeriodId" class="form-label">Eserin Tarihi Dönemi</label>
+                    <select class="form-select" formControlName="histPeriodId" id="histPeriodId">
+                        <option value="" selected>{{getTranslate('choose')}}</option>
+                        <option *ngFor="let histPeriod of histPeriods" [value]="histPeriod.id">
+                            {{histPeriod.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Kitabe Metni -->
+                <div class="mb-3 text-start">
+                    <label for="originalEpitaph" class="form-label">Eserin Kitabesinin Metni</label>
+                    <textarea class="form-control" id="originalEpitaph" style="height: 130px"
+                        formControlName="originalEpitaph" rows="3" placeholder="Eserin kitabesinin metnini girin">
+                </textarea>
+                </div>
+
+                <!-- Translates Start -->
+                <!-- ----------------------------------------------------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------- -->
+
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <h4 class="alert-heading">Çeviriler</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                    <p>
+                        Tarihi eserleri eklerken istediğiniz dile çevirebilirsiniz. Bunun için aşağıdaki artı butonunu
+                        kullanın. Artı butonuna her bastığınızda size yeni bir alan açacaktır. Önce çeviri yapmak
+                        istediğiniz dili seçin, sonra gerekli alanları doldurun ve ekleme butonuna basarak tarihi eseri
+                        kaydedin.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        Eğer ihtiyacınız olursa, soldaki 'Diller' menüsünden sisteme yeni bir dil ekleyebilirsiniz.
+                    </p>
+                </div>
+
+                <!-- Form Array Start -->
+                <!-- ----------------------------------------------------------------------------------- -->
+                <div formArrayName="artifactTranslates"
+                    *ngFor="let artifactTranslate of artifactTranslates.controls; let i = index;"
+                    class="d-flex justify-content-between">
+
+                    <div class="form-numbers me-3">
+                        <h5 class="fw-bold">{{i+1}}.</h5>
+                    </div>
+                    <div class="form-controls flex-grow-1">
+                        <h5 class="fw-bold">{{getLanguageNameByFormControl(artifactTranslate)}}</h5>
+                        <hr class="text-success border-2 opacity-100">
+
+                        <div formGroupName="{{i}}">
+                            <!-- Language -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'languageId' + i" class="form-label">
+                                    Eserin bilgilerini gireceğiniz dili seçin
+                                </label>
+                                <select class="form-select" formControlName="languageId" [id]="'languageId' + i">
+                                    <option value="" selected>{{getTranslate('choose')}}...</option>
+                                    <option *ngFor="let language of languages" [value]="language.id">
+                                        {{language.languageName}}
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <!-- Name -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'name' + i" class="form-label">
+                                    Eserin adı
+                                </label>
+                                <input type="text" class="form-control" [id]="'name' + i" formControlName="name"
+                                    placeholder="Eserin isminin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını buraya girin">
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'description' + i" class="form-label">Eserin Açıklaması</label>
+                                <textarea class="form-control" [id]="'description' + i" style="height: 130px"
+                                    formControlName="description" rows="3"
+                                    placeholder="Eseri açıklamasının '{{getLanguageNameByFormControl(artifactTranslate)}}' dilindeki karşılığını girin">
+                                </textarea>
+                            </div>
+
+                            <!-- Epitaph -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'epitaph' + i" class="form-label">Eserin Kitabesinin Anlamı</label>
+                                <textarea class="form-control" [id]="'epitaph' + i" style="height: 130px"
+                                    formControlName="epitaph" rows="3"
+                                    placeholder="Eserin kitabesininin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını girin">
+                                </textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-col-3 ms-3 align-self-start">
+                        <button class="btn btn-fill btn-outline-danger d-flex justify-content-between align-items-center" (click)="deleteArtifactTranslate(i)">
+                            <fa-icon [icon]="faTrash" class="1x"></fa-icon>
+                            <h6 class="fw-small mb-0 d-none d-lg-block ms-2">Çeviriyi Kaldır</h6>
+                        </button>
+                    </div>
+                </div> <!-- Form Array End -->
+                <hr class="text-dark border-2 opacity-100">
+                <div class="d-flex justify-content-start flex-wrap flex-md-nowrap
+                                align-items-center pb-2 mb-3 border-bottom">
+                    <button class="btn btn-fill btn-outline-dark me-2" (click)="addArtifactTranslate()">
+                        <fa-icon [icon]="faPlus" class="1x me-2"></fa-icon> Çeviri Ekle
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-fill btn-dark" (click)="update()">
+                Tarihi Eseri Kaydet
+            </button>
+        </div>
+    </main>
+
+</body>

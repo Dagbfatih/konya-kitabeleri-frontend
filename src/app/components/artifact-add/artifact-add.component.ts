@@ -1,8 +1,5 @@
-import { ResponseModel } from './../../core/models/responseModels/responseModel';
-import { Observable } from 'rxjs';
 import { ErrorService } from './../../services/error.service';
 import { ArtifactModelForTranslation } from './../../models/entities/artifactTranslateModel';
-import { Translate } from './../../models/entities/translate';
 import { TranslateService } from './../../services/translate.service';
 import { Language } from './../../models/entities/language';
 import { LanguageService } from 'src/app/services/language.service';
@@ -17,10 +14,7 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { allTranslates } from 'src/app/services/translation.service';
@@ -30,7 +24,6 @@ import {
   faPlus,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-artifact-add',
@@ -45,9 +38,6 @@ export class ArtifactAddComponent implements OnInit {
   artifactTypes: ArtifactType[] = [];
   histPeriods: HistPeriod[] = [];
   languages: Language[] = [];
-  nameUuid: string;
-  descriptionUuid: string;
-  epitaphUuid: string;
 
   constructor(
     private artifactService: ArtifactService,
@@ -65,9 +55,6 @@ export class ArtifactAddComponent implements OnInit {
     this.getAllArtifactTypes();
     this.getAllHistPeriods();
     this.getAllLanguages();
-    this.nameUuid = this.generateUUID();
-    this.descriptionUuid = this.generateUUID();
-    this.epitaphUuid = this.generateUUID();
   }
 
   getAllLanguages() {
@@ -157,10 +144,6 @@ export class ArtifactAddComponent implements OnInit {
     });
 
     return artifactTranslates;
-  }
-
-  generateUUID(): string {
-    return UUID.UUID();
   }
 
   getLanguageNameByFormControl(formControl: AbstractControl): string {

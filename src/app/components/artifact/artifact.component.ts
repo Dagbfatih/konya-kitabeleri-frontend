@@ -1,3 +1,4 @@
+import { ArtifactUpdateService } from './../../services/artifact-update.service';
 import { ArtifactUpdateComponent } from './../artifact-update/artifact-update.component';
 import { ArtifactDeleteComponent } from './../artifact-delete/artifact-delete.component';
 import { Router } from '@angular/router';
@@ -25,7 +26,8 @@ export class ArtifactComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private artifactService: ArtifactService,
-    private router: Router
+    private router: Router,
+    private artifactUpdateService: ArtifactUpdateService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,11 @@ export class ArtifactComponent implements OnInit {
       size: 'm',
     });
     modalReferance.componentInstance.artifact = artifact;
+  }
+
+  goUpdateForm(artifact: ArtifactDetailsDto) {
+    this.artifactUpdateService.setArtifact(artifact);
+    this.router.navigate(['admin/artifact/update'])
   }
 
   getTranslate(key: string) {

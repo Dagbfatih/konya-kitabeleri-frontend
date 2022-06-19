@@ -1,3 +1,7 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from './../../models/entities/user';
+import { TokenService } from 'src/app/services/token.service';
 import { SettingsService } from './../../services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
@@ -27,7 +31,10 @@ export class NaviComponent implements OnInit {
     private router: Router,
     private settingsService: SettingsService,
     private languageService: LanguageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private tokenService: TokenService,
+    private authService: AuthService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +111,21 @@ export class NaviComponent implements OnInit {
     this.languageService.getAll().subscribe((response) => {
       this.languages = response.data;
     });
+  }
+
+  getUser(): User {
+    return this.tokenService.getUserWithJWT();
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+
+  signOut() {
+    this.authService.signOut();
+    sessionStorage.removeItem('adminCurrentPage');
+    this.toastrService.info('Going to homepage...', 'Logged Out');
+    this.router.navigate(['']);
   }
 
   setLanguage(languageCode: string) {

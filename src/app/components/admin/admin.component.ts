@@ -1,3 +1,6 @@
+import { User } from './../../models/entities/user';
+import { TokenService } from 'src/app/services/token.service';
+import { ToastrService } from 'ngx-toastr';
 import { VirtualTourComponent } from './../virtual-tour/virtual-tour.component';
 import { ArtifactTypeComponent } from './../artifact-type/artifact-type.component';
 import { HistoricalPeriodComponent } from './../historical-period/historical-period.component';
@@ -24,6 +27,7 @@ import {
   faUsersCog,
 } from '@fortawesome/free-solid-svg-icons';
 import { ArtifactAddComponent } from '../artifact-add/artifact-add.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -43,7 +47,13 @@ export class AdminComponent implements OnInit {
   currentMainPage: string = '';
   currentComponent: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private toastrService: ToastrService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     this.subscribeRoute();
@@ -79,6 +89,17 @@ export class AdminComponent implements OnInit {
       top: offsetPosition,
       behavior: 'smooth',
     });
+  }
+
+  getUserInfo(): User {
+    return this.tokenService.getUserWithJWT();
+  }
+
+  signOut() {
+    this.authService.signOut();
+    sessionStorage.removeItem('adminCurrentPage');
+    this.toastrService.info('Going to homepage...', 'Logged Out');
+    this.router.navigate(['']);
   }
 
   subscribeRoute() {

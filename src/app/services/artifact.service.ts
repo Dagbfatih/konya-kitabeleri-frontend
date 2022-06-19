@@ -37,6 +37,24 @@ export class ArtifactService extends ServiceRepositoryBase<Artifact> {
     );
   }
 
+  updateWithTranslations(
+    artifact: Artifact,
+    artifactModels: ArtifactModelForTranslation[]
+  ): Observable<ResponseModel> {
+    let artifactDelete: any = artifact;
+    delete artifactDelete.artifactTranslates;
+
+    let artifactModelForPost: ArtifactModelForPost = {
+      artifact: artifactDelete,
+      artifactModels: Object.assign([], artifactModels),
+    };
+
+    return this.httpClient.post<ResponseModel>(
+      this.apiUrl + 'updatewithtranslations',
+      artifactModelForPost
+    );
+  }
+
   getAllDetails(): Observable<ListResponseModel<ArtifactDetailsDto>> {
     return this.httpClient.get<ListResponseModel<ArtifactDetailsDto>>(
       this.apiUrl + 'getalldetails'

@@ -50,13 +50,18 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
 
-      this.authService.login(loginModel).subscribe((response) => {
-        loginModel.rememberMe
-          ? this.setTokenOnLocal(response.data)
-          : this.setTokenOnSession(response.data);
-        this.toastrService.success(response.message);
-        this.router.navigate(['/admin']);
-      });
+      this.authService.login(loginModel).subscribe(
+        (response) => {
+          loginModel.rememberMe
+            ? this.setTokenOnLocal(response.data)
+            : this.setTokenOnSession(response.data);
+          this.toastrService.success(response.message, this.getTranslate('successful'));
+          this.router.navigate(['/admin']);
+        },
+        (responseError) => {
+          this.errorService.writeErrorMessages(responseError);
+        }
+      );
     }
   }
 

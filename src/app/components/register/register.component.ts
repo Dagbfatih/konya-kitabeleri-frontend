@@ -68,6 +68,10 @@ export class RegisterComponent implements OnInit {
           this.toastrService.success(response.message);
           this.tokenService.setLocal(response.data.accessToken.token);
           window.location.reload();
+          this.toastrService.info(
+            this.getTranslate('redirectToLoginPage'),
+            this.getTranslate('info')
+          );
           this.router.navigate(['/admin']);
         },
         (responseError) => {
@@ -75,7 +79,7 @@ export class RegisterComponent implements OnInit {
         }
       );
     } else {
-      console.log(this.registerForm.errors)
+      console.log(this.registerForm.errors);
       this.toastrService.warning(
         this.registerForm.errors?.message,
         this.getTranslate('warning')
