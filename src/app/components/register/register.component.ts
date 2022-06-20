@@ -1,3 +1,6 @@
+import { EmailAddress } from './../../models/entities/emailAddress';
+import { EmailMessage } from './../../models/entities/emailMessage';
+import { MailService } from './../../services/mail.service';
 import { RegisterModel } from './../../models/entities/registerModel';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from './../../services/token.service';
@@ -26,13 +29,15 @@ import { allTranslates } from 'src/app/services/translation.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted: boolean = false;
+
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private errorService: ErrorService,
     private router: Router,
     private tokenService: TokenService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private mailService: MailService
   ) {}
 
   ngOnInit(): void {
@@ -65,21 +70,21 @@ export class RegisterComponent implements OnInit {
 
       this.authService.registerWithCustomer(customerForRegisterModel).subscribe(
         (response) => {
-          this.toastrService.success(response.message);
-          this.tokenService.setLocal(response.data.accessToken.token);
-          window.location.reload();
-          this.toastrService.info(
-            this.getTranslate('redirectToLoginPage'),
-            this.getTranslate('info')
-          );
-          this.router.navigate(['/admin']);
+          this.toastrService.success(response.message, this.getTranslate('successful'));
+          // this.tokenService.setLocal(response.data.accessToken.token);
+          this.sendMail(registerModel);
+          // window.location.reload();
+          // this.toastrService.info(
+          //   this.getTranslate('redirectToLoginPage'),
+          //   this.getTranslate('info')
+          // );
+          this.router.navigate(['/login']);
         },
         (responseError) => {
           this.errorService.writeErrorMessages(responseError);
         }
       );
     } else {
-      console.log(this.registerForm.errors);
       this.toastrService.warning(
         this.registerForm.errors?.message,
         this.getTranslate('warning')
@@ -105,6 +110,44 @@ export class RegisterComponent implements OnInit {
     };
 
     return newRegisterModel;
+  }
+
+  sendMail(userInfo: RegisterModel) {
+    let fromEmailAddresses: EmailAddress[] = [
+      {
+        name: userInfo.firstName + ' ' + userInfo.lastName,
+        address: userInfo.email,
+      },
+    ];
+
+    let toEmailAddresses: EmailAddress[] = [
+      { name: 'admin', address: 'kitabelerindili@gmail.com' },
+    ];
+
+    let emailMessage: EmailMessage = {
+      fromAddresses: fromEmailAddresses,
+      subject: 'Sisteme bir kullanıcı kayıt oldu',
+      content:
+        'Kullanıcı: ' +
+        userInfo.firstName +
+        ' ' +
+        userInfo.lastName +
+        '\nEmail: ' +
+        userInfo.email,
+      toAddresses: toEmailAddresses,
+    };
+
+    this.mailService.send(emailMessage).subscribe(
+      (response) => {
+        // this.toastrService.success(
+        //   response.message,
+        //   this.getTranslate('successful')
+        // );
+      },
+      (responseError) => {
+        // this.errorService.writeErrorMessages(responseError);
+      }
+    );
   }
 
   checkPasswords: ValidatorFn = (
