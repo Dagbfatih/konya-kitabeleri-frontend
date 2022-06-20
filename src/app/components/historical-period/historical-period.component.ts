@@ -6,7 +6,7 @@ import { HistoricalPeriodAddComponent } from './../historical-period-add/histori
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faRedoAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-historical-period',
@@ -16,7 +16,10 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 export class HistoricalPeriodComponent implements OnInit {
   faEdit = faEdit;
   faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
+
   histPeriods: HistPeriod[] = [];
+  dataLoaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,8 +32,10 @@ export class HistoricalPeriodComponent implements OnInit {
   }
 
   getAll() {
+    this.dataLoaded = false;
     this.histPeriodService.getAll().subscribe((response) => {
       this.histPeriods = response.data;
+      this.dataLoaded = true;
     });
   }
 

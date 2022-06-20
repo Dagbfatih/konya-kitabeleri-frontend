@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ArtifactTypeDeleteComponent } from '../artifact-type-delete/artifact-type-delete.component';
 import { ArtifactTypeUpdateComponent } from '../artifact-type-update/artifact-type-update.component';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faRedoAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-artifact-type',
@@ -15,6 +15,8 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 export class ArtifactTypeComponent implements OnInit {
   faEdit = faEdit;
   faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
+
   artifactTypes: ArtifactType[] = [];
   dataLoaded = false;
 
@@ -28,6 +30,7 @@ export class ArtifactTypeComponent implements OnInit {
   }
 
   getAll() {
+    this.dataLoaded = false;
     this.artifactTypeService.getAll().subscribe((response) => {
       this.artifactTypes = response.data;
       this.dataLoaded = true;

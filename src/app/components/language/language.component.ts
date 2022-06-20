@@ -3,7 +3,7 @@ import { LanguageDeleteComponent } from './../language-delete/language-delete.co
 import { LanguageAddComponent } from './../language-add/language-add.component';
 import { Language } from './../../models/entities/language';
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faRedoAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LanguageService } from 'src/app/services/language.service';
 
@@ -15,7 +15,10 @@ import { LanguageService } from 'src/app/services/language.service';
 export class LanguageComponent implements OnInit {
   faEdit = faEdit;
   faTrash = faTrash;
+  faRedoAlt = faRedoAlt;
+
   languages: Language[] = [];
+  dataLoaded = false;
 
   constructor(
     private modalService: NgbModal,
@@ -27,8 +30,10 @@ export class LanguageComponent implements OnInit {
   }
 
   getAll() {
+    this.dataLoaded = false;
     this.languageService.getAll().subscribe((response) => {
       this.languages = response.data;
+      this.dataLoaded = true;
     });
   }
 

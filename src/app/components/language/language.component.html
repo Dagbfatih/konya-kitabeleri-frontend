@@ -3,6 +3,10 @@
     <h1 class="h2">Diller</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
+            <button class="btn shadow-none me-2">
+                <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh" (click)="getAll();">
+                </fa-icon>
+            </button>
             <button type="button" class="btn btn-outline-secondary" (click)="openAddForm()">Ekle</button>
             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
         </div>
@@ -22,11 +26,11 @@
             <th scope="col"></th>
         </tr>
     </thead>
-    <tbody class="table-group-divider">
+    <tbody *ngIf="dataLoaded" class="table-group-divider">
         <tr *ngFor="let language of languages; let i = index;">
             <th scope="row">{{i+1}}</th>
             <td>{{language.languageName}}</td>
-            <td>{{language.code}}</td>      
+            <td>{{language.code}}</td>
             <td class="text-end">
                 <button class="btn shadow-none me-2" (click)="openUpdateForm(language)">
                     <fa-icon [icon]="faEdit" size="1x" class="fa-icon-edit me-2"></fa-icon>
@@ -38,3 +42,8 @@
         </tr>
     </tbody>
 </table>
+<div *ngIf="!dataLoaded" class="d-flex justify-content-center mt-5">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>

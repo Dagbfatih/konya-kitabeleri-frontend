@@ -8,7 +8,12 @@ import { ArtifactService } from './../../services/artifact.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Artifact } from './../../models/entities/artifact';
 import { Component, OnInit } from '@angular/core';
-import { faEye, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEye,
+  faTrash,
+  faEdit,
+  faRedoAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { allTranslates } from 'src/app/services/translation.service';
 
 @Component({
@@ -20,8 +25,10 @@ export class ArtifactComponent implements OnInit {
   faEye = faEye;
   faTrash = faTrash;
   faEdit = faEdit;
+  faRedoAlt = faRedoAlt;
 
   artifacts: ArtifactDetailsDto[] = [];
+  dataLoaded = false;
 
   constructor(
     private modalService: NgbModal,
@@ -35,8 +42,10 @@ export class ArtifactComponent implements OnInit {
   }
 
   getAllArtifacts() {
+    this.dataLoaded = false;
     this.artifactService.getAllDetails().subscribe((response) => {
       this.artifacts = response.data;
+      this.dataLoaded = true;
     });
   }
 
@@ -49,7 +58,7 @@ export class ArtifactComponent implements OnInit {
 
   goUpdateForm(artifact: ArtifactDetailsDto) {
     this.artifactUpdateService.setArtifact(artifact);
-    this.router.navigate(['admin/artifact/update'])
+    this.router.navigate(['admin/artifact/update']);
   }
 
   getTranslate(key: string) {

@@ -2,7 +2,11 @@
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
     <h1 class="h2">Tarihi Eserler</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
+        <div class="me-2">
+            <button class="btn shadow-none me-2">
+                <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh" (click)="getAllArtifacts();">
+                </fa-icon>
+            </button>
             <button type="button" class="btn btn-outline-secondary" routerLink="/admin/artifact/add">Ekle</button>
             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
         </div>
@@ -27,7 +31,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="dataLoaded">
             <tr *ngFor="let artifact of artifacts" class="align-bottom">
                 <td>
                     <span class="d-inline-block text-truncate" style="max-width: 150px;">
@@ -67,4 +71,9 @@
             </tr>
         </tbody>
     </table>
+    <div *ngIf="!dataLoaded" class="d-flex justify-content-center mt-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 </div>
