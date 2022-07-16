@@ -114,3 +114,20 @@ ul.friend-list .right p {
 .btn:hover div .fa {
   color: var(--app-navi-dropdown-hover-color);
 }
+
+/* .autocomplete {
+  position: relative;
+  display: inline-block;
+}
+.autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+} */
+
+#autocomplete {
+  max-width: 400px;
+  margin: 0 auto;
+}

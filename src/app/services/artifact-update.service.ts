@@ -1,13 +1,16 @@
+import { Artifact } from 'src/app/models/entities/artifact';
 import { Translate } from './../models/entities/translate';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { Injectable } from '@angular/core';
+import { ArtifactModelForTranslation } from '../models/entities/artifactTranslateModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArtifactUpdateService {
   artifact: ArtifactDetailsDto;
+  artifactTranslations: ArtifactModelForTranslation[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.subscribeReload();
@@ -22,12 +25,21 @@ export class ArtifactUpdateService {
     this.artifact = artifact;
   }
 
+  setInnerArtifact(artifact: Artifact) {
+    this.artifact.artifact = artifact;
+  }
+
+  setTranslations(artifactTranslations: ArtifactModelForTranslation[]) {
+    this.artifactTranslations = artifactTranslations;
+  }
+
   getArtifactTranslateForms(): FormGroup[] {
     let forms: FormGroup[] = [];
 
     let nameTranslates: Translate[] = this.getNameTranslates();
     let descriptionTranslates: Translate[] = this.getDescriptionTranslates();
     let epitaphTranslates: Translate[] = this.getEpitaphTranslates();
+    let summaryTranslates: Translate[] = this.getSummaryTranslates();
     let languages: number[] = this.getLanguagesByTranslations();
 
     languages.forEach((languageId) => {
@@ -35,9 +47,10 @@ export class ArtifactUpdateService {
         this.createArtifactAddFormTranslate(
           languageId,
           nameTranslates.find((nt) => nt.languageId === languageId)?.value!,
-          descriptionTranslates.find((nt) => nt.languageId === languageId)
+          descriptionTranslates.find((dt) => dt.languageId === languageId)
             ?.value!,
-          epitaphTranslates.find((nt) => nt.languageId === languageId)?.value!
+          epitaphTranslates.find((et) => et.languageId === languageId)?.value!,
+          summaryTranslates.find((st) => st.languageId === languageId)?.value!
         )
       );
     });
@@ -49,11 +62,13 @@ export class ArtifactUpdateService {
     languageId: number,
     name: string,
     description: string,
-    epitaph: string
+    epitaph: string,
+    summary: string
   ): FormGroup {
     return this.formBuilder.group({
       languageId: [languageId],
       name: [name, Validators.required],
+      summary: [summary, Validators.required],
       description: [description, Validators.required],
       epitaph: [epitaph, Validators.required],
     });
@@ -85,6 +100,12 @@ export class ArtifactUpdateService {
     );
   }
 
+  private getSummaryTranslates(): Translate[] {
+    return this.artifact.translates.filter(
+      (t) => t.key === this.artifact.artifact.summary
+    );
+  }
+
   // Refresh Protection
   subscribeReload() {
     window.onbeforeunload = () => {
@@ -96,7 +117,10 @@ export class ArtifactUpdateService {
     if (this.artifact) {
       sessionStorage.setItem(
         'ArtifactUpdateForm',
-        JSON.stringify(this.artifact)
+        JSON.stringify({
+          artifact: this.artifact,
+          translations: this.artifactTranslations,
+        })
       );
     }
   }
@@ -104,7 +128,13 @@ export class ArtifactUpdateService {
   getBackupData() {
     let data = sessionStorage.getItem('ArtifactUpdateForm');
     if (data !== null) {
-      this.artifact = JSON.parse(data);
+      let parsedData = JSON.parse(data) as {
+        artifact: ArtifactDetailsDto;
+        translations: ArtifactModelForTranslation[];
+      };
+      console.log('pa', parsedData);
+      this.artifact = parsedData.artifact;
+      this.artifactTranslations = parsedData.translations;
       sessionStorage.removeItem('ArtifactUpdateForm');
     }
   }

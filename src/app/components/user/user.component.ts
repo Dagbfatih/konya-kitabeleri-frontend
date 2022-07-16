@@ -11,6 +11,7 @@ import {
   faDotCircle,
   faRedoAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { allTranslates } from 'src/app/services/translation.service';
 declare var bootstrap: any;
 
 @Component({
@@ -57,5 +58,9 @@ export class UserComponent implements OnInit {
       this.users = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  getTranslate(key: string) {
+    return allTranslates.get(key);
   }
 }

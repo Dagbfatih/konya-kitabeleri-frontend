@@ -13,7 +13,7 @@
                         </a>
                         <li class="mb-2">
                             Tarih Eserleri Projesi, Selçuklu Yüksel Bahadır Alaylı Bilim ve Sanat Merkezi öğretim üyesi
-                            Osman XXX rehberliğinde Ayşe İnci ve Fatih Dağ tarafından 2022 TÜBİTAK için hazırlanmıştır.
+                            Osman XXX rehberliğinde Dilay Güzel ve Fatih Dağ tarafından 2022 TÜBİTAK için hazırlanmıştır.
                         </li>
                         <!-- <li class="mb-2">Code licensed <a href="https://github.com/twbs/bootstrap/blob/main/LICENSE"
                               target="_blank" rel="license noopener">MIT</a>, docs <a
@@ -26,16 +26,19 @@
                     <h5>{{getTranslate("links")}}</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Anasayfa</a>
+                            <a class="link-dark link" routerLink="/">Anasayfa</a>
                         </li>
                         <li class="mb-2">
-                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Konya</a>
+                            <a class="link-dark link" routerLink="/konya">Konya</a>
                         </li>
                         <li class="mb-2">
-                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Konya Kitabeleri</a>
+                            <a class="link-dark link" (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">Konya Kitabeleri</a>
                         </li>
                         <li class="mb-2">
-                            <a class="link-dark link" href="/soruluk-frontend/give-feedback">Sanal Gezi</a>
+                            <a class="link-dark link" routerLink="/virtual-tours">Sanal Gezi</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="link-dark link" routerLink="/source">Kaynakça</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +57,7 @@
                     <h5>{{getTranslate("contact")}}</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a class="link-dark unlink">tarihieserler@gmail.com</a>
+                            <a class="link-dark unlink">kitabelerindili@gmail.com</a>
                         </li>
                         <li class="mb-2">
                             <a class="link-dark unlink">dagbfatih@hotmail.com</a>

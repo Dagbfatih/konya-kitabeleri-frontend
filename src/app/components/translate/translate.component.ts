@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateDeleteComponent } from './../translate-delete/translate-delete.component';
 import { LanguageService } from './../../services/language.service';
 import { Language } from './../../models/entities/language';
@@ -6,8 +7,14 @@ import { TranslateService } from './../../services/translate.service';
 import { Translate } from './../../models/entities/translate';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faEdit, faTrash, faRedoAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEdit,
+  faTrash,
+  faRedoAlt,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 import { TranslateUpdateComponent } from '../translate-update/translate-update.component';
+import { allTranslates } from 'src/app/services/translation.service';
 
 @Component({
   selector: 'app-translate',
@@ -16,21 +23,33 @@ import { TranslateUpdateComponent } from '../translate-update/translate-update.c
 })
 export class TranslateComponent implements OnInit {
   translates: Translate[] = [];
+  filterText: string = '';
+  languageFilter: number;
   faEdit = faEdit;
   faTrash = faTrash;
   faRedoAlt = faRedoAlt;
+  faSearch = faSearch;
   languages: Language[] = [];
+  filterForm: FormGroup;
   dataLoaded = false;
 
   constructor(
     private translateService: TranslateService,
     private modalService: NgbModal,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getAll();
     this.getAllLanguages();
+    this.createFilterForm();
+  }
+  createFilterForm() {
+    this.filterForm = this.formBuilder.group({
+      filterText: [''],
+      languageFilter: [0],
+    });
   }
 
   getAllLanguages() {
@@ -69,5 +88,14 @@ export class TranslateComponent implements OnInit {
       size: 'm',
     });
     modalReferance.componentInstance.translate = translate;
+  }
+
+  filter() {
+    this.filterText = this.filterForm.get('filterText')?.value;
+    this.languageFilter = this.filterForm.get('languageFilter')?.value;
+  }
+
+  getTranslate(key: string) {
+    return allTranslates.get(key);
   }
 }

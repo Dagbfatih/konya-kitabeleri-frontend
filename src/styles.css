@@ -38,6 +38,16 @@
   transition: 0.2s;
 }
 
+.fa-icon-refresh:active {
+  color: rgb(0, 108, 158);
+  transition: 0.01s;
+}
+
+.fa-icon-images:hover {
+  color: rgb(255, 196, 0);
+  transition: 0.2s;
+}
+
 .fa-icon-trash:hover {
   color: red;
   transition: 0.2s;
@@ -61,6 +71,178 @@
 .fa-icon-clipboard:hover {
   color: #fdad00;
   transition: 0.2s;
+}
+
+.fa-icon-minus-circle-corner {
+  color: red;
+  transition: 0.2s;
+}
+
+.fa-icon-minus-circle-corner:hover {
+  color: rgb(141, 0, 0);
+  transition: 0.2s;
+}
+
+.fa-icon-search:hover {
+  color: rgb(0, 0, 0);
+  transition: 0.2s;
+}
+
+::ng-deep .custom-tooltip .arrow::before {
+  border-top-color: black;
+}
+
+/* search button */
+.search-filter {
+  position: relative;
+}
+
+.search-filter .fa-icon-search {
+  position: absolute;
+  top: 7px;
+  left: 14px;
+  color: #9ca3af;
+}
+
+.search-filter-input {
+  text-indent: 33px;
+}
+
+.filter-input {
+  border-radius: 10px;
+}
+
+.filter-input:focus {
+  border-color: black;
+  box-shadow: none;
+}
+/* Search Button End */
+
+/* My Toggle Button */
+
+.my-btn-toggle {
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: transparent;
+}
+
+.my-btn-toggle:hover,
+.my-btn-toggle:focus {
+  color: rgba(0, 0, 0, 0.85);
+  background-color: var(--app-list-color);
+}
+
+.my-btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform 0.35s ease;
+  transform-origin: 0.5em 50%;
+}
+
+.my-btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, 0.85);
+}
+.my-btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.my-btn-toggle-nav a {
+  padding: 0.1875rem 0.5rem;
+  margin-top: 0.125rem;
+  margin-left: 1.25rem;
+}
+.my-btn-toggle-nav a:hover,
+.my-btn-toggle-nav a:focus {
+  background-color: var(--app-list-color);
+}
+
+.my-btn-toggle-nav a.active {
+  background-color: var(--app-list-color);
+  font-weight: 600;
+}
+
+/* My Toc CSS */
+
+.my-toc {
+  grid-area: toc;
+}
+@media (min-width: 992px) {
+  .my-toc {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5rem;
+    right: 0;
+    z-index: 2;
+    height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+}
+.my-toc nav {
+  font-size: 0.875rem;
+}
+.my-toc nav ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.my-toc nav ul ul {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+.my-toc nav li {
+  margin-bottom: 0.25rem;
+}
+.my-toc nav a {
+  color: inherit;
+}
+.my-toc nav a:not(:hover) {
+  text-decoration: none;
+}
+.my-toc nav a code {
+  font: inherit;
+}
+.my-toc-toggle {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 575.98px) {
+  .my-toc-toggle {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+@media (max-width: 767.98px) {
+  .my-toc-toggle {
+    border: 1px solid #dee2e6;
+    border-radius: 0.4rem;
+  }
+  .my-toc-toggle:hover,
+  .my-toc-toggle:focus,
+  .my-toc-toggle:active,
+  .my-toc-toggle[aria-expanded="true"] {
+    color: var(--my-violet);
+    background-color: #fff;
+    border-color: var(--my-violet);
+  }
+  .my-toc-toggle:focus,
+  .my-toc-toggle[aria-expanded="true"] {
+    box-shadow: 0 0 0 3px rgba(var(--my-violet-rgb), 0.25);
+  }
+}
+@media (max-width: 767.98px) {
+  .my-toc-collapse nav {
+    padding: 1.25rem;
+    background-color: var(--bs-gray-100);
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+  }
+}
+@media (min-width: 768px) {
+  .my-toc-collapse {
+    display: block !important;
+  }
 }
 
 :root {

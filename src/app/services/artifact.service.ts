@@ -1,3 +1,5 @@
+import { ArtifactImage } from './../models/entities/artifactImage';
+import { ItemResponseModel } from './../core/models/responseModels/ItemResponseModel';
 import { ArtifactModelForPost } from './../models/entities/artifactModelForPost';
 import { ResponseModel } from './../core/models/responseModels/responseModel';
 import { ArtifactModelForTranslation } from './../models/entities/artifactTranslateModel';
@@ -19,10 +21,10 @@ export class ArtifactService extends ServiceRepositoryBase<Artifact> {
     super('artifacts', httpClient);
   }
 
-  addWithTranslations(
+  addWithDetails(
     artifact: Artifact,
     artifactModels: ArtifactModelForTranslation[]
-  ): Observable<ResponseModel> {
+  ): Observable<ItemResponseModel<number>> {
     let artifactDelete: any = artifact;
     delete artifactDelete.artifactTranslates;
 
@@ -31,13 +33,13 @@ export class ArtifactService extends ServiceRepositoryBase<Artifact> {
       artifactModels: Object.assign([], artifactModels),
     };
 
-    return this.httpClient.post<ResponseModel>(
+    return this.httpClient.post<ItemResponseModel<number>>(
       this.apiUrl + 'addwithtranslations',
       artifactModelForPost
     );
   }
 
-  updateWithTranslations(
+  updateWithDetails(
     artifact: Artifact,
     artifactModels: ArtifactModelForTranslation[]
   ): Observable<ResponseModel> {
@@ -58,6 +60,22 @@ export class ArtifactService extends ServiceRepositoryBase<Artifact> {
   getAllDetails(): Observable<ListResponseModel<ArtifactDetailsDto>> {
     return this.httpClient.get<ListResponseModel<ArtifactDetailsDto>>(
       this.apiUrl + 'getalldetails'
+    );
+  }
+
+  getAllDetailsAndDefaultImages(): Observable<
+    ListResponseModel<ArtifactDetailsDto>
+  > {
+    return this.httpClient.get<ListResponseModel<ArtifactDetailsDto>>(
+      this.apiUrl + 'getalldetailsanddefaultimages'
+    );
+  }
+
+  getDetailsById(
+    id: number
+  ): Observable<ItemResponseModel<ArtifactDetailsDto>> {
+    return this.httpClient.get<ItemResponseModel<ArtifactDetailsDto>>(
+      this.apiUrl + 'getdetailsbyid?id=' + id
     );
   }
 

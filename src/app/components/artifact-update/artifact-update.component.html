@@ -7,7 +7,7 @@
                 </button>
                 <h1 class="fw-normal">Tarihi Eser Güncelle</h1>
                 <a class="btn btn-sm btn-outline-secondary rounded-2 align-self-start">
-                Nasıl yapılacağını öğrenin
+                    Nasıl yapılacağını öğrenin
                 </a>
             </div>
             <hr class="text-dark border-2 opacity-100 mb-5">
@@ -17,7 +17,7 @@
                 <div class="mb-3 text-start">
                     <label for="artifactTypeId" class="form-label">Eserin Türü</label>
                     <select class="form-select" formControlName="artifactTypeId" id="artifactTypeId">
-                        <option value="" selected>{{getTranslate('choose')}}</option>
+                        <option value="" selected>{{getTranslate('choose')}}...</option>
                         <option *ngFor="let artifactType of artifactTypes" [value]="artifactType.id">
                             {{artifactType.name}}
                         </option>
@@ -28,11 +28,20 @@
                 <div class="mb-3 text-start">
                     <label for="histPeriodId" class="form-label">Eserin Tarihi Dönemi</label>
                     <select class="form-select" formControlName="histPeriodId" id="histPeriodId">
-                        <option value="" selected>{{getTranslate('choose')}}</option>
+                        <option value="" selected>{{getTranslate('choose')}}...</option>
                         <option *ngFor="let histPeriod of histPeriods" [value]="histPeriod.id">
                             {{histPeriod.name}}
                         </option>
                     </select>
+                </div>
+
+                <!-- Year of Construction -->
+                <div class="mb-3 text-start">
+                    <label for="yearOfConstruction" class="form-label">
+                        Eserin Yapım Tarihi
+                    </label>
+                    <input type="text" class="form-control" id="yearOfConstruction" formControlName="yearOfConstruction"
+                        placeholder="Eserin yapım tarihini girin (1453, 1071...)">
                 </div>
 
                 <!-- Kitabe Metni -->
@@ -41,6 +50,28 @@
                     <textarea class="form-control" id="originalEpitaph" style="height: 130px"
                         formControlName="originalEpitaph" rows="3" placeholder="Eserin kitabesinin metnini girin">
                 </textarea>
+                </div>
+
+                <!-- Latitude -->
+                <div class="mb-3 text-start">
+                    <label for="latitude" class="form-label">
+                        Eserin Bulunduğu Enlem - {{getTranslate('optional')}}
+                    </label>
+                    <input type="number" class="form-control" id="latitude" formControlName="latitude"
+                        placeholder="Eserin bulunduğu konumun enlemini girin ({{getTranslate('optional')}})" [ngClass]="{ 'is-invalid':
+                          submitted && getArtifactUpdateFormControls.latitude.errors ,
+                        'is-valid': submitted && getArtifactUpdateFormControls.latitude.valid }">
+                </div>
+
+                <!-- Longitude -->
+                <div class="mb-3 text-start">
+                    <label for="longitude" class="form-label">
+                        Eserin Bulunduğu Boylam - {{getTranslate('optional')}}
+                    </label>
+                    <input type="number" class="form-control" id="longitude" formControlName="longitude"
+                        placeholder="Eserin bulunduğu konumun boylamını girin ({{getTranslate('optional')}})" [ngClass]="{ 'is-invalid':  
+                        submitted && getArtifactUpdateFormControls.longitude.errors ,
+                        'is-valid': submitted && getArtifactUpdateFormControls.longitude.valid }">
                 </div>
 
                 <!-- Translates Start -->
@@ -101,6 +132,15 @@
                                     placeholder="Eserin isminin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını buraya girin">
                             </div>
 
+                            <!-- Summary -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'summary' + i" class="form-label">Eserin Kısaca Özeti</label>
+                                <textarea class="form-control" [id]="'summary' + i" style="height: 130px"
+                                    formControlName="summary" rows="3"
+                                    placeholder="Eseri özetinin '{{getLanguageNameByFormControl(artifactTranslate)}}' dilindeki karşılığını girin">
+                                </textarea>
+                            </div>
+
                             <!-- Description -->
                             <div class="mb-3 text-start">
                                 <label [for]="'description' + i" class="form-label">Eserin Açıklaması</label>
@@ -123,7 +163,9 @@
 
                     </div>
                     <div class="form-col-3 ms-3 align-self-start">
-                        <button class="btn btn-fill btn-outline-danger d-flex justify-content-between align-items-center" (click)="deleteArtifactTranslate(i)">
+                        <button
+                            class="btn btn-fill btn-outline-danger d-flex justify-content-between align-items-center"
+                            (click)="deleteArtifactTranslate(i)">
                             <fa-icon [icon]="faTrash" class="1x"></fa-icon>
                             <h6 class="fw-small mb-0 d-none d-lg-block ms-2">Çeviriyi Kaldır</h6>
                         </button>
@@ -141,7 +183,7 @@
 
         <div class="d-flex justify-content-end">
             <button class="btn btn-fill btn-dark" (click)="update()">
-                Tarihi Eseri Kaydet
+                Kaydet
             </button>
         </div>
     </main>

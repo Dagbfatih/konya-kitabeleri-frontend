@@ -2,6 +2,19 @@
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ps-lg-2">
     <h1 class="h2">Tarihi Eserler</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
+
+        <!-- Filters -->
+        <div class="me-4">
+            <form [formGroup]="filterForm" (ngSubmit)="filter()">
+                <div class="search-filter" style="width: 320px;">
+                    <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
+                    <input type="text" class="form-control filter-input search-filter-input col-4"
+                        formControlName="filterText" [placeholder]="getTranslate('searchOnArtifacts')">
+                </div>
+            </form>
+        </div>
+
+        <!-- Add Button -->
         <div class="me-2">
             <button class="btn shadow-none me-2">
                 <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh" (click)="getAllArtifacts();">
@@ -17,63 +30,92 @@
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">İsim</th>
-                <th scope="col">Tarih</th>
-                <th scope="col">Açıklama</th>
-                <th scope="col">Kitabe Anlamı</th>
-                <th scope="col">Kitabe Metni</th>
-                <th scope="col">Eser Türü</th>
-                <th scope="col">Dönem</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="dataLoaded">
-            <tr *ngFor="let artifact of artifacts" class="align-bottom">
-                <td>
-                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                        {{getTranslate(artifact.artifact.name)}}
-                    </span>
-                </td>
-                <td>{{artifact.artifact.date}}</td>
-                <td>
-                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                        {{getTranslate(artifact.artifact.description)}}
-                    </span>
-                </td>
-                <td>
-                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                        {{getTranslate(artifact.artifact.epitaph)}}
-                    </span>
-                </td>
-                <td>
-                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                        {{artifact.artifact.originalEpitaph}}
-                    </span>
-                </td>
-                <td>{{artifact.artifactType.name}}</td>
-                <td>{{artifact.historicalPeriod.name}}</td>
-                <td>
-                    <button class="btn shadow-none" (click)="goUpdateForm(artifact)">
-                        <fa-icon [icon]="faEdit" class="fa-icon-edit 1x"></fa-icon>
-                    </button>
-                    <button class="btn shadow-none">
-                        <fa-icon [icon]="faTrash" class="fa-icon-trash 1x" (click)="openDeleteForm(artifact.artifact)">
-                        </fa-icon>
-                    </button>
-                    <button class="btn shadow-none">
-                        <fa-icon [icon]="faEye" class="fa-icon-eye 1x"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div *ngIf="!dataLoaded" class="d-flex justify-content-center mt-5">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+<table class="table align-middle table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">İsim</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Özet</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">Kitabe Anlamı</th>
+            <th scope="col">Kitabe Metni</th>
+            <th scope="col">Eser Türü</th>
+            <th scope="col">Dönem</th>
+            <th scope="col">Konum</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody *ngIf="dataLoaded">
+        <tr *ngFor="let artifact of artifacts | artifactFilter:filterText; let i = index;" class="align-bottom">
+            <td>{{artifact.artifact.id}}</td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{getTranslate(artifact.artifact.name)}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{artifact.artifact.yearOfConstruction}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{getTranslate(artifact.artifact.summary)}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{getTranslate(artifact.artifact.description)}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{getTranslate(artifact.artifact.epitaph)}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{artifact.artifact.originalEpitaph}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{artifact.artifactType.name}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{artifact.historicalPeriod.name}}
+                </span>
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{artifact.artifact?.latitude?.toString()+", "+artifact.artifact?.longitude?.toString()}}
+                </span>
+            </td>
+            <td>
+                <button class="btn shadow-none" placement="top" ngbTooltip="Resim Ekle" tooltipClass="custom-tooltip">
+                    <fa-icon [icon]="faImages" class="fa-icon-images 1x" (click)="goImageUpdateForm(artifact)">
+                    </fa-icon>
+                </button>
+                <button class="btn shadow-none" (click)="goUpdateForm(artifact)" placement="top"
+                    ngbTooltip="Eseri Güncelle" tooltipClass="custom-tooltip">
+                    <fa-icon [icon]="faEdit" class="fa-icon-edit 1x"></fa-icon>
+                </button>
+                <button class="btn shadow-none" placement="top" ngbTooltip="Eseri Sil" tooltipClass="custom-tooltip">
+                    <fa-icon [icon]="faTrash" class="fa-icon-trash 1x" (click)="openDeleteForm(artifact.artifact)">
+                    </fa-icon>
+                </button>
+                <button class="btn shadow-none" placement="top" ngbTooltip="Önizle" tooltipClass="custom-tooltip">
+                    <fa-icon [icon]="faEye" class="fa-icon-eye 1x" (click)="goPreview(artifact)"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="!dataLoaded" class="d-flex justify-content-center mt-5">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
     </div>
 </div>

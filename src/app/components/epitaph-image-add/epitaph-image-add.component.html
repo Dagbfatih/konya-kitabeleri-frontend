@@ -1,0 +1,57 @@
+<body class="text-center">
+    <main class="my-form w-100 m-auto">
+        <form>
+            <div class="d-flex justify-content-between">
+                <button class="btn-back" (click)="goBack()">
+                    <fa-icon [icon]="faArrowLeft" class="fa-2x"></fa-icon>
+                </button>
+                <h1 class="fw-normal">Kitabe Resmini Ekleyin</h1>
+                <a class="btn btn-sm btn-outline-secondary rounded-2 align-self-start">
+                    Nasıl yapılacağını öğrenin
+                </a>
+            </div>
+            <hr class="text-dark border-2 opacity-100 mb-5">
+
+            <!-- Epitaph Image Add -->
+            <div class="">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-self-center">
+                        <fa-icon class="align-self-center fa-2x me-2 text-secondary" [icon]="faImage"></fa-icon>
+                        <h2 class="align-self-center">Kitabe Fotoğrafı</h2>
+                    </div>
+                    <div class="align-self-center">
+                    </div>
+                </div>
+                <hr class="text-dark border-1 opacity-25 mb-3">
+
+                <div class="mb-3">
+                    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="epitaphImageDropped($event)"
+                        [showBrowseBtn]="false" [multiple]="false" accept=".png, .jpeg, .jpg, .webp, .avif">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            Resmi buraya sürükleyin veya
+                            <button type="button" class="btn btn-outline-info ms-2"
+                                (click)="openFileSelector()">Dosyalara
+                                gözat</button>
+                        </ng-template>
+                    </ngx-file-drop>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="">
+                        <div *ngFor="let image of epitaphImages" class="">
+                            <span class="fw-light">
+                                {{image.relativePath}}
+                            </span>
+                            <button class="btn btn-danger" (click)="deleteEpitaphImage(image)">
+                                Kaldır
+                            </button>
+                        </div>
+
+                    </div>
+                    <button class="btn btn-outline-dark" (click)="uploadEpitaphImage()">
+                        Seçili Resmi Ekle
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>

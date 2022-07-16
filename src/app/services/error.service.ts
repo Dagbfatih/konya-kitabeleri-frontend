@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorDetails } from '../models/entities/errorDetails';
+import { allTranslates } from './translation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,12 @@ export class ErrorService {
 
   writeErrorMessages(responseError: any) {
     let returnedError = responseError.error;
-
+    console.log('aaaaaaaa')
     if (!returnedError.ExceptionType) {
-      this.toastrService.error(returnedError.message, 'Hata');
+      this.toastrService.error(
+        returnedError.message,
+        this.getTranslate('error')
+      );
       return;
     }
 
@@ -33,5 +37,9 @@ export class ErrorService {
     } else {
       this.toastrService.error(returnedError.ErrorMessage, 'Hata');
     }
+  }
+
+  getTranslate(key: string) {
+    return allTranslates.get(key);
   }
 }

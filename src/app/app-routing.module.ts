@@ -1,3 +1,10 @@
+import { SourceComponent } from './components/source/source.component';
+import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
+import { LocationAddComponent } from './components/location-add/location-add.component';
+import { ArtifactImageUpdateComponent } from './components/artifact-image-update/artifact-image-update.component';
+import { ArtifactPreviewComponent } from './components/artifact-preview/artifact-preview.component';
+import { ArtifactAddConfirmationComponent } from './components/artifact-add-confirmation/artifact-add-confirmation.component';
+import { ArtifactImageAddComponent } from './components/artifact-image-add/artifact-image-add.component';
 import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
@@ -85,12 +92,33 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'source',
+    component: SourceComponent,
+  },
+  {
     path: 'admin/artifact/add',
     component: ArtifactAddComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
+  // {
+  //   path: 'admin/artifact/location/add',
+  //   component: LocationAddComponent,
+  //   canActivate: [AdminGuard, LoginGuard],
+  // },
+  {
+    path: 'admin/artifact/preview/:id',
+    component: ArtifactPreviewComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
+  {
+    path: 'admin/artifact/upload-images',
+    component: ArtifactImageUpdateComponent,
+    canActivate: [AdminGuard, LoginGuard],
   },
   {
     path: 'admin/artifact/update',
     component: ArtifactUpdateComponent,
+    canActivate: [AdminGuard, LoginGuard],
   },
   {
     path: 'register',

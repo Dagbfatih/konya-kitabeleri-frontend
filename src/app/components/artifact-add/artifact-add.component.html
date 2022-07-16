@@ -7,7 +7,7 @@
                 </button>
                 <h1 class="fw-normal">Tarihi Eser Ekle</h1>
                 <a class="btn btn-sm btn-outline-secondary rounded-2 align-self-start">
-                Nasıl yapılacağını öğrenin
+                    Nasıl yapılacağını öğrenin
                 </a>
             </div>
             <hr class="text-dark border-2 opacity-100 mb-5">
@@ -16,8 +16,10 @@
                 <!-- Eser Türü -->
                 <div class="mb-3 text-start">
                     <label for="artifactTypeId" class="form-label">Eserin Türü</label>
-                    <select class="form-select" formControlName="artifactTypeId" id="artifactTypeId">
-                        <option value="" selected>{{getTranslate('choose')}}</option>
+                    <select class="form-select" formControlName="artifactTypeId" id="artifactTypeId" [ngClass]="{ 'is-invalid':
+                      submitted && getArtifactAddFormControls.artifactTypeId.errors ,
+                         'is-valid': submitted && getArtifactAddFormControls.artifactTypeId.valid }">
+                        <option value="" selected>{{getTranslate('choose')}}...</option>
                         <option *ngFor="let artifactType of artifactTypes" [value]="artifactType.id">
                             {{artifactType.name}}
                         </option>
@@ -27,21 +29,68 @@
                 <!-- Tarihi Dönemi -->
                 <div class="mb-3 text-start">
                     <label for="histPeriodId" class="form-label">Eserin Tarihi Dönemi</label>
-                    <select class="form-select" formControlName="histPeriodId" id="histPeriodId">
-                        <option value="" selected>{{getTranslate('choose')}}</option>
+                    <select class="form-select" formControlName="histPeriodId" id="histPeriodId" [ngClass]="{ 'is-invalid':
+                      submitted && getArtifactAddFormControls.histPeriodId.errors ,
+                    'is-valid': submitted && getArtifactAddFormControls.histPeriodId.valid }">
+                        <option value="" selected>{{getTranslate('choose')}}...</option>
                         <option *ngFor="let histPeriod of histPeriods" [value]="histPeriod.id">
                             {{histPeriod.name}}
                         </option>
                     </select>
                 </div>
 
+                <!-- Year of Construction -->
+                <div class="mb-3 text-start">
+                    <label for="yearOfConstruction" class="form-label">
+                        Eserin Yapım Tarihi
+                    </label>
+                    <input type="text" class="form-control" id="yearOfConstruction" formControlName="yearOfConstruction"
+                        placeholder="Eserin yapım tarihini girin (1453, 1071...)" [ngClass]="{ 'is-invalid':
+                          submitted && getArtifactAddFormControls.yearOfConstruction.errors ,
+                        'is-valid': submitted && getArtifactAddFormControls.yearOfConstruction.valid }">
+                </div>
+
                 <!-- Kitabe Metni -->
                 <div class="mb-3 text-start">
                     <label for="originalEpitaph" class="form-label">Eserin Kitabesinin Metni</label>
                     <textarea class="form-control" id="originalEpitaph" style="height: 130px"
-                        formControlName="originalEpitaph" rows="3" placeholder="Eserin kitabesinin metnini girin">
-                </textarea>
+                        formControlName="originalEpitaph" rows="3" placeholder="Eserin kitabesinin orijinal metnini girin"
+                        [ngClass]="{ 'is-invalid':  submitted && getArtifactAddFormControls.originalEpitaph.errors ,
+                        'is-valid': submitted && getArtifactAddFormControls.originalEpitaph.valid }">
+                    </textarea>
                 </div>
+
+                <!-- Latitude -->
+                <div class="mb-3 text-start">
+                    <label for="latitude" class="form-label">
+                        Eserin Bulunduğu Enlem - <span class="text-muted">{{getTranslate('optional')}}</span>
+                    </label>
+                    <input type="number" class="form-control" id="latitude" formControlName="latitude"
+                        placeholder="Eserin bulunduğu konumun enlemini girin ({{getTranslate('optional')}})" [ngClass]="{ 'is-invalid':
+                          submitted && getArtifactAddFormControls.latitude.errors ,
+                        'is-valid': submitted && getArtifactAddFormControls.latitude.valid }">
+                </div>
+
+                <!-- Longitude -->
+                <div class="mb-3 text-start">
+                    <label for="longitude" class="form-label">
+                        Eserin Bulunduğu Boylam - <span class="text-muted">{{getTranslate('optional')}}</span>
+                    </label>
+                    <input type="number" class="form-control" id="longitude" formControlName="longitude"
+                        placeholder="Eserin bulunduğu konumun boylamını girin ({{getTranslate('optional')}})" [ngClass]="{ 'is-invalid':  
+                        submitted && getArtifactAddFormControls.longitude.errors ,
+                        'is-valid': submitted && getArtifactAddFormControls.longitude.valid }">
+                </div>
+                <!-- <div class="mb-3 text-start">
+                    <label for="epitaphImagePath" class="form-label">Kitabe Resmi </label>
+                    <input class="form-control" formControlName="epitaphImagePath" type="file" id="epitaphImagePath"
+                        (change)="onEpitaphImageSelected($event)">
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label for="artifactImages" class="form-label">Eserin Kitabesinin Metni</label>
+                    <input class="form-control" formControlName="artifactImages" type="file" id="artifactImages" multiple>
+                </div> -->
 
                 <!-- Translates Start -->
                 <!-- ----------------------------------------------------------------------------------- -->
@@ -67,7 +116,7 @@
                 <!-- Form Array Start -->
                 <!-- ----------------------------------------------------------------------------------- -->
                 <div formArrayName="artifactTranslates"
-                    *ngFor="let artifactTranslate of artifactTranslates.controls; let i = index;"
+                    *ngFor="let artifactTranslate of getArtifactTranslateFormControls; let i = index;"
                     class="d-flex justify-content-between">
 
                     <div class="form-numbers me-3">
@@ -83,7 +132,9 @@
                                 <label [for]="'languageId' + i" class="form-label">
                                     Eserin bilgilerini gireceğiniz dili seçin
                                 </label>
-                                <select class="form-select" formControlName="languageId" [id]="'languageId' + i">
+                                <select class="form-select" formControlName="languageId" [id]="'languageId' + i"
+                                    [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('languageId')?.errors ,
+                                'is-valid': submitted && artifactTranslate.get('languageId')?.valid }">
                                     <option value="" selected>{{getTranslate('choose')}}...</option>
                                     <option *ngFor="let language of languages" [value]="language.id">
                                         {{language.languageName}}
@@ -98,7 +149,20 @@
                                     Eserin adı
                                 </label>
                                 <input type="text" class="form-control" [id]="'name' + i" formControlName="name"
-                                    placeholder="Eserin isminin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını buraya girin">
+                                    placeholder="Eserin isminin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını buraya girin"
+                                    [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('name')?.errors ,
+                                'is-valid': submitted && artifactTranslate.get('name')?.valid }">
+                            </div>
+
+                            <!-- Summary -->
+                            <div class="mb-3 text-start">
+                                <label [for]="'summary' + i" class="form-label">Eserin Kısaca Özeti</label>
+                                <textarea class="form-control" [id]="'summary' + i" style="height: 130px"
+                                    formControlName="summary" rows="3"
+                                    placeholder="Eseri özetinin '{{getLanguageNameByFormControl(artifactTranslate)}}' dilindeki karşılığını girin"
+                                    [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('summary')?.errors ,
+                                'is-valid': submitted && artifactTranslate.get('summary')?.valid }">
+                                </textarea>
                             </div>
 
                             <!-- Description -->
@@ -106,7 +170,9 @@
                                 <label [for]="'description' + i" class="form-label">Eserin Açıklaması</label>
                                 <textarea class="form-control" [id]="'description' + i" style="height: 130px"
                                     formControlName="description" rows="3"
-                                    placeholder="Eseri açıklamasının '{{getLanguageNameByFormControl(artifactTranslate)}}' dilindeki karşılığını girin">
+                                    placeholder="Eseri açıklamasının '{{getLanguageNameByFormControl(artifactTranslate)}}' dilindeki karşılığını girin"
+                                    [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('description')?.errors ,
+                                'is-valid': submitted && artifactTranslate.get('description')?.valid }">
                                 </textarea>
                             </div>
 
@@ -115,7 +181,9 @@
                                 <label [for]="'epitaph' + i" class="form-label">Eserin Kitabesinin Anlamı</label>
                                 <textarea class="form-control" [id]="'epitaph' + i" style="height: 130px"
                                     formControlName="epitaph" rows="3"
-                                    placeholder="Eserin kitabesininin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını girin">
+                                    placeholder="Eserin kitabesininin '{{getLanguageNameByFormControl(artifactTranslate)}}' karşılığını girin"
+                                    [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('epitaph')?.errors ,
+                                'is-valid': submitted && artifactTranslate.get('epitaph')?.valid }">
                                 </textarea>
                             </div>
                         </div>
@@ -123,7 +191,9 @@
 
                     </div>
                     <div class="form-col-3 ms-3 align-self-start">
-                        <button class="btn btn-fill btn-outline-danger d-flex justify-content-between align-items-center" (click)="deleteArtifactTranslate(i)">
+                        <button
+                            class="btn btn-fill btn-outline-danger d-flex justify-content-between align-items-center"
+                            (click)="deleteArtifactTranslate(i)">
                             <fa-icon [icon]="faTrash" class="1x"></fa-icon>
                             <h6 class="fw-small mb-0 d-none d-lg-block ms-2">Çeviriyi Kaldır</h6>
                         </button>
@@ -141,7 +211,7 @@
 
         <div class="d-flex justify-content-end">
             <button class="btn btn-fill btn-dark" (click)="add()">
-                Tarihi Eseri Kaydet
+                Kaydet ve Devam Et
             </button>
         </div>
     </main>

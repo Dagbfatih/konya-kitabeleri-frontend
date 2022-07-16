@@ -37,6 +37,7 @@ export class TranslateDeleteComponent implements OnInit {
         response.message,
         this.getTranslate('successful')
       );
+      this.close();
     });
   }
 

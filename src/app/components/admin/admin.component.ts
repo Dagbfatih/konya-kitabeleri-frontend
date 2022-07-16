@@ -57,7 +57,17 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeRoute();
+    this.runTooltipSelectorJs();
     // this.runActiveStateManagementScript();
+  }
+
+  runTooltipSelectorJs() {
+    // const tooltipTriggerList = document.querySelectorAll(
+    //   '[data-bs-toggle="tooltip"]'
+    // );
+    // const tooltipList = [...tooltipTriggerList].map(
+    //   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    // );
   }
 
   navigate(url: string, id: string) {

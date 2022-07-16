@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { ArtifactTypeService } from './../../services/artifact-type.service';
@@ -8,11 +9,9 @@ import { ArtifactService } from 'src/app/services/artifact.service';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { allTranslates } from 'src/app/services/translation.service';
+import { faCaretDown, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -20,12 +19,17 @@ import {
   styleUrls: ['./konya-kitabe.component.css'],
 })
 export class KonyaKitabeComponent implements OnInit {
+  faCheckCircle = faCheckCircle;
+  faCaret = faCaretDown;
   histPeriods: HistPeriod[] = [];
   artifactTypes: ArtifactType[] = [];
-  artifactDetails: ArtifactDetailsDto[] = [];
-  currentArtifact: ArtifactDetailsDto = {} as ArtifactDetailsDto;
-  currentRoute: string = '';
+  artifacts: ArtifactDetailsDto[] = [];
+  currentArtifact: ArtifactDetailsDto;
   searchEngineForm: FormGroup;
+  baseUrl = environment.baseUrl;
+  dataLoaded = false;
+  latitude = 37.870897465942406;
+  longitude = 32.50499899799871;
 
   constructor(
     private artifactService: ArtifactService,
@@ -41,9 +45,39 @@ export class KonyaKitabeComponent implements OnInit {
     this.getAllArtifactsDetails();
     this.getAllHistPeriods();
     this.getAllartifactTypes();
-    this.setCurrentArtifact();
     this.runActiveStateManagement();
     this.createSearchEngineForm();
+  }
+
+  getAllArtifactsDetails() {
+    this.dataLoaded = false;
+    this.artifactService
+      .getAllDetailsAndDefaultImages()
+      .subscribe((response) => {
+        this.artifacts = response.data;
+        this.dataLoaded = true;
+        this.getCurrentArtifact();
+      });
+  }
+
+  getCurrentArtifact() {
+    this.activatedRoute.params.subscribe((param) => {
+      if (param['id']) {
+        this.currentArtifact = this.getArtifactById(+param['id'])!;
+      } else if (param['period']) {
+        if (this.checkHistPeriodContainsArtifact(param['period'])) {
+          this.currentArtifact = this.artifacts.find(
+            (a) =>
+              a.artifact.histPeriodId ===
+              this.getPeriodFromUrl(param['period']).id
+          )!;
+        } else {
+          this.currentArtifact = this.artifacts[0];
+        }
+      } else {
+        this.currentArtifact = this.artifacts[0];
+      }
+    });
   }
 
   createSearchEngineForm() {
@@ -65,19 +99,18 @@ export class KonyaKitabeComponent implements OnInit {
     });
   }
 
-  setCurrentArtifact() {
-    this.activatedRoute.params.subscribe((param) => {
-      if (param['id']) {
-        this.currentArtifact = this.artifactDetails.find(
-          (a) => a.artifact.id === Number(param['id'])
-        )!;
-      } else {
-        this.currentArtifact = this.artifactDetails.find(
-          (a) => a.historicalPeriod.paramName === param['period']
-        )!;
+  checkHistPeriodContainsArtifact(histPeriod: string): boolean {
+    for (let i = 0; i < this.artifactTypes.length; i++) {
+      const element = this.artifactTypes[i];
+      let contains: boolean =
+        this.getArtifactsByTypeAndPeriod(element.id, histPeriod).length > 0;
+
+      if (contains) {
+        return true;
       }
-      console.log("artifact",this.currentArtifact)
-    });
+    }
+
+    return false;
   }
 
   getAllartifactTypes() {
@@ -86,47 +119,36 @@ export class KonyaKitabeComponent implements OnInit {
     });
   }
 
+  getPeriodFromUrl(paramName: string): HistPeriod {
+    return this.histPeriods.find((h) => h.paramName === paramName)!;
+  }
+
   getAllHistPeriods() {
     this.histPeriodService.getAll().subscribe((response) => {
       this.histPeriods = response.data;
     });
   }
 
+  getArtifactById(id: number): ArtifactDetailsDto | undefined {
+    console.log('all artifacts', this.artifacts);
+    return this.artifacts.find((a) => a.artifact.id === id);
+  }
+
   search() {}
 
-  getArtifactsByTypeAndPeriod(typeId: number, periodId: number) {
-    return this.artifactDetails.filter(
-      (a) => a.artifactType.id === typeId && a.historicalPeriod.id === periodId
+  getArtifactsByTypeAndPeriod(artifactTypeId: number, histPeriod: string) {
+    return this.artifacts.filter(
+      (a) =>
+        a.artifactType.id === artifactTypeId &&
+        a.historicalPeriod.paramName === histPeriod
     );
-  }
-
-  getAllArtifactsDetails() {
-    this.artifactService.getAllDetails().subscribe((response) => {
-      this.artifactDetails = response.data;
-    });
-  }
-
-  createRouteUrl(
-    period: string,
-    artifactType: number,
-    artifactId: number
-  ): string {
-    this.currentRoute =
-      period + '/' + artifactType.toString() + '/' + artifactId.toString();
-    return this.currentRoute;
-  }
-
-  selectArtifact(period: string, artifactType: number, artifactId: number) {
-    this.currentArtifact = this.artifactDetails.find((a) => a.artifact.id)!;
-    let param = this.createRouteUrl(period, artifactType, artifactId);
-
-    this.router.navigate(['/konya-kitabeleri/' + param], {
-      relativeTo: this.activatedRoute,
-    });
-    this.scrollService.scrollTop();
   }
 
   scroll(id: string) {
     this.scrollService.scroll(id, 75);
+  }
+
+  getTranslate(key: string) {
+    return allTranslates.get(key);
   }
 }

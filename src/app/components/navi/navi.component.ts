@@ -1,3 +1,6 @@
+import { ArtifactFilterPipe } from './../../pipes/artifact-filter.pipe';
+import { ArtifactService } from 'src/app/services/artifact.service';
+import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from './../../models/entities/user';
@@ -15,6 +18,11 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Artifact } from 'src/app/models/entities/artifact';
+import { Observable, OperatorFunction } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 @Component({
   selector: 'app-navi',
@@ -22,10 +30,14 @@ import {
   styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
+  faSearch = faSearch;
   baseUrl = environment.baseUrl;
+  searchText = '';
   languages: Language[] = [];
   searchEngineForm: FormGroup;
   currentLanguage: Language = {} as Language;
+  artifacts: ArtifactDetailsDto[] = [];
+  filteredArtifacts: ArtifactDetailsDto[] = [];
 
   constructor(
     private router: Router,
@@ -34,15 +46,26 @@ export class NaviComponent implements OnInit {
     private formBuilder: FormBuilder,
     private tokenService: TokenService,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private artifactService: ArtifactService,
+    private artifactFilterPipe: ArtifactFilterPipe,
+    private orderByPipe: OrderByPipe
   ) {}
 
   ngOnInit(): void {
     this.getLanguages();
+    this.getArtifacts();
     this.runActiveStateManagementScript();
     this.runCollapseScript();
     this.createSearchEngineForm();
     this.getCurrentLanguage();
+  }
+
+  getArtifacts() {
+    this.artifactService.getAllDetailsAndDefaultImages().subscribe((response) => {
+      this.artifacts = response.data;
+      this.filteredArtifacts = this.artifacts;
+    });
   }
 
   getCurrentLanguage() {
@@ -61,8 +84,43 @@ export class NaviComponent implements OnInit {
 
   createSearchEngineForm() {
     this.searchEngineForm = this.formBuilder.group({
-      searchText: ['', Validators.required],
+      searchText: [''],
     });
+  }
+
+  search: OperatorFunction<string, readonly ArtifactDetailsDto[]> = (
+    text$: Observable<string>
+  ) => {
+    return text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map((searchedText) =>
+        searchedText.length < 2 ? [] : this.filterArtifacts(searchedText)
+      )
+    );
+  };
+
+  inputFormatter = (x: ArtifactDetailsDto) =>
+    this.getTranslate(x.artifact?.name)!;
+
+  filterArtifacts(searchedText: string) {
+    this.filteredArtifacts = this.artifactFilterPipe.transform(
+      this.artifacts,
+      searchedText
+    );
+
+    return this.filteredArtifacts;
+  }
+
+  searchSelected(item: any) {
+    this.router.navigate([
+      'konya-kitabeleri/' +
+        item.item.historicalPeriod.paramName +
+        '/' +
+        item.item.artifactType.id +
+        '/' +
+        item.item.artifact.id,
+    ]);
   }
 
   runActiveStateManagementScript() {
@@ -132,8 +190,6 @@ export class NaviComponent implements OnInit {
     this.settingsService.setLanguage(languageCode);
     location.reload();
   }
-
-  search() {}
 
   getTranslate(key: string) {
     return allTranslates.get(key);

@@ -1,0 +1,11 @@
+.img-container {
+  position: relative;
+}
+.img-container img {
+  display: block;
+}
+.img-container fa-icon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}

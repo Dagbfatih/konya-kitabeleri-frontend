@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArtifactUpdateService } from './../../services/artifact-update.service';
 import { ArtifactUpdateComponent } from './../artifact-update/artifact-update.component';
 import { ArtifactDeleteComponent } from './../artifact-delete/artifact-delete.component';
@@ -13,6 +14,8 @@ import {
   faTrash,
   faEdit,
   faRedoAlt,
+  faImages,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { allTranslates } from 'src/app/services/translation.service';
 
@@ -26,7 +29,11 @@ export class ArtifactComponent implements OnInit {
   faTrash = faTrash;
   faEdit = faEdit;
   faRedoAlt = faRedoAlt;
-
+  faImages = faImages;
+  faSearch = faSearch;
+  
+  filterForm: FormGroup;
+  filterText = '';
   artifacts: ArtifactDetailsDto[] = [];
   dataLoaded = false;
 
@@ -34,11 +41,19 @@ export class ArtifactComponent implements OnInit {
     private modalService: NgbModal,
     private artifactService: ArtifactService,
     private router: Router,
-    private artifactUpdateService: ArtifactUpdateService
+    private artifactUpdateService: ArtifactUpdateService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getAllArtifacts();
+    this.createFilterForm();
+  }
+
+  createFilterForm() {
+    this.filterForm = this.formBuilder.group({
+      filterText: [''],
+    });
   }
 
   getAllArtifacts() {
@@ -59,6 +74,19 @@ export class ArtifactComponent implements OnInit {
   goUpdateForm(artifact: ArtifactDetailsDto) {
     this.artifactUpdateService.setArtifact(artifact);
     this.router.navigate(['admin/artifact/update']);
+  }
+
+  goImageUpdateForm(artifact: ArtifactDetailsDto) {
+    this.artifactUpdateService.setArtifact(artifact);
+    this.router.navigate(['admin/artifact/upload-images']);
+  }
+
+  goPreview(artifact: ArtifactDetailsDto) {
+    this.router.navigate(['admin/artifact/preview/' + artifact.artifact.id]);
+  }
+
+  filter() {
+    this.filterText = this.filterForm.get('filterText')?.value;
   }
 
   getTranslate(key: string) {

@@ -11,15 +11,16 @@
                 <div class="card  h-100">
                     <!-- text-white bg-dark -->
                     <!-- border-light -->
-                    <img *ngIf="artifact.artifactImages[0]?.path" [src]="artifact.artifactImages[0].path"
-                        class="card-img-top img" width="500" height="500" alt="..." (click)="open(artifact.artifactImages[0].path, content)">
+                    <img *ngIf="artifact.artifactImages[0]?.path" [src]="baseUrl+artifact.artifactImages[0].path"
+                        class="card-img-top img" width="500" height="500" alt="..."
+                        (click)="open(artifact.artifactImages[0].path, content)">
                     <img *ngIf="!artifact.artifactImages[0]" src="https://www.waterstation.com.tr/img/default.jpg"
                         class="card-img-top img" width="500" height="500" alt="..." (click)="open('', content)">
                     <div class="card-body">
                         <h5 class="card-title">
                             {{getTranslate(artifact.artifact.name)}}
                         </h5>
-                        <p class="card-text text-muted" style="overflow-wrap: break-word; white-space: pre-wrap;">
+                        <p class="card-text text-muted custom-text-truncate">
                             {{getTranslate(artifact.artifact.description)}}
                         </p>
                     </div>
@@ -34,7 +35,8 @@
             <div *ngFor="let artifact of artifactsDetails; let i = index;" class="col">
                 <div class="card h-100">
                     <img *ngIf="artifact.artifactImages[0]?.path" [src]="artifact.artifactImages[0].path"
-                        class="card-img-top img" width="500" height="500" alt="..." (click)="open(artifact.artifactImages[0].path, content)">
+                        class="card-img-top img" width="500" height="500" alt="..."
+                        (click)="open(artifact.artifactImages[0].path, content)">
                     <img *ngIf="!artifact.artifactImages[0]" src="https://www.waterstation.com.tr/img/default.jpg"
                         class="card-img-top img" width="500" height="500" alt="..." (click)="open('', content)">
                     <div class="card-body">

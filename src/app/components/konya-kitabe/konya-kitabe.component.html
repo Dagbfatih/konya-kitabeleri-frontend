@@ -1,252 +1,176 @@
-<nav class="navbar sticky-top navbar-expand-md navbar-light bd-navbar text-dark form-search d-lg-none">
-    <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
+<body>
 
-        <form class="d-flex col-12" [formGroup]="searchEngineForm" role="search">
-            <input class="form-control me-2" formControlName="searchText" type="search" placeholder="Ara"
-                aria-label="Search">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-                aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-            </button>
-        </form>
+    <div class="container-xxl my-gutter mt-3 my-md-4 my-layout">
+        <aside class="my-sidebar">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-transparent">
 
-        <div class="collapse navbar-collapse" id="menu">
 
-            <div class="my-sidebar h-100">
-                <div class="flex-shrink-0 bg-transparent">
-                    <div *ngFor="let period of histPeriods; let i = index;">
-                        <a [routerLink]="'/konya-kitabeleri/'+period.paramName"
-                            class="d-flex align-items-center pb-3 mt-3 link-dark text-decoration-none">
-                            <span class="fs-6 fw-semibold">{{period.name}}</span>
-                        </a>
-                        <ul class="list-unstyled ps-0 ">
+                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                    <img src="http://localhost:4200/assets/images/logo.png" class="me-2" width="30">
+                    <span class="fs-5 fw-semibold">Kitabeler</span>
+                </a>
 
-                            <li class="mb-1" *ngFor="let artifactType of artifactTypes; let j = index;">
-                                <button
-                                    class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#'+artifactType.name+i"
-                                    aria-expanded="true">
-                                    {{artifactType.name}}
-                                </button>
-                                <div class="collapse bd-sidebar-collapse" [id]="artifactType.name+i"
-                                    [ngClass]="{'show': (currentArtifact?.artifactType?.id === artifactType.id) && (currentArtifact?.historicalPeriod?.id === period.id)}">
-                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                        <li
-                                            *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, period.id)">
-                                            <a class="sub-link link-dark d-inline-flex text-decoration-none rounded"
-                                                [ngClass]="{'active': currentArtifact?.artifact?.id === artifact.artifact.id}"
-                                                [id]="createRouteUrl(period.paramName, artifactType.id, artifact.artifact.id!)"
-                                                (click)="selectArtifact(period.paramName, artifactType.id, artifact.artifact.id!)"
-                                                data-bs-toggle="collapse" data-bs-target="#menu">
-                                                {{artifact.artifact.name}}
-                                            </a>
-                                        </li>
-                                    </ul>
+                <!-- Historical Periods -->
+                <div *ngFor="let histPeriod of histPeriods; let i = index;" class="historical-period-list">
+                    <div *ngIf="checkHistPeriodContainsArtifact(histPeriod.paramName)">
+                        <h6
+                            class="sidebar-heading d-flex justify-content-between align-items-center mt-2 mb-1 text-muted text-uppercase">
+                            {{histPeriod.name}}
+                        </h6>
+                        <ul class="artifact-type-list list-unstyled ps-0">
+
+                            <li *ngFor="let artifactType of artifactTypes; let j = index;" class="mb-1">
+                                <div
+                                    *ngIf="getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName).length > 0">
+                                    <button
+                                        class="btn btn-toggle my-btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
+                                        data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
+                                        aria-expanded="true">
+                                        {{artifactType.name}}
+                                    </button>
+                                    <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
+                                        <ul class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                            <li
+                                                *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
+                                                <a class="link-dark d-inline-flex text-decoration-none rounded"
+                                                    routerLink="/konya-kitabeleri/{{histPeriod.paramName}}/{{artifactType.id}}/{{artifact.artifact.id}}">
+                                                    {{getTranslate(artifact.artifact.name)}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
+                </div> <!-- End Historical Periods -->
+            </div>
+        </aside> <!-- End Sidebar -->
+
+        <!-- Content -->
+        <main class="my-main order-1">
+            <!-- Spinner -->
+            <div *ngIf="!dataLoaded || !currentArtifact" class="d-flex justify-content-center mt-5">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
 
-        </div>
-    </div>
-</nav>
+            <!-- Data -->
+            <div *ngIf="dataLoaded && currentArtifact" class="my-content ps-lg-2">
+                <div class="d-md-flex text-start align-items-center justify-content-start">
+                    <h1 class="my-title mb-0" id="approach-1">{{getTranslate(currentArtifact?.artifact?.name!)}}</h1>
+                </div>
+                <p class="my-lead">
+                    {{getTranslate(currentArtifact?.artifact?.summary!)}}
+                </p>
 
-<div class="container-xxl bd-gutter mt-3 my-md-4 my-layout">
-
-    <!-- Sidebar -->
-    <div class="my-sidebar">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-transparent">
-            <div *ngFor="let period of histPeriods; let i = index;">
-                <a [routerLink]="'/konya-kitabeleri/'+period.paramName"
-                    class="d-flex align-items-center pb-3 mt-3 link-dark text-decoration-none">
-                    <span class="fs-5 fw-semibold">{{period.name}}</span>
-                </a>
-                <ul class="list-unstyled ps-0 ">
-
-                    <li class="mb-1" *ngFor="let artifactType of artifactTypes; let j = index;">
-                        <button
-                            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed btn-collapse"
-                            data-bs-toggle="collapse" [attr.data-bs-target]="'#'+artifactType.name+i"
-                            aria-expanded="true">
-                            {{artifactType.name}}
-                        </button>
-                        <div class="collapse bd-sidebar-collapse" [id]="artifactType.name+i"
-                            [ngClass]="{'show': (currentArtifact?.artifactType?.id === artifactType.id) && (currentArtifact?.historicalPeriod?.id === period.id)}">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
-                                <li *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, period.id)">
-                                    <a class="sub-link link-dark d-inline-flex text-decoration-none rounded"
-                                        [ngClass]="{'active': currentArtifact?.artifact?.id === artifact.artifact.id}"
-                                        [id]="createRouteUrl(period.paramName, artifactType.id, artifact.artifact.id!)"
-                                        (click)="selectArtifact(period.paramName, artifactType.id, artifact.artifact.id!)">
-                                        {{artifact.artifact.name}}
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content -->
-    <div class="my-main order-1 mb-5 px-3">
-
-        <div class="row">
-            <div class="col-md-10">
-                <div class="bd-intro ps-lg-2 mt-2">
-                    <div class="d-md-flex text-start align-items-center justify-content-start">
-                        <h1 class="bd-title mb-0" id="approach-1">{{currentArtifact?.artifact?.name}}</h1>
+                <div class="bd-content pt-4">
+                    <div class="mb-5">
+                        <h2 id="approach-2">
+                            Hakkında
+                        </h2>
+                        <img *ngIf="currentArtifact && currentArtifact.artifactImages.length > 0"
+                            [src]="baseUrl+currentArtifact.artifactImages[0].path" alt="" width="500" height="500"
+                            class="img-fluid">
+                        <p class="mt-3" id="1">
+                            {{getTranslate(currentArtifact?.artifact?.description!)}}
+                        </p>
                     </div>
-                    <p class="bd-lead">
-                        {{currentArtifact?.artifact?.description}}
-                    </p>
-
-                    <div class="toc-collapse d-lg-none">
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
-                            <strong class="h6 my-2 me-2">Bu sayfada</strong>
-                            <i class="fa fa-chevron-down"></i>
+                    <div class="mb-5">
+                        <h2 id="approach-3">
+                            Kitabesi
+                        </h2>
+                        <img *ngIf="currentArtifact?.epitaphImage" [src]="baseUrl+currentArtifact?.epitaphImage?.path"
+                            alt="" width="500" height="500" class="img-fluid">
+                        <p class="mt-4 word" style="white-space: pre-wrap;" id="2">
+                            {{currentArtifact?.artifact?.originalEpitaph}}
+                        </p>
+                        <button class="btn btn-secondary me-1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#originalEpitaph" aria-expanded="false" aria-controls="originalEpitaph">
+                            {{getTranslate('epitaphTranslation')}}
+                            <fa-icon [icon]="faCaret" size="1x"></fa-icon>
                         </button>
 
-                        <div class="bd-toc mt-3 mb-5 ps-xl-3 mb-lg-5 text-muted">
-                            <hr class="d-none d-md-block my-2">
-                            <div class="collapse bd-toc-collapse" id="tocContents">
-                                <nav id="TableOfContents">
-                                    <ul>
-                                        <li>
-                                            <a class="link"
-                                                (click)="scroll('approach-1')">{{currentArtifact?.artifact?.name}}</a>
-                                            <ul>
-                                                <li>
-                                                    <a class="link" (click)="scroll('approach-2')">Hakkında</a>
-                                                </li>
-                                                <li>
-                                                    <a class="link" (click)="scroll('approach-3')">Kitabesi</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="link" data-bs-toggle="collapse"
-                                                                href="#originalEpitaph" role="button"
-                                                                aria-expanded="false" aria-controls="originalEpitaph"
-                                                                (click)="scroll('approach-3')">Orijinal
-                                                                metin</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="link" (click)="scroll('approach-4')">Sanal
-                                                        Gezisi</a>
-                                                </li>
-                                                <li>
-                                                    <a class="link" (click)="scroll('approach-5')">Konumu</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
+                        <div class="collapse mt-3" id="originalEpitaph">
+                            <div class="card card-body">
+                                {{getTranslate(currentArtifact?.artifact?.epitaph!)}}
                             </div>
                         </div>
+
                     </div>
-
-                    <div class="bd-content pt-4">
-                        <div class="mb-5">
-                            <h2 id="approach-2">
-                                Hakkında
-                            </h2>
-                            <img *ngIf="currentArtifact.artifactImages.length>0"
-                                [src]="currentArtifact.artifactImages[0].path" alt="" width="500" height="500"
-                                class="img-fluid">
-                            <p class="mt-3" id="1">
-                                {{currentArtifact?.artifact?.epitaph}}
-                            </p>
-                        </div>
-                        <div class="mb-5">
-                            <h2 id="approach-3">
-                                Kitabesi
-                            </h2>
-                            <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
-                                class="img-fluid">
-                            <p class="mt-4" id="2">
-                                {{currentArtifact?.artifact?.epitaph}}
-                                <a class="link" data-bs-toggle="collapse" href="#originalEpitaph" role="button"
-                                    aria-expanded="false" aria-controls="originalEpitaph">
-                                    Orijinal Metin
-                                </a>
-                            </p>
-
-                            <div class="collapse" id="originalEpitaph">
-                                <div class="card card-body">
-                                    {{currentArtifact?.artifact?.originalEpitaph}}
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="mb-5">
-                            <h2 id="approach-4">
-                                Sanal Gezisi
-                            </h2>
-                            <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
-                                class="img-fluid">
-                        </div>
-                        <div class="mb-5">
-                            <h2 id="approach-5">
-                                Konumu
-                            </h2>
-                            <iframe class="d-none d-lg-block"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100699.78118967438!2d32.446868752836885!3d37.93351029051349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d0851041d7b9a3%3A0x843bb18685ba9410!2sMevlana%20M%C3%BCzesi!5e0!3m2!1str!2str!4v1653497627077!5m2!1str!2str"
-                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            <iframe class="d-lg-none w-100"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100699.78118967438!2d32.446868752836885!3d37.93351029051349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d0851041d7b9a3%3A0x843bb18685ba9410!2sMevlana%20M%C3%BCzesi!5e0!3m2!1str!2str!4v1653497627077!5m2!1str!2str"
-                                height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
+                    <div *ngIf="false" class="mb-5">
+                        <h2 id="approach-4">
+                            Sanal Gezisi
+                        </h2>
+                        <!-- <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
+                            class="img-fluid"> -->
+                    </div>
+                    <div class="mb-5">
+                        <h2 id="approach-5">
+                            Konumu
+                        </h2>
+                        <agm-map [latitude]="latitude" [longitude]="longitude">
+                            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                        </agm-map>
+                        <!-- <iframe class="d-none d-lg-block"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100699.78118967438!2d32.446868752836885!3d37.93351029051349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d0851041d7b9a3%3A0x843bb18685ba9410!2sMevlana%20M%C3%BCzesi!5e0!3m2!1str!2str!4v1653497627077!5m2!1str!2str"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe class="d-lg-none w-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100699.78118967438!2d32.446868752836885!3d37.93351029051349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d0851041d7b9a3%3A0x843bb18685ba9410!2sMevlana%20M%C3%BCzesi!5e0!3m2!1str!2str!4v1653497627077!5m2!1str!2str"
+                            height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 d-none d-lg-block">
-                <div class="bd-toc mt-3 mb-5 ps-xl-3 mb-lg-5 text-muted">
-                    <strong class="d-none d-md-block h6 my-2">Bu sayfada</strong>
-                    <hr class="d-none d-md-block my-2">
-                    <div class="" id="tocContents">
-                        <nav id="TableOfContents">
-                            <ul>
-                                <li>
-                                    <a class="link" (click)="scroll('approach-1')">{{currentArtifact?.artifact?.name}}</a>
-                                    <ul>
-                                        <li>
-                                            <a class="link" (click)="scroll('approach-2')">Hakkında</a>
-                                        </li>
-                                        <li>
-                                            <a class="link" (click)="scroll('approach-3')">Kitabesi</a>
-                                            <ul>
-                                                <li>
-                                                    <a class="link" data-bs-toggle="collapse" href="#originalEpitaph"
-                                                        role="button" aria-expanded="false"
-                                                        aria-controls="originalEpitaph"
-                                                        (click)="scroll('approach-3')">Orijinal metin</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="link" (click)="scroll('approach-4')">Sanal Gezisi</a>
-                                        </li>
-                                        <li>
-                                            <a class="link" (click)="scroll('approach-5')">Konumu</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+            <div class="my-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-muted">
+                <button class="btn btn-link link-dark p-md-0 mb-2 mb-md-0 text-decoration-none my-toc-toggle d-md-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false"
+                    aria-controls="tocContents">
+                    On this page
+                    <svg class="bi d-md-none ms-2" aria-hidden="true">
+                        <use xlink:href="#chevron-expand"></use>
+                    </svg>
+                </button>
+                <strong class="d-none d-md-block h6 my-2">On this page</strong>
+                <hr class="d-none d-md-block my-2">
+                <div class="collapse my-toc-collapse" id="tocContents">
+                    <nav id="TableOfContents">
+                        <ul>
+                            <li>
+                                <a class="link"
+                                    (click)="scroll('approach-1')">{{getTranslate(currentArtifact?.artifact?.name!)}}</a>
+                                <ul>
+                                    <li>
+                                        <a class="link" (click)="scroll('approach-2')">Hakkında</a>
+                                    </li>
+                                    <li>
+                                        <a class="link" (click)="scroll('approach-3')">Kitabesi</a>
+                                        <ul>
+                                            <li>
+                                                <a class="link" data-bs-toggle="collapse" href="#originalEpitaph"
+                                                    role="button" aria-expanded="false" aria-controls="originalEpitaph"
+                                                    (click)="scroll('approach-3')">Orijinal
+                                                    metin</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li *ngIf="false">
+                                        <a class="link" (click)="scroll('approach-4')">Sanal
+                                            Gezisi</a>
+                                    </li>
+                                    <li>
+                                        <a class="link" (click)="scroll('approach-5')">Konumu</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </div>
+        </main> <!-- End Content -->
     </div>
-</div>
+
+</body>

@@ -1,3 +1,9 @@
+import { ArtifactUpdateService } from 'src/app/services/artifact-update.service';
+import { Router } from '@angular/router';
+import { ArtifactAddService } from './../../services/artifact-add.service';
+import { ArtifactImage } from './../../models/entities/artifactImage';
+import { ArtifactDetailsDto } from './../../models/dtos/artifactDetailsDto';
+import { ArtifactImageService } from './../../services/artifact-image.service';
 import { ErrorService } from './../../services/error.service';
 import { ArtifactModelForTranslation } from './../../models/entities/artifactTranslateModel';
 import { TranslateService } from './../../services/translate.service';
@@ -38,6 +44,7 @@ export class ArtifactAddComponent implements OnInit {
   artifactTypes: ArtifactType[] = [];
   histPeriods: HistPeriod[] = [];
   languages: Language[] = [];
+  submitted = false;
 
   constructor(
     private artifactService: ArtifactService,
@@ -46,8 +53,10 @@ export class ArtifactAddComponent implements OnInit {
     private histPeriodService: HistPeriodService,
     private toastrService: ToastrService,
     private languageService: LanguageService,
-    private translateService: TranslateService,
-    private errorService: ErrorService
+    private artifactUpdateService: ArtifactUpdateService,
+    private errorService: ErrorService,
+    private artifactAddService: ArtifactAddService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -81,20 +90,23 @@ export class ArtifactAddComponent implements OnInit {
         [this.createArtifactAddFormTranslate()],
         Validators.required
       ),
-      date: [Date.now(), Validators.required],
       originalEpitaph: ['', Validators.required],
       epitaphImagePath: ['path', Validators.required],
       artifactTypeId: ['', Validators.required],
       histPeriodId: ['', Validators.required],
+      yearOfConstruction: ['', Validators.required],
+      latitude: [''],
+      longitude: [''],
     });
   }
 
   createArtifactAddFormTranslate(): FormGroup {
     return this.formBuilder.group({
-      languageId: [''],
+      languageId: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
       epitaph: ['', Validators.required],
+      summary: ['', Validators.required],
     });
   }
 
@@ -106,6 +118,7 @@ export class ArtifactAddComponent implements OnInit {
   }
 
   add() {
+    this.submitted = true;
     if (this.artifactAddForm.valid) {
       let artifactModel: Artifact = Object.assign(
         {},
@@ -113,22 +126,40 @@ export class ArtifactAddComponent implements OnInit {
       );
       artifactModel.artifactTypeId = +artifactModel.artifactTypeId;
       artifactModel.histPeriodId = +artifactModel.histPeriodId;
-      artifactModel.date = new Date();
+      artifactModel.latitude = +artifactModel.latitude!;
+      artifactModel.longitude = +artifactModel.longitude!;
       let artifactTranslateModels = this.getArtifactTranslates();
 
       this.artifactService
-        .addWithTranslations(artifactModel, artifactTranslateModels)
-        .subscribe((response) => {
-          this.toastrService.success(
-            response.message,
-            this.getTranslate('successful')
-          );
-        });
+        .addWithDetails(artifactModel, artifactTranslateModels)
+        .subscribe(
+          (response) => {
+            artifactModel.id = response.data;
+            this.setArtifactAddModels(artifactModel, artifactTranslateModels);
+            this.toastrService.success(
+              response.message,
+              this.getTranslate('successful')
+            );
+            this.router.navigate(['/admin/artifact/upload-images']);
+          },
+          (responseError) => {
+            this.errorService.writeErrorMessages(responseError);
+          }
+        );
 
       // Http Posting
     } else {
-      console.log('error', this.artifactAddForm);
     }
+  }
+
+  setArtifactAddModels(
+    artifact: Artifact,
+    translations: ArtifactModelForTranslation[]
+  ) {
+    this.artifactAddService.setArtifact(artifact);
+    this.artifactAddService.setTranslations(translations);
+    this.artifactUpdateService.setInnerArtifact(artifact);
+    this.artifactUpdateService.setTranslations(translations);
   }
 
   getArtifactTranslates() {
@@ -141,6 +172,7 @@ export class ArtifactAddComponent implements OnInit {
       a.descriptionKey = '';
       a.nameKey = '';
       a.epitaphKey = '';
+      a.summaryKey = '';
     });
 
     return artifactTranslates;
@@ -157,6 +189,14 @@ export class ArtifactAddComponent implements OnInit {
 
   getTranslate(key: string) {
     return allTranslates.get(key);
+  }
+
+  get getArtifactAddFormControls() {
+    return this.artifactAddForm.controls;
+  }
+
+  get getArtifactTranslateFormControls() {
+    return this.artifactTranslates.controls;
   }
 
   goBack() {

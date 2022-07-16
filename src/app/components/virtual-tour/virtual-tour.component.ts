@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { ArtifactService } from './../../services/artifact.service';
 import { ArtifactDetailsDto } from './../../models/dtos/artifactDetailsDto';
 import { allTranslates } from './../../services/translation.service';
@@ -10,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./virtual-tour.component.css'],
 })
 export class VirtualTourComponent implements OnInit {
+  baseUrl = environment.baseUrl;
   currentPhotoPath: string;
   artifactsDetails: ArtifactDetailsDto[] = [];
 

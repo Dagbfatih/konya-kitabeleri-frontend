@@ -68,7 +68,8 @@ export class TranslateUpdateComponent implements OnInit {
         {},
         this.translateUpdateForm.value
       );
-
+      
+      translateModel.id = this.translate.id;
       translateModel.languageId = +translateModel.languageId;
 
       this.translateService.update(translateModel).subscribe(

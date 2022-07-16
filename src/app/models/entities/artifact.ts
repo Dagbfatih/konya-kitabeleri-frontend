@@ -1,11 +1,13 @@
 export interface Artifact {
   id?: number;
   name: string;
-  date: Date;
   description: string;
-  epitaph:string;
-  originalEpitaph:string;
-  epitaphImagePath:string;
-  artifactTypeId:number;
-  histPeriodId:number;
+  summary: string;
+  epitaph: string;
+  originalEpitaph: string;
+  artifactTypeId: number;
+  histPeriodId: number;
+  yearOfConstruction: string;
+  latitude?: number;
+  longitude?: number;
 }

@@ -9,7 +9,11 @@ import { HistoricalArtifactsComponent } from './components/historical-artifacts/
 import { SettingsComponent } from './components/settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
-import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCarouselModule,
+  NgbModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { KonyaComponent } from './components/konya/konya.component';
 import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
@@ -56,7 +60,30 @@ import { ArtifactUpdateComponent } from './components/artifact-update/artifact-u
 import { ClaimDeleteComponent } from './components/claim-delete/claim-delete.component';
 import { ClaimUpdateComponent } from './components/claim-update/claim-update.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { UserClaimDeleteComponent } from './components/user-claim-delete/user-claim-delete.component'
+import { UserClaimDeleteComponent } from './components/user-claim-delete/user-claim-delete.component';
+import { KebabCasePipe } from './pipes/kebab-case.pipe';
+import { ArtifactImageAddComponent } from './components/artifact-image-add/artifact-image-add.component';
+import { ArtifactAddConfirmationComponent } from './components/artifact-add-confirmation/artifact-add-confirmation.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { ArtifactPreviewComponent } from './components/artifact-preview/artifact-preview.component';
+import { ArtifactImageUpdateComponent } from './components/artifact-image-update/artifact-image-update.component';
+import { ArtifactImageDeleteComponent } from './components/artifact-image-delete/artifact-image-delete.component';
+import { AgmCoreModule } from '@agm/core';
+import { LocationComponent } from './components/location/location.component';
+import { LocationAddComponent } from './components/location-add/location-add.component';
+import { LocationDeleteComponent } from './components/location-delete/location-delete.component';
+import { LocationUpdateComponent } from './components/location-update/location-update.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { TranslateSearchFilterPipe } from './pipes/translate-search-filter.pipe';
+import { ArtifactFilterPipe } from './pipes/artifact-filter.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { IOCModule } from './modules/ioc/ioc.module';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { EpitaphImageDeleteComponent } from './components/epitaph-image-delete/epitaph-image-delete.component';
+import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
+import { EpitaphImageUpdateComponent } from './components/epitaph-image-update/epitaph-image-update.component';
+import { SourceComponent } from './components/source/source.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +134,25 @@ import { UserClaimDeleteComponent } from './components/user-claim-delete/user-cl
     ClaimUpdateComponent,
     UserEditComponent,
     UserClaimDeleteComponent,
+    KebabCasePipe,
+    ArtifactImageAddComponent,
+    ArtifactAddConfirmationComponent,
+    ArtifactPreviewComponent,
+    ArtifactImageUpdateComponent,
+    ArtifactImageDeleteComponent,
+    LocationComponent,
+    LocationAddComponent,
+    LocationDeleteComponent,
+    LocationUpdateComponent,
+    SearchFilterPipe,
+    TranslateSearchFilterPipe,
+    ArtifactFilterPipe,
+    HighlightDirective,
+    OrderByPipe,
+    EpitaphImageDeleteComponent,
+    EpitaphImageAddComponent,
+    EpitaphImageUpdateComponent,
+    SourceComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,12 +161,19 @@ import { UserClaimDeleteComponent } from './components/user-claim-delete/user-cl
     NgbCarouselModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxFileDropModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAeb9alXm-VrEoLJcGojHkH2lAUYig5gms',
+    }),
     NgbModule,
+    NgbTypeaheadModule,
+    IOCModule,
+    AutocompleteLibModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

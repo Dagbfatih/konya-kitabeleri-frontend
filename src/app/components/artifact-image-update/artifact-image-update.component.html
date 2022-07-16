@@ -1,0 +1,156 @@
+<body class="text-center">
+    <main class="my-form w-100 m-auto">
+        <div class="d-flex justify-content-between">
+            <button class="btn-back" (click)="goBack()">
+                <fa-icon [icon]="faArrowLeft" class="fa-2x"></fa-icon>
+            </button>
+            <h1 class="fw-normal">Resimleri Güncelle</h1>
+            <a class="btn btn-sm btn-outline-secondary rounded-2 align-self-start">
+                Nasıl yapılacağını öğrenin
+            </a>
+        </div>
+        <hr class="text-dark border-2 opacity-100 mb-5">
+        <div class="row">
+
+            <!-- Image Management -->
+            <div class="col-lg-8 col-sm-12">
+                <form>
+
+                    <!-- artifact images -->
+                    <div class="mb-5">
+                        <!-- Exist images -->
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-self-center">
+                                <fa-icon class="align-self-center fa-2x me-2 text-secondary" [icon]="faImages">
+                                </fa-icon>
+                                <h2 class="align-self-center">Mevcut Eser Resimleri</h2>
+                            </div>
+                            <div class="align-self-center">
+                                <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh"
+                                    (click)="getImages();getEpitaphImages();">
+                                </fa-icon>
+                            </div>
+                        </div>
+                        <hr class="text-dark border-1 opacity-25 mb-3">
+                        <div class="mb-5 d-flex justify-content-start">
+                            <div class="">
+                                <h3 *ngIf="artifactImages.length == 0" class="text-secondary">Kayıtlı resim yok</h3>
+                            </div>
+                            <div *ngIf="artifactImages.length > 0" class="row row-cols-auto">
+                                <div *ngFor="let image of artifactImages" class="col">
+                                    <div class="img-container">
+                                        <img class="border" [src]="baseUrl + image.path" width="150" alt="">
+                                        <fa-icon [icon]="faMinusCircle" size="2x" class="fa-icon-minus-circle-corner"
+                                            (click)="openArtifactImageDeleteForm(image)"></fa-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add artifact images -->
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-self-center">
+                                <fa-icon class="align-self-center fa-2x me-2 text-secondary" [icon]="faLandmark">
+                                </fa-icon>
+                                <h2 class="align-self-center">Tarihi Eser Resmi Ekle</h2>
+                            </div>
+                            <div class="align-self-center">
+                            </div>
+                        </div>
+                        <hr class="text-dark border-1 opacity-25 mb-3">
+                        <div class="mb-3">
+                            <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="artifactImageDropped($event)"
+                                [showBrowseBtn]="false" [multiple]="false" accept=".png, .jpeg, .jpg, .webp, .avif">
+                                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                    Resmi buraya sürükleyin veya
+                                    <button type="button" class="btn btn-outline-info ms-2"
+                                        (click)="openFileSelector()">
+                                        Dosyalara gözat
+                                    </button>
+                                </ng-template>
+                            </ngx-file-drop>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="">
+                                <div *ngFor="let image of images" class="">
+                                    <span class="fw-light">
+                                        {{image.relativePath}}
+                                    </span>
+                                    <button class="btn btn-danger" (click)="deleteArtifactImage(image)">
+                                        Kaldır
+                                    </button>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-outline-dark" (click)="uploadArtifactImage()">
+                                Seçili Resmi Ekle
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="text-dark border-5 opacity-100 mb-5">
+
+                    <!-- Epitaph Images -->
+                    <app-epitaph-image-update></app-epitaph-image-update>
+
+                </form>
+
+
+
+
+            </div>
+
+            <!-- Artifact Info -->
+            <div class="col ms-5 d-none d-lg-block text-start">
+                <div class="mb-5">
+                    <h2 id="approach-2">
+                        Hakkında
+                    </h2>
+                    <img *ngIf="artifactImages.length > 0" [src]="baseUrl+artifactImages[0].path" alt="" width="500"
+                        height="500" class="img-fluid">
+                    <p class="mt-3 h4" id="1">
+                        {{getTranslate(currentArtifact?.artifact?.name!)}}
+                    </p>
+                    <p class="mt-3" id="1">
+                        {{getTranslate(currentArtifact?.artifact?.description!)}}
+                    </p>
+                </div>
+
+                <div class="mb-5">
+                    <h2 id="approach-3">
+                        Kitabesi
+                    </h2>
+                    <img *ngIf="epitaphImages.length>0" [src]="baseUrl+epitaphImages[0].path" alt="" width="500"
+                        height="500" class="img-fluid">
+                    <p class="mt-4" id="2">
+                        {{getTranslate(currentArtifact?.artifact?.epitaph!)}}
+                        <a class="link" data-bs-toggle="collapse" href="#originalEpitaph" role="button"
+                            aria-expanded="false" aria-controls="originalEpitaph">
+                            Orijinal Metin
+                        </a>
+                    </p>
+
+                    <div class="collapse" id="originalEpitaph">
+                        <div class="card card-body">
+                            {{currentArtifact?.artifact?.originalEpitaph}}
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 
+                <div class="mb-5">
+                    <h2 id="approach-4">
+                        Sanal Gezisi
+                    </h2>
+                    <img [src]="currentArtifact?.artifact?.epitaphImagePath" alt="" width="500" height="500"
+                        class="img-fluid">
+                </div>
+                <div class="mb-5">
+                    <h2 id="approach-5">
+                        Konumu
+                    </h2>
+                </div> -->
+            </div>
+        </div>
+    </main>
+</body>

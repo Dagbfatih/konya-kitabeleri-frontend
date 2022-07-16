@@ -1,0 +1,30 @@
+<body class="d-flex align-items-center text-center">
+
+    <main class="form-location w-100 m-auto">
+        <form [formGroup]="locationAddForm">
+            <img class="mb-4" src="assets/images/logo.png" alt="" width="72">
+            <h1 class="h3 mb-3 fw-normal">Lütfen tarihi eserin konumunu girin</h1>
+            <div class="form-floating mb-1">
+                <input type="text" formControlName="latitude" class="form-control" id="latitude" placeholder="latitude">
+                <label for="latitude">{{getTranslate('latitude')}}</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="longitude" class="form-control" id="longitude"
+                    placeholder="longitude">
+                <label for="longitude">{{getTranslate('longitude')}}</label>
+            </div>
+
+            <div class="d-flex justify-content-between ">
+                <button class="btn btn-lg btn-outline-dark me-2" type="submit" (click)="goBack()">
+                    <fa-icon [icon]="faArrowLeft" class="fa-1x"></fa-icon>
+                </button>
+                <button class="btn btn-lg btn-outline-dark w-100" type="submit" (click)="add()">Konumu Ekle</button>
+            </div>
+
+            <p class="mt-2 mb-3 text-muted">Konum hazır değil mi?
+                <a routerLink="/admin/artifact/add">Daha sonra ekle</a>
+            </p>
+        </form>
+    </main>
+
+</body>

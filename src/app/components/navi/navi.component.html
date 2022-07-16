@@ -83,11 +83,55 @@
 
                 <!-- Search Form -->
                 <li class="nav-item me-5">
-                    <form class="d-flex" [formGroup]="searchEngineForm" role="search">
-                        <input class="form-control me-2" formControlName="searchText" type="search" placeholder="Ara"
-                            aria-label="Ara">
-                        <button class="btn btn-outline-light" type="submit" (click)="search()">Ara</button>
+
+                    <ng-template #resultTemplate class="" let-result="result" let-searchedText="term">
+
+                        <div class="well search-result">
+                            <div class="row">
+                                <div *ngIf="result.artifactImages.length > 0" class="d-flex justify-content-center align-items-center col-md-4 col-lg-3">
+                                    <img class="img-responsive" [src]="baseUrl+result.artifactImages[0].path"
+                                        height="24" alt="">
+                                </div>
+                                <div class="col-md-8 col-lg-9">
+                                    <div class="me-auto">
+                                        <div class="fw-light">
+                                            <ngb-highlight highlightClass="text-danger" [result]="getTranslate(result.artifact.name)"
+                                                [term]="searchedText">
+                                            </ngb-highlight>
+                                        </div>
+                                    </div>
+
+                                    <ngb-highlight highlightClass="text-danger" class="fs-6 fw-light d-inline-block text-truncate" style="max-width: 186px;"
+                                        [result]="getTranslate(result.artifact.description)" [term]="searchedText">
+                                    </ngb-highlight>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </ng-template>
+
+                    <div class="search-filter" style="width: 320px;">
+                        <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
+                        <input id="typeahead-basic" type="search" class="form-control filter-input search-filter-input"
+                            [(ngModel)]="searchText" [resultTemplate]="resultTemplate" [ngbTypeahead]="search"
+                            [inputFormatter]="inputFormatter" [editable]='false'
+                            (selectItem)="searchSelected($event)" [placeholder]="getTranslate('searchOnArtifacts')"/>
+                    </div>
+
+                    <!-- <form class="d-flex" [formGroup]="searchEngineForm" (ngSubmit)="search()" role="search">
+                        <div class="search-filter" style="width: 320px;">
+                            <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
+                            <input type="search" class="form-control filter-input search-filter-input col-4"
+                                [(ngModel)]="searchText" formControlName="searchText"
+                                [placeholder]="getTranslate('searchOnArtifacts')">
+                        </div>
                     </form>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let artifact of artifacts | artifactFilter: searchText">
+                            {{getTranslate(artifact.artifact.name)}}
+                        </li>
+                    </ul> -->
                 </li>
 
                 <!-- Language -->
@@ -119,12 +163,13 @@
                     </a>
 
                     <ul class="dropdown-menu text-small dropdown-menu-dark" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item disabled">Settings</a></li>
+                        <li><a class="dropdown-item" routerLink="/admin">Admin</a></li>
+                        <li><a class="dropdown-item disabled">{{getTranslate('settings')}}</a></li>
                         <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" (click)="signOut()">Sign out</a></li>
+                        <li><a class="dropdown-item" (click)="signOut()">{{getTranslate('signOut')}}</a></li>
                     </ul>
 
                 </li>
