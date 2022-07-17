@@ -30,7 +30,7 @@
                                         {{artifactType.name}}
                                     </button>
                                     <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
-                                        <ul class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <ul class="artifact-list my-btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                             <li
                                                 *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                 <a class="link-dark d-inline-flex text-decoration-none rounded"
