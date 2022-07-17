@@ -7,17 +7,17 @@
         <div class="mb-3">
             <div class="form-floating mb-3">
                 <input type="text" formControlName="name" class="form-control" id="name" placeholder="Name">
-                <label for="name">Historical Period Name</label>
+                <label for="name">{{getTranslate('name')}}</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" formControlName="description" class="form-control" id="description"
                     placeholder="Description">
-                <label for="description">Historical Period Description</label>
+                <label for="description">{{getTranslate('description')}}</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" formControlName="paramName" class="form-control" id="paramName"
                     placeholder="Parameter name">
-                <label for="paramName">Historical Period Parameter Name</label>
+                <label for="paramName">{{getTranslate('parameterName')}}</label>
             </div>
         </div>
     </form>
