@@ -136,7 +136,7 @@
                                     [ngClass]="{ 'is-invalid': submitted && artifactTranslate.get('languageId')?.errors ,
                                 'is-valid': submitted && artifactTranslate.get('languageId')?.valid }">
                                     <option value="" selected>{{getTranslate('choose')}}...</option>
-                                    <option *ngFor="let language of languages" [value]="language.id">
+                                    <option *ngFor="let language of languages" [value]="+language.id!">
                                         {{language.languageName}}
                                     </option>
                                 </select>

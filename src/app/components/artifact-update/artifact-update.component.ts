@@ -113,12 +113,11 @@ export class ArtifactUpdateComponent implements OnInit {
 
   createArtifactTranslateForm(): FormGroup {
     return this.formBuilder.group({
-      languageId: [''],
+      languageId: ['', Validators.required],
       name: ['', Validators.required],
       summary: ['', Validators.required],
       description: ['', Validators.required],
       epitaph: ['', Validators.required],
-      yearOfConstruction: ['', Validators.required],
     });
   }
 
@@ -152,9 +151,7 @@ export class ArtifactUpdateComponent implements OnInit {
               response.message,
               this.getTranslate('successful')
             );
-            this.router
-              .navigate(['admin/artifact/upload-images'])
-              .finally(() => location.reload());
+            this.goBack();
           },
           (responseError) => {
             this.errorService.writeErrorMessages(responseError);

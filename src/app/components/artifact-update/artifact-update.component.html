@@ -114,7 +114,8 @@
                                 <label [for]="'languageId' + i" class="form-label">
                                     Eserin bilgilerini gireceğiniz dili seçin
                                 </label>
-                                <select class="form-select" formControlName="languageId" [id]="'languageId' + i">
+                                <select class="form-select" formControlName="languageId" [id]="'languageId' + i"
+                                    >
                                     <option value="" selected>{{getTranslate('choose')}}...</option>
                                     <option *ngFor="let language of languages" [value]="language.id">
                                         {{language.languageName}}
