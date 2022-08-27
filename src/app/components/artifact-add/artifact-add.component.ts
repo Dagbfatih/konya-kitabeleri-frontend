@@ -146,8 +146,6 @@ export class ArtifactAddComponent implements OnInit {
             this.errorService.writeErrorMessages(responseError);
           }
         );
-
-      // Http Posting
     } else {
     }
   }
@@ -158,8 +156,6 @@ export class ArtifactAddComponent implements OnInit {
   ) {
     this.artifactAddService.setArtifact(artifact);
     this.artifactAddService.setTranslations(translations);
-    this.artifactUpdateService.setInnerArtifact(artifact);
-    this.artifactUpdateService.setTranslations(translations);
   }
 
   getArtifactTranslates() {

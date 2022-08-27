@@ -101,7 +101,7 @@
             </div>
 
             <!-- Artifact Info -->
-            <div class="col ms-5 d-none d-lg-block text-start">
+            <div *ngIf="currentArtifact" class="col ms-5 d-none d-lg-block text-start">
                 <div class="mb-5">
                     <h2 id="approach-2">
                         Hakkında
@@ -109,10 +109,10 @@
                     <img *ngIf="artifactImages.length > 0" [src]="baseUrl+artifactImages[0].path" alt="" width="500"
                         height="500" class="img-fluid">
                     <p class="mt-3 h4" id="1">
-                        {{getTranslate(currentArtifact?.artifact?.name!)}}
+                        {{getTranslate(currentArtifact?.name!)}}
                     </p>
                     <p class="mt-3" id="1">
-                        {{getTranslate(currentArtifact?.artifact?.description!)}}
+                        {{getTranslate(currentArtifact?.description!)}}
                     </p>
                 </div>
 
@@ -123,7 +123,7 @@
                     <img *ngIf="epitaphImages.length>0" [src]="baseUrl+epitaphImages[0].path" alt="" width="500"
                         height="500" class="img-fluid">
                     <p class="mt-4" id="2">
-                        {{getTranslate(currentArtifact?.artifact?.epitaph!)}}
+                        {{getTranslate(currentArtifact?.epitaph!)}}
                         <a class="link" data-bs-toggle="collapse" href="#originalEpitaph" role="button"
                             aria-expanded="false" aria-controls="originalEpitaph">
                             Orijinal Metin
@@ -132,7 +132,7 @@
 
                     <div class="collapse" id="originalEpitaph">
                         <div class="card card-body">
-                            {{currentArtifact?.artifact?.originalEpitaph}}
+                            {{currentArtifact?.originalEpitaph}}
                         </div>
                     </div>
 

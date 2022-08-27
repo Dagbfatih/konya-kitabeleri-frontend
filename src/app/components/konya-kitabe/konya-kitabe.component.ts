@@ -11,7 +11,16 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { allTranslates } from 'src/app/services/translation.service';
-import { faCaretDown, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowsAlt,
+  faArrowsAltH,
+  faArrowsAltV,
+  faCaretDown,
+  faCheckCircle,
+  faExpandArrowsAlt,
+  faMonument,
+  faPeopleArrows,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -21,6 +30,7 @@ import { faCaretDown, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 export class KonyaKitabeComponent implements OnInit {
   faCheckCircle = faCheckCircle;
   faCaret = faCaretDown;
+  faMonument = faMonument;
   histPeriods: HistPeriod[] = [];
   artifactTypes: ArtifactType[] = [];
   artifacts: ArtifactDetailsDto[] = [];
@@ -148,7 +158,7 @@ export class KonyaKitabeComponent implements OnInit {
     this.scrollService.scroll(id, 75);
   }
 
-  getTranslate(key: string) {
-    return allTranslates.get(key);
+  getTranslate(key?: string) {
+    return allTranslates.get(key ?? '');
   }
 }

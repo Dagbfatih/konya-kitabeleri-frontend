@@ -1,12 +1,13 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark bd-navbar">
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
 
+        <div class="d-lg-none" style="width: 2.25rem;"></div>
         <div class="navbar-header">
             <a class="navbar-brand text-white d-none d-lg-block" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
                 <!-- Kitabelerin Dili -->
             </a>
-            <a class="navbar-brand text-white d-lg-none" routerLink="/">
+            <a class="navbar-brand text-white d-lg-none me-0" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
             </a>
         </div>
@@ -14,6 +15,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
                 <!-- flex-row vardı -->
@@ -88,20 +90,22 @@
 
                         <div class="well search-result">
                             <div class="row">
-                                <div *ngIf="result.artifactImages.length > 0" class="d-flex justify-content-center align-items-center col-md-4 col-lg-3">
+                                <div *ngIf="result.artifactImages.length > 0"
+                                    class="d-flex justify-content-center align-items-center col-md-4 col-lg-3">
                                     <img class="img-responsive" [src]="baseUrl+result.artifactImages[0].path"
                                         height="24" alt="">
                                 </div>
                                 <div class="col-md-8 col-lg-9">
                                     <div class="me-auto">
                                         <div class="fw-light">
-                                            <ngb-highlight highlightClass="text-danger" [result]="getTranslate(result.artifact.name)"
-                                                [term]="searchedText">
+                                            <ngb-highlight highlightClass="text-danger"
+                                                [result]="getTranslate(result.artifact.name)" [term]="searchedText">
                                             </ngb-highlight>
                                         </div>
                                     </div>
 
-                                    <ngb-highlight highlightClass="text-danger" class="fs-6 fw-light d-inline-block text-truncate" style="max-width: 186px;"
+                                    <ngb-highlight highlightClass="text-danger"
+                                        class="fs-6 fw-light d-inline-block text-truncate" style="max-width: 186px;"
                                         [result]="getTranslate(result.artifact.description)" [term]="searchedText">
                                     </ngb-highlight>
                                 </div>
@@ -115,8 +119,8 @@
                         <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
                         <input id="typeahead-basic" type="search" class="form-control filter-input search-filter-input"
                             [(ngModel)]="searchText" [resultTemplate]="resultTemplate" [ngbTypeahead]="search"
-                            [inputFormatter]="inputFormatter" [editable]='false'
-                            (selectItem)="searchSelected($event)" [placeholder]="getTranslate('searchOnArtifacts')"/>
+                            [inputFormatter]="inputFormatter" [editable]='false' (selectItem)="searchSelected($event)"
+                            [placeholder]="getTranslate('searchOnArtifacts')" />
                     </div>
 
                     <!-- <form class="d-flex" [formGroup]="searchEngineForm" (ngSubmit)="search()" role="search">

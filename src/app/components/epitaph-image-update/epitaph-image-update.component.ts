@@ -1,3 +1,5 @@
+import { Artifact } from './../../models/entities/artifact';
+import { ArtifactAddService } from 'src/app/services/artifact-add.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { EpitaphImageDeleteComponent } from './../epitaph-image-delete/epitaph-image-delete.component';
 import { EpitaphImageService } from './../../services/epitaph-image.service';
@@ -44,7 +46,7 @@ export class EpitaphImageUpdateComponent implements OnInit {
   faMonument = faMonument;
 
   images: NgxFileDropEntry[] = [];
-  currentArtifact: ArtifactDetailsDto;
+  currentArtifact: Artifact;
   baseUrl = environment.baseUrl;
   epitaphImages: EpitaphImage[] = [];
 
@@ -54,7 +56,8 @@ export class EpitaphImageUpdateComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private modalService: NgbModal,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private artifactAddService: ArtifactAddService
   ) {}
 
   ngOnInit(): void {
@@ -63,12 +66,14 @@ export class EpitaphImageUpdateComponent implements OnInit {
   }
 
   getArtifactInfo() {
-    this.currentArtifact = this.artifactUpdateService.getArtifact();
+    this.currentArtifact =
+      this.artifactUpdateService.getInnerArtifact() ??
+      this.artifactAddService.getArtifact();
   }
 
   getImages() {
     this.epitaphImageService
-      .getallbyartifact(this.currentArtifact.artifact.id!)
+      .getallbyartifact(this.currentArtifact.id!)
       .subscribe((response) => {
         this.epitaphImages = response.data;
       });
@@ -103,7 +108,7 @@ export class EpitaphImageUpdateComponent implements OnInit {
         fileEntry.file((file: File) => {
           // create artifactImage
           let addedEpitaphImage: EpitaphImage = {
-            artifactId: this.currentArtifact.artifact.id!,
+            artifactId: this.currentArtifact.id!,
             path: '',
           };
 

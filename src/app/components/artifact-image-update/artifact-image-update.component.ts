@@ -1,3 +1,4 @@
+import { ArtifactAddService } from 'src/app/services/artifact-add.service';
 import { EpitaphImageService } from './../../services/epitaph-image.service';
 import { ArtifactService } from 'src/app/services/artifact.service';
 import { EpitaphImageDeleteComponent } from './../epitaph-image-delete/epitaph-image-delete.component';
@@ -28,6 +29,7 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { EpitaphImage } from 'src/app/models/entities/epitaphImage';
+import { Artifact } from 'src/app/models/entities/artifact';
 
 @Component({
   selector: 'app-artifact-image-update',
@@ -46,7 +48,7 @@ export class ArtifactImageUpdateComponent implements OnInit {
   faMonument = faMonument;
 
   images: NgxFileDropEntry[] = [];
-  currentArtifact: ArtifactDetailsDto;
+  currentArtifact: Artifact;
   baseUrl = environment.baseUrl;
   artifactImages: ArtifactImage[] = [];
   epitaphImages: EpitaphImage[] = [];
@@ -57,7 +59,8 @@ export class ArtifactImageUpdateComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private modalService: NgbModal,
-    private epitaphImageService: EpitaphImageService
+    private epitaphImageService: EpitaphImageService,
+    private artifactAddService: ArtifactAddService
   ) {}
 
   ngOnInit(): void {
@@ -68,14 +71,16 @@ export class ArtifactImageUpdateComponent implements OnInit {
 
   getEpitaphImages() {
     this.epitaphImageService
-      .getallbyartifact(this.currentArtifact.artifact.id!)
+      .getallbyartifact(this.currentArtifact.id!)
       .subscribe((response) => {
         this.epitaphImages = response.data;
       });
   }
 
   getArtifactInfo() {
-    this.currentArtifact = this.artifactUpdateService.getArtifact();
+    this.currentArtifact =
+      this.artifactUpdateService.getInnerArtifact() ??
+      this.artifactAddService.getArtifact();
   }
 
   artifactImageDropped(images: NgxFileDropEntry[]) {
@@ -88,7 +93,7 @@ export class ArtifactImageUpdateComponent implements OnInit {
 
   getImages() {
     this.artifactImageService
-      .getallbyartifact(this.currentArtifact.artifact.id!)
+      .getallbyartifact(this.currentArtifact.id!)
       .subscribe((response) => {
         this.artifactImages = response.data;
       });
@@ -115,7 +120,7 @@ export class ArtifactImageUpdateComponent implements OnInit {
         fileEntry.file((file: File) => {
           // create artifactImage
           let addedArtifactImage: ArtifactImage = {
-            artifactId: this.currentArtifact.artifact.id!,
+            artifactId: this.currentArtifact.id!,
             path: '',
           };
 

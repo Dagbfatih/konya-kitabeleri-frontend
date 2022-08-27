@@ -2,7 +2,6 @@ import { ArtifactModelForTranslation } from './../models/entities/artifactTransl
 import { Injectable } from '@angular/core';
 import { ArtifactDetailsDto } from '../models/dtos/artifactDetailsDto';
 import { Artifact } from '../models/entities/artifact';
-import { Location } from '../models/entities/location';
 
 @Injectable({
   providedIn: 'root',

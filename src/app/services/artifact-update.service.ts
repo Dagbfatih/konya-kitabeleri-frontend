@@ -9,7 +9,8 @@ import { ArtifactModelForTranslation } from '../models/entities/artifactTranslat
   providedIn: 'root',
 })
 export class ArtifactUpdateService {
-  artifact: ArtifactDetailsDto;
+  title = 'artifactUpdateForm';
+  artifact: ArtifactDetailsDto = {} as ArtifactDetailsDto;
   artifactTranslations: ArtifactModelForTranslation[] = [];
 
   constructor(private formBuilder: FormBuilder) {
@@ -27,6 +28,10 @@ export class ArtifactUpdateService {
 
   setInnerArtifact(artifact: Artifact) {
     this.artifact.artifact = artifact;
+  }
+
+  getInnerArtifact() {
+    return this.artifact.artifact;
   }
 
   setTranslations(artifactTranslations: ArtifactModelForTranslation[]) {
@@ -116,26 +121,21 @@ export class ArtifactUpdateService {
   backupData() {
     if (this.artifact) {
       sessionStorage.setItem(
-        'ArtifactUpdateForm',
+        this.title,
         JSON.stringify({
           artifact: this.artifact,
-          translations: this.artifactTranslations,
+          translations: JSON.stringify(this.artifactTranslations),
         })
       );
     }
   }
 
   getBackupData() {
-    let data = sessionStorage.getItem('ArtifactUpdateForm');
+    let data = sessionStorage.getItem(this.title);
     if (data !== null) {
-      let parsedData = JSON.parse(data) as {
-        artifact: ArtifactDetailsDto;
-        translations: ArtifactModelForTranslation[];
-      };
-      console.log('pa', parsedData);
-      this.artifact = parsedData.artifact;
-      this.artifactTranslations = parsedData.translations;
-      sessionStorage.removeItem('ArtifactUpdateForm');
+      this.artifact = JSON.parse(data).artifact;
+      this.artifactTranslations = JSON.parse(data).translations;
+      sessionStorage.removeItem(this.title);
     }
   }
 }

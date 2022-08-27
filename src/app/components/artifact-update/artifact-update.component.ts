@@ -51,7 +51,6 @@ export class ArtifactUpdateComponent implements OnInit {
     private histPeriodService: HistPeriodService,
     private toastrService: ToastrService,
     private languageService: LanguageService,
-    private translateService: TranslateService,
     private errorService: ErrorService,
     private artifactUpdateService: ArtifactUpdateService,
     private router: Router

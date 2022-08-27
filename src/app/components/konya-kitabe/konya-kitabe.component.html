@@ -1,12 +1,85 @@
 <body>
+    <!-- Sm Historical Periods -->
+    <nav class="navbar bg-light d-md-none">
+        <div class="container-fluid">
+
+            <a class="d-flex align-items-center link-dark text-decoration-none">
+                <!-- <img src="http://localhost:4200/assets/images/logo.png" class="me-2" width="30"> -->
+                <fa-icon [icon]="faMonument" size="2x" class="me-2 text-success"></fa-icon>
+                <span class="fs-5 fw-semibold">Kitabeler</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#histPeriodOffcanvas" aria-controls="histPeriodOffcanvas" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="offcanvas" data-bs-target="#histPeriodOffcanvas"
+                    width="30" height="30" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
+                </svg>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="histPeriodOffcanvas"
+                aria-labelledby="histPeriodOffcanvasLabel">
+                <div class="offcanvas-header">
+                    <fa-icon [icon]="faMonument" size="2x" class="me-2 text-success"></fa-icon>
+                    <h5 class="offcanvas-title" id="histPeriodOffcanvasLabel">Kitabeler</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+
+                    <!-- Historical Periods -->
+                    <div *ngFor="let histPeriod of histPeriods; let i = index;"
+                        class="historical-period-list d-md-none">
+                        <div *ngIf="checkHistPeriodContainsArtifact(histPeriod.paramName)">
+                            <h6
+                                class="sidebar-heading d-flex justify-content-between align-items-center mt-2 mb-1 text-muted text-uppercase">
+                                {{histPeriod.name}}
+                            </h6>
+                            <ul class="artifact-type-list list-unstyled ps-0">
+
+                                <li *ngFor="let artifactType of artifactTypes; let j = index;" class="mb-1">
+                                    <div
+                                        *ngIf="getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName).length > 0">
+                                        <button
+                                            class="btn btn-toggle my-btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
+                                            data-bs-toggle="collapse"
+                                            [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
+                                            aria-expanded="true">
+                                            {{artifactType.name}}
+                                        </button>
+                                        <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
+                                            <ul
+                                                class="artifact-list my-btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                                <li
+                                                    *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
+                                                    <a class="link-dark d-inline-flex text-decoration-none rounded"
+                                                        data-bs-dismiss="offcanvas"
+                                                        routerLink="/konya-kitabeleri/{{histPeriod.paramName}}/{{artifactType.id}}/{{artifact.artifact.id}}">
+                                                        {{getTranslate(artifact.artifact.name)}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> <!-- End Historical Periods -->
+
+                </div>
+
+            </div>
+        </div>
+    </nav>
 
     <div class="container-xxl my-gutter mt-3 my-md-4 my-layout">
-        <aside class="my-sidebar">
+        <aside class="my-sidebar d-none d-md-block">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-transparent">
 
-
                 <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-                    <img src="http://localhost:4200/assets/images/logo.png" class="me-2" width="30">
+                    <img src="assets/images/logo.png" class="me-2" width="30">
                     <span class="fs-5 fw-semibold">Kitabeler</span>
                 </a>
 
@@ -60,10 +133,10 @@
             <!-- Data -->
             <div *ngIf="dataLoaded && currentArtifact" class="my-content ps-lg-2">
                 <div class="d-md-flex text-start align-items-center justify-content-start">
-                    <h1 class="my-title mb-0" id="approach-1">{{getTranslate(currentArtifact?.artifact?.name!)}}</h1>
+                    <h1 class="my-title mb-0" id="approach-1">{{getTranslate(currentArtifact.artifact.name)}}</h1>
                 </div>
                 <p class="my-lead">
-                    {{getTranslate(currentArtifact?.artifact?.summary!)}}
+                    {{getTranslate(currentArtifact.artifact.summary!)}}
                 </p>
 
                 <div class="bd-content pt-4">
@@ -75,17 +148,17 @@
                             [src]="baseUrl+currentArtifact.artifactImages[0].path" alt="" width="500" height="500"
                             class="img-fluid">
                         <p class="mt-3" id="1">
-                            {{getTranslate(currentArtifact?.artifact?.description!)}}
+                            {{getTranslate(currentArtifact.artifact.description!)}}
                         </p>
                     </div>
                     <div class="mb-5">
                         <h2 id="approach-3">
                             Kitabesi
                         </h2>
-                        <img *ngIf="currentArtifact?.epitaphImage" [src]="baseUrl+currentArtifact?.epitaphImage?.path"
+                        <img *ngIf="currentArtifact?.epitaphImage" [src]="baseUrl+currentArtifact.epitaphImage.path"
                             alt="" width="500" height="500" class="img-fluid">
                         <p class="mt-4 word" style="white-space: pre-wrap;" id="2">
-                            {{currentArtifact?.artifact?.originalEpitaph}}
+                            {{currentArtifact.artifact.originalEpitaph}}
                         </p>
                         <button class="btn btn-secondary me-1" type="button" data-bs-toggle="collapse"
                             data-bs-target="#originalEpitaph" aria-expanded="false" aria-controls="originalEpitaph">
@@ -95,7 +168,7 @@
 
                         <div class="collapse mt-3" id="originalEpitaph">
                             <div class="card card-body">
-                                {{getTranslate(currentArtifact?.artifact?.epitaph!)}}
+                                {{getTranslate(currentArtifact.artifact.epitaph!)}}
                             </div>
                         </div>
 
@@ -125,15 +198,17 @@
                     </div>
                 </div>
             </div>
-            <div class="my-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-muted">
-                <button class="btn btn-link link-dark p-md-0 mb-2 mb-md-0 text-decoration-none my-toc-toggle d-md-none"
+
+            <!-- Toc -->
+            <div class="my-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-muted d-none d-md-block">
+                <!-- <button class="btn btn-link link-dark p-md-0 mb-2 mb-md-0 text-decoration-none my-toc-toggle d-md-none"
                     type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false"
                     aria-controls="tocContents">
                     On this page
                     <svg class="bi d-md-none ms-2" aria-hidden="true">
                         <use xlink:href="#chevron-expand"></use>
                     </svg>
-                </button>
+                </button> -->
                 <strong class="d-none d-md-block h6 my-2">On this page</strong>
                 <hr class="d-none d-md-block my-2">
                 <div class="collapse my-toc-collapse" id="tocContents">
@@ -141,7 +216,7 @@
                         <ul>
                             <li>
                                 <a class="link"
-                                    (click)="scroll('approach-1')">{{getTranslate(currentArtifact?.artifact?.name!)}}</a>
+                                    (click)="scroll('approach-1')">{{getTranslate(currentArtifact.artifact.name)}}</a>
                                 <ul>
                                     <li>
                                         <a class="link" (click)="scroll('approach-2')">Hakkında</a>
@@ -170,6 +245,7 @@
                     </nav>
                 </div>
             </div>
+
         </main> <!-- End Content -->
     </div>
 
