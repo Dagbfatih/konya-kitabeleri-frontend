@@ -127,6 +127,13 @@ ul.friend-list .right p {
   right: 0;
 } */
 
+.filter-input {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.375rem;
+  background-color: #171a1d;
+  color: #ffffff;
+}
+
 #autocomplete {
   max-width: 400px;
   margin: 0 auto;

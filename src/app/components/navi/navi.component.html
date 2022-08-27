@@ -1,7 +1,7 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark bd-navbar">
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
 
-        <div class="d-lg-none" style="width: 2.25rem;"></div>
+        <!-- <div class="d-lg-none" style="width: 2.25rem;"></div> -->
         <div class="navbar-header">
             <a class="navbar-brand text-white d-none d-lg-block" routerLink="/">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
@@ -16,7 +16,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
                 <!-- flex-row vardı -->
                 <!-- <li class="nav-item col-md-auto">
@@ -77,43 +77,37 @@
                 </li>
             </ul>
 
-
-            <hr class="d-md-none text-white-50">
-
-
             <ul class="navbar-nav flex-row flex-wrap ms-md-auto ps-2 align-items-center text-start">
 
                 <!-- Search Form -->
-                <li class="nav-item me-5">
+                <li class="nav-item">
 
                     <ng-template #resultTemplate class="" let-result="result" let-searchedText="term">
-
                         <div class="well search-result">
-                            <div class="row">
-                                <div *ngIf="result.artifactImages.length > 0"
-                                    class="d-flex justify-content-center align-items-center col-md-4 col-lg-3">
-                                    <img class="img-responsive" [src]="baseUrl+result.artifactImages[0].path"
-                                        height="24" alt="">
+                            <div class="row" style="min-width: 308px;">
+
+                                <div class="col-md-4 col-lg-3 col-sm-4">
+                                    <div *ngIf="result.artifactImages.length > 0"
+                                        class="d-flex justify-content-center align-items-center ">
+                                        <img class="img-responsive" [src]="baseUrl+result.artifactImages[0].path"
+                                            height="34" alt="">
+                                    </div>
                                 </div>
-                                <div class="col-md-8 col-lg-9">
+                                <div class="col-md-8 col-lg-9 col-sm-8">
                                     <div class="me-auto">
                                         <div class="fw-light">
-                                            <ngb-highlight highlightClass="text-danger"
+                                            <ngb-highlight highlightClass="fw-bold"
                                                 [result]="getTranslate(result.artifact.name)" [term]="searchedText">
                                             </ngb-highlight>
                                         </div>
                                     </div>
-
-                                    <ngb-highlight highlightClass="text-danger"
-                                        class="fs-6 fw-light d-inline-block text-truncate" style="max-width: 186px;"
-                                        [result]="getTranslate(result.artifact.description)" [term]="searchedText">
-                                    </ngb-highlight>
                                 </div>
+
                             </div>
-
                         </div>
-
                     </ng-template>
+
+                    <hr class="d-lg-none text-white-50">
 
                     <div class="search-filter" style="width: 320px;">
                         <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
@@ -123,19 +117,7 @@
                             [placeholder]="getTranslate('searchOnArtifacts')" />
                     </div>
 
-                    <!-- <form class="d-flex" [formGroup]="searchEngineForm" (ngSubmit)="search()" role="search">
-                        <div class="search-filter" style="width: 320px;">
-                            <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
-                            <input type="search" class="form-control filter-input search-filter-input col-4"
-                                [(ngModel)]="searchText" formControlName="searchText"
-                                [placeholder]="getTranslate('searchOnArtifacts')">
-                        </div>
-                    </form>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let artifact of artifacts | artifactFilter: searchText">
-                            {{getTranslate(artifact.artifact.name)}}
-                        </li>
-                    </ul> -->
+                    <hr class="d-lg-none text-white-50">
                 </li>
 
                 <!-- Language -->
@@ -158,7 +140,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown dropdown-menu-end" *ngIf="isAuthenticated()">
+                <li class="nav-item dropdown dropdown-menu-end ms-2" *ngIf="isAuthenticated()">
 
                     <a class="nav-link d-block link-dark text-decoration-none dropdown-toggle" role="button"
                         id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
