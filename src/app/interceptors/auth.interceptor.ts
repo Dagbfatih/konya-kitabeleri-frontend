@@ -46,6 +46,11 @@ export class AuthInterceptor implements HttpInterceptor {
         .append(
           'language',
           this.settingsService.getLanguageCodeFromLocalStorage()
+        )
+        .append('Access-Control-Allow-Origin', '*')
+        .append(
+          'Access-Control-Allow-Headers',
+          'Origin, X-Requested-With, Content-Type, Accept'
         ),
     });
 
