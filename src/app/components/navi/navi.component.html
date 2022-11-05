@@ -1,4 +1,29 @@
-<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark bd-navbar">
+<!-- SM SOCİAL -->
+<nav class="navbar sticky-top navbar-expand navbar-first navbar-dark bg-success"> <!--  border-bottom -->
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto">
+
+                <!-- LG LİST -->
+                <li class="nav-item">
+                    <a class="nav-link p-2" href="https://facebook.com/" target="_blank" rel="noopener">
+                        <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link p-2" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                        <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark bd-navbar shadow-lg second-navbar">
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
 
         <!-- <div class="d-lg-none" style="width: 2.25rem;"></div> -->
@@ -18,20 +43,9 @@
 
         <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
-                <!-- flex-row vardı -->
-                <!-- <li class="nav-item col-md-auto">
-                    <a class="nav-link text-white" aria-current="page" routerLink="/historical-artifacts">
-                        {{getTranslate("historicalArtifacts")}}
-                    </a>
-                </li> -->
-                <!-- <li class="nav-item col-md-auto">
-                    <a class="nav-link text-white" aria-current="page" routerLink="/cities">
-                        {{getTranslate("cities")}}
-                    </a>
-                </li> -->
-                <li class="nav-item nav-item-link col-md-auto">
-                    <!-- her birinde col 6 vardı -->
-                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/konya">
+
+                <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/konya">
                         Konya
                     </a>
                 </li>
@@ -41,37 +55,27 @@
                         Kitabeler
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                        <li>
+                        <li *ngFor="let histPeriod of histPeriods">
                             <a class="dropdown-item nav-item-link" style="white-space: normal;"
-                                (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">
-                                Selçuklu Dönemi
+                                (click)="navigate('/konya-kitabeleri/' + histPeriod.paramName, histPeriod.paramName)">
+                                {{histPeriod.name}}
                             </a>
                         </li>
-                        <!-- <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
-                        <li>
-                            <a class="dropdown-item nav-item-link" style="white-space: normal;"
-                                (click)="navigate('/konya-kitabeleri/osmanli-donemi', 'osmanli-donemi')">
-                                Osmanlı Dönemi
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
-                <li class="nav-item nav-item-link col-md-auto">
-                    <!-- her birinde col 6 vardı -->
-                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/virtual-tours">
+                <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/virtual-tours">
                         Sanal Gezi
                     </a>
                 </li>
-                <li class="nav-item nav-item-link col-md-auto">
-                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/about-us">
+                <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/about-us">
                         Hakkımızda
                     </a>
                 </li>
-                <li class="nav-item nav-item-link col-md-auto">
-                    <!-- her birinde col 6 vardı -->
-                    <a class="nav-link nav-link-custom text-white" aria-current="page" routerLink="/contact">
+                <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/contact">
                         İletişim
                     </a>
                 </li>

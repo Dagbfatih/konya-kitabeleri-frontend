@@ -1,3 +1,6 @@
+import { ErrorService } from './../../services/error.service';
+import { HistPeriodService } from './../../services/hist-period.service';
+import { HistPeriod } from './../../models/entities/histPeriod';
 import { ArtifactFilterPipe } from './../../pipes/artifact-filter.pipe';
 import { ArtifactService } from 'src/app/services/artifact.service';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
@@ -38,6 +41,7 @@ export class NaviComponent implements OnInit {
   currentLanguage: Language = {} as Language;
   artifacts: ArtifactDetailsDto[] = [];
   filteredArtifacts: ArtifactDetailsDto[] = [];
+  histPeriods: HistPeriod[] = [];
 
   constructor(
     private router: Router,
@@ -49,7 +53,9 @@ export class NaviComponent implements OnInit {
     private toastrService: ToastrService,
     private artifactService: ArtifactService,
     private artifactFilterPipe: ArtifactFilterPipe,
-    private orderByPipe: OrderByPipe
+    private orderByPipe: OrderByPipe,
+    private histPeriodService: HistPeriodService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -59,13 +65,27 @@ export class NaviComponent implements OnInit {
     this.runCollapseScript();
     this.createSearchEngineForm();
     this.getCurrentLanguage();
+    this.getAllHistPeriods();
+  }
+
+  getAllHistPeriods() {
+    this.histPeriodService.getAll().subscribe(
+      (response) => {
+        this.histPeriods = response.data;
+      },
+      (responseError) => {
+        this.errorService.writeErrorMessages(responseError);
+      }
+    );
   }
 
   getArtifacts() {
-    this.artifactService.getAllDetailsAndDefaultImages().subscribe((response) => {
-      this.artifacts = response.data;
-      this.filteredArtifacts = this.artifacts;
-    });
+    this.artifactService
+      .getAllDetailsAndDefaultImages()
+      .subscribe((response) => {
+        this.artifacts = response.data;
+        this.filteredArtifacts = this.artifacts;
+      });
   }
 
   getCurrentLanguage() {

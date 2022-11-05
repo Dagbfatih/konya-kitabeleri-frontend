@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "tarih-project": {
+      "i18n": {
+        "sourceLocale":"en-US"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {

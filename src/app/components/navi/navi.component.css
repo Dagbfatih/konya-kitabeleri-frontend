@@ -1,5 +1,10 @@
-a.nav-link.active {
+.bd-navbar-nav .nav-link.active {
   font-weight: 600;
+  color: #fff;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #838f996c !important;
 }
 
 .btn.btn-outline-light.sign-in {
@@ -8,6 +13,24 @@ a.nav-link.active {
 
 .dropdown-menu {
   width: 15%;
+  min-width: 200px;
+}
+
+.navbar-first {
+  height: 40px;
+}
+
+.second-navbar {
+  top: 40px;
+}
+
+
+.bd-navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.bd-navbar-nav .nav-link:hover {
+  color: #fff;
 }
 
 ul.friend-list {
@@ -23,23 +46,9 @@ ul.friend-list li {
   transition: 0.3s;
 }
 
-.text-custom {
-  color: #ffffff;
-}
-
 ul.friend-list {
   margin: 0;
   padding: 0;
-}
-
-.text-custom > li > a {
-  color: #ffffff;
-  font-weight: 400;
-}
-
-.text-custom > li > .active {
-  font-weight: 600;
-  color: #ffffff;
 }
 
 .dropdown-toggle.dr-arrow:hover {
