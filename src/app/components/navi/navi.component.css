@@ -21,9 +21,17 @@
 }
 
 .second-navbar {
+  /* top: 40px; */
   top: 40px;
 }
 
+/* image */
+.header-image {
+  height: auto;
+  position: sticky;
+  top: 0px;
+  overflow: hidden;
+}
 
 .bd-navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.85);
