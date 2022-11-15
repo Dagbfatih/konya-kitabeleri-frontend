@@ -51,6 +51,10 @@ export class AuthInterceptor implements HttpInterceptor {
         .append(
           'Access-Control-Allow-Headers',
           'Origin, X-Requested-With, Content-Type, Accept'
+        )
+        .append(
+          'Access-Control-Allow-Methods',
+          'GET, POST, PUT, DELETE, OPTIONS, HEAD'
         ),
     });
 
