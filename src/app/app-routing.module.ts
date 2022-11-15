@@ -57,10 +57,10 @@ const routes: Routes = [
     path: 'about-us',
     component: AboutUsComponent,
   },
-  {
-    path: 'virtual-tours',
-    component: VirtualTourComponent,
-  },
+  // {
+  //   path: 'virtual-tours',
+  //   component: VirtualTourComponent,
+  // },
   {
     path: 'konya-kitabeleri/:period',
     component: KonyaKitabeComponent,
