@@ -43,6 +43,6 @@ export class ServiceRepositoryBase<T> implements ServiceRepository<T> {
   }
 
   update(entity: T): Observable<ResponseModel> {
-    return this.httpClient.put<ResponseModel>(this.apiUrl + 'update', entity);
+    return this.httpClient.post<ResponseModel>(this.apiUrl + 'update', entity);
   }
 }
