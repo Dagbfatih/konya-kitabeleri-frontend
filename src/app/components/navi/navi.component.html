@@ -62,7 +62,7 @@
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
 
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/konya">
+                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" routerLink="/konya">
                         Konya
                     </a>
                 </li>
@@ -73,26 +73,25 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li *ngFor="let histPeriod of histPeriods">
-                            <a class="dropdown-item nav-item-link" style="white-space: normal;"
+                            <a class="dropdown-item nav-link-collapse" style="white-space: normal;"
                                 (click)="navigate('/konya-kitabeleri/' + histPeriod.paramName, histPeriod.paramName)">
                                 {{histPeriod.name}}
                             </a>
                         </li>
-
                     </ul>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom disabled" aria-current="page" routerLink="/virtual-tours">
+                    <a class="nav-link nav-link-custom disabled nav-link-collapse text-white-50" routerLink="/virtual-tours">
                         Sanal Gezi
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/about-us">
+                    <a class="nav-link nav-link-custom nav-link-collapse" routerLink="/about-us">
                         Hakkımızda
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom" aria-current="page" routerLink="/contact">
+                    <a class="nav-link nav-link-custom nav-link-collapse" routerLink="/contact">
                         İletişim
                     </a>
                 </li>

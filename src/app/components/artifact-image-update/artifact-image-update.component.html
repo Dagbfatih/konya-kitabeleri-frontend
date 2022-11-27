@@ -61,12 +61,21 @@
                         <div class="mb-3">
                             <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="artifactImageDropped($event)"
                                 [showBrowseBtn]="false" [multiple]="false" accept=".png, .jpeg, .jpg, .webp, .avif">
+
                                 <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                                    Resmi buraya sürükleyin veya
-                                    <button type="button" class="btn btn-outline-info ms-2"
-                                        (click)="openFileSelector()">
-                                        Dosyalara gözat
-                                    </button>
+
+                                    <div *ngIf="uploading" class="spinner-border text-dark" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+
+                                    <div *ngIf="!uploading">
+                                        Resmi buraya sürükleyin veya
+                                        <button *ngIf="!uploading" type="button" class="btn btn-outline-info ms-2"
+                                            (click)="openFileSelector()">
+                                            Dosyalara gözat
+                                        </button>
+                                    </div>
+
                                 </ng-template>
                             </ngx-file-drop>
                         </div>
@@ -82,7 +91,9 @@
                                 </div>
 
                             </div>
-                            <button class="btn btn-outline-dark" (click)="uploadArtifactImage()">
+                            <button class="btn btn-outline-dark" [disabled]="uploading" (click)="uploadArtifactImage()">
+                                <span *ngIf="uploading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
                                 Seçili Resmi Ekle
                             </button>
                         </div>
@@ -120,7 +131,7 @@
                     <h2 id="approach-3">
                         Kitabesi
                     </h2>
-                    <img *ngIf="epitaphImages.length>0" [src]="baseUrl+epitaphImages[0].path" alt="" width="500"
+                    <img *ngIf="epitaphImages.length > 0" [src]="baseUrl+epitaphImages[0].path" alt="" width="500"
                         height="500" class="img-fluid">
                     <p class="mt-4" id="2">
                         {{getTranslate(currentArtifact?.epitaph!)}}

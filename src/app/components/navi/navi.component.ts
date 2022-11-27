@@ -97,7 +97,7 @@ export class NaviComponent implements OnInit {
   }
 
   runCollapseScript() {
-    $('.navbar-collapse .nav-item-link').on('click', function () {
+    $('.navbar-collapse .nav-link-collapse').on('click', function () {
       (<any>$('.navbar-collapse')).collapse('hide');
     });
   }

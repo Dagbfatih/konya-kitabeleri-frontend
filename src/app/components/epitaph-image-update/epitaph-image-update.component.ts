@@ -45,6 +45,7 @@ export class EpitaphImageUpdateComponent implements OnInit {
   faLandmark = faLandmark;
   faMonument = faMonument;
 
+  uploading = false;
   images: NgxFileDropEntry[] = [];
   currentArtifact: Artifact;
   baseUrl = environment.baseUrl;
@@ -101,6 +102,7 @@ export class EpitaphImageUpdateComponent implements OnInit {
 
   uploadEpitaphImage() {
     let images = this.images;
+    this.uploading = true;
 
     for (const droppedFile of images) {
       if (droppedFile.fileEntry.isFile) {
@@ -115,6 +117,8 @@ export class EpitaphImageUpdateComponent implements OnInit {
           // http post
           this.epitaphImageService.addImage(file, addedEpitaphImage).subscribe(
             (response) => {
+              this.uploading = false;
+              this.getImages();
               this.toastrService.success(
                 response.message,
                 this.getTranslate('successful')
@@ -123,6 +127,7 @@ export class EpitaphImageUpdateComponent implements OnInit {
               this.deleteEpitaphImage(droppedFile);
             },
             (responseError: HttpErrorResponse) => {
+              this.uploading = false;
               this.errorService.writeErrorMessages(responseError);
             }
           );

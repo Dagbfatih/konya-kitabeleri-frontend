@@ -43,10 +43,18 @@
         <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="epitaphImageDropped($event)"
             [showBrowseBtn]="false" [multiple]="false" accept=".png, .jpeg, .jpg, .webp, .avif">
             <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                Resmi buraya sürükleyin veya
-                <button type="button" class="btn btn-outline-info ms-2" (click)="openFileSelector()">
-                    Dosyalara gözat
-                </button>
+
+                <div *ngIf="uploading" class="spinner-border text-dark" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+
+                <div *ngIf="!uploading">
+                    Resmi buraya sürükleyin veya
+                    <button type="button" class="btn btn-outline-info ms-2" (click)="openFileSelector()">
+                        Dosyalara gözat
+                    </button>
+                </div>
+
             </ng-template>
         </ngx-file-drop>
     </div>
@@ -62,7 +70,8 @@
             </div>
 
         </div>
-        <button class="btn btn-outline-dark" (click)="uploadEpitaphImage()">
+        <button [disabled]="uploading" class="btn btn-outline-dark" (click)="uploadEpitaphImage()">
+            <span *ngIf="uploading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Seçili Resmi Ekle
         </button>
     </div>

@@ -1,3 +1,4 @@
+import { ErrorService } from './../../services/error.service';
 import { ArtifactAddService } from 'src/app/services/artifact-add.service';
 import { EpitaphImageService } from './../../services/epitaph-image.service';
 import { ArtifactService } from 'src/app/services/artifact.service';
@@ -47,6 +48,7 @@ export class ArtifactImageUpdateComponent implements OnInit {
   faLandmark = faLandmark;
   faMonument = faMonument;
 
+  uploading: boolean = false;
   images: NgxFileDropEntry[] = [];
   currentArtifact: Artifact;
   baseUrl = environment.baseUrl;
@@ -60,7 +62,8 @@ export class ArtifactImageUpdateComponent implements OnInit {
     private toastrService: ToastrService,
     private modalService: NgbModal,
     private epitaphImageService: EpitaphImageService,
-    private artifactAddService: ArtifactAddService
+    private artifactAddService: ArtifactAddService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +116,7 @@ export class ArtifactImageUpdateComponent implements OnInit {
 
   uploadArtifactImage() {
     let images = this.images;
+    this.uploading = true;
 
     for (const droppedFile of images) {
       if (droppedFile.fileEntry.isFile) {
@@ -127,13 +131,21 @@ export class ArtifactImageUpdateComponent implements OnInit {
           // http post
           this.artifactImageService
             .addImage(file, addedArtifactImage)
-            .subscribe((response) => {
-              this.toastrService.success(
-                response.message,
-                this.getTranslate('successful')
-              );
-              this.deleteArtifactImage(droppedFile);
-            });
+            .subscribe(
+              (response) => {
+                this.uploading = false;
+                this.getImages();
+                this.toastrService.success(
+                  response.message,
+                  this.getTranslate('successful')
+                );
+                this.deleteArtifactImage(droppedFile);
+              },
+              (responseError) => {
+                this.uploading = false;
+                this.errorService.writeErrorMessages(responseError);
+              }
+            );
         });
       }
     }

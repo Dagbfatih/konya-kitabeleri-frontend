@@ -68,7 +68,8 @@ export class ArtifactImageAddComponent implements OnInit {
 
   uploadArtifactImage() {
     let images = this.artifactImages;
-
+    this.uploading = true;
+    
     for (const droppedFile of images) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -80,7 +81,7 @@ export class ArtifactImageAddComponent implements OnInit {
           };
 
           // http post
-          this.uploading = true;
+          
           this.artifactImageService
             .addImage(file, addedArtifactImage)
             .subscribe((response) => {
