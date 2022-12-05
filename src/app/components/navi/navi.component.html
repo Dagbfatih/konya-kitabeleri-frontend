@@ -1,5 +1,5 @@
-<!-- First Navbar -->
-<nav class="navbar sticky-top navbar-expand navbar-first navbar-dark bg-dark border-bottom">
+<!-- First (Top) Navbar -->
+<!-- <nav class="navbar sticky-top navbar-expand navbar-first navbar-dark bg-dark border-bottom">
     <div class="container-xxl px-4">
 
         <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -20,7 +20,7 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
 <!-- İmg Header -->
 <!-- <div class="header-image d-none d-lg-block">
@@ -80,11 +80,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item col-md-auto">
+                <!-- <li class="nav-item col-md-auto">
                     <a class="nav-link nav-link-custom disabled nav-link-collapse text-white-50" routerLink="/virtual-tours">
                         Sanal Gezi
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item col-md-auto">
                     <a class="nav-link nav-link-custom nav-link-collapse" routerLink="/about-us">
                         Hakkımızda
@@ -97,9 +97,33 @@
                 </li>
             </ul>
 
+            <hr class="d-lg-none text-white-50">
             <ul class="navbar-nav flex-row flex-wrap ms-md-auto ps-2 align-items-center text-start">
 
+                <!-- Social -->
+                <li class="nav-item col-lg-auto col-6">
+                    <a class="nav-link py-2 px-0 px-lg-2" href="https://facebook.com/" target="_blank" rel="noopener">
+                        <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+                        <small class="d-lg-none ms-2">Facebook</small>
+                    </a>
+                </li>
+
+                <li class="nav-item col-lg-auto col-6">
+                    <a class="nav-link py-2 px-0 px-lg-2" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                        <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+                        <small class="d-lg-none ms-2">İnstagram</small>
+                    </a>
+                </li>
+
+                <li class="nav-item col-lg-auto col-6 me-lg-2">
+                    <a class="nav-link py-2 px-0 px-lg-2" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                        <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+                        <small class="d-lg-none ms-2">Twitter</small>
+                    </a>
+                </li>
+
                 <!-- Search Form -->
+                <hr class="d-lg-none text-white-50 w-100">
                 <li class="nav-item me-2">
 
                     <ng-template #resultTemplate class="" let-result="result" let-searchedText="term">
@@ -127,7 +151,7 @@
                         </div>
                     </ng-template>
 
-                    <hr class="d-lg-none text-white-50">
+                    
 
                     <div class="search-filter" style="width: 320px;">
                         <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
@@ -137,9 +161,9 @@
                             [placeholder]="getTranslate('searchOnArtifacts')" />
                     </div>
 
-                    <hr class="d-lg-none text-white-50">
+                    
                 </li>
-
+                <hr class="d-lg-none text-white-50 w-100">
                 <!-- Language -->
                 <li class="nav-item dropdown">
                     <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
