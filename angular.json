@@ -5,7 +5,7 @@
   "projects": {
     "tarih-project": {
       "i18n": {
-        "sourceLocale":"en-US"
+        "sourceLocale": "en-US"
       },
       "projectType": "application",
       "schematics": {

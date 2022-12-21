@@ -1,3 +1,6 @@
+import { Language } from './../../models/entities/language';
+import { LanguageService } from './../../services/language.service';
+import { SettingsService } from './../../services/settings.service';
 import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { ScrollService } from 'src/app/services/scroll.service';
@@ -21,6 +24,7 @@ import {
   faMonument,
   faPeopleArrows,
 } from '@fortawesome/free-solid-svg-icons';
+import { Track } from 'ngx-audio-player';
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -36,10 +40,22 @@ export class KonyaKitabeComponent implements OnInit {
   artifacts: ArtifactDetailsDto[] = [];
   currentArtifact: ArtifactDetailsDto;
   searchEngineForm: FormGroup;
+  currentLanguage: Language;
   baseUrl = environment.baseUrl;
   dataLoaded = false;
-  latitude = 37.870897465942406;
-  longitude = 32.50499899799871;
+  latitude = '';
+  longitude = '';
+
+  msaapDisplayTitle = true;
+  msaapDisplayPlayList = false;
+  msaapPageSizeOptions = [2, 4, 6];
+  msaapDisplayVolumeControls = true;
+  msaapDisplayRepeatControls = true;
+  msaapDisplayArtist = false;
+  msaapDisplayDuration = true;
+  msaapDisablePositionSlider = false;
+  mapsURL = '';
+  msaapPlaylist: Track[] = [];
 
   constructor(
     private artifactService: ArtifactService,
@@ -48,15 +64,25 @@ export class KonyaKitabeComponent implements OnInit {
     private scrollService: ScrollService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private settingsService: SettingsService,
+    private languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
     this.getAllArtifactsDetails();
     this.getAllHistPeriods();
-    this.getAllartifactTypes();
+    this.getAllArtifactTypes();
+    this.getCurrentLanguage();
     this.runActiveStateManagement();
     this.createSearchEngineForm();
+  }
+
+  getCurrentLanguage() {
+    let languageCode = this.settingsService.getLanguageCodeFromLocalStorage();
+    this.languageService.getByCode(languageCode).subscribe((response) => {
+      this.currentLanguage = response.data;
+    });
   }
 
   getAllArtifactsDetails() {
@@ -68,6 +94,15 @@ export class KonyaKitabeComponent implements OnInit {
         this.dataLoaded = true;
         this.getCurrentArtifact();
       });
+  }
+
+  setLocation() {
+    this.latitude = this.currentArtifact.artifact.latitude?.toString()!;
+    this.longitude = this.currentArtifact.artifact.longitude?.toString()!;
+  }
+
+  triggerOnEnded(event: any) {
+    console.log('ended');
   }
 
   getCurrentArtifact() {
@@ -83,9 +118,11 @@ export class KonyaKitabeComponent implements OnInit {
           )!;
         } else {
           this.currentArtifact = this.artifacts[0];
+          this.setLocation();
         }
       } else {
         this.currentArtifact = this.artifacts[0];
+        this.setLocation();
       }
     });
   }
@@ -123,7 +160,7 @@ export class KonyaKitabeComponent implements OnInit {
     return false;
   }
 
-  getAllartifactTypes() {
+  getAllArtifactTypes() {
     this.artifactTypeService.getAll().subscribe((response) => {
       this.artifactTypes = response.data;
     });
@@ -140,11 +177,8 @@ export class KonyaKitabeComponent implements OnInit {
   }
 
   getArtifactById(id: number): ArtifactDetailsDto | undefined {
-    console.log('all artifacts', this.artifacts);
     return this.artifacts.find((a) => a.artifact.id === id);
   }
-
-  search() {}
 
   getArtifactsByTypeAndPeriod(artifactTypeId: number, histPeriod: string) {
     return this.artifacts.filter(

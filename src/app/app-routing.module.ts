@@ -1,3 +1,4 @@
+import { LanguageGuard } from './guards/language.guard';
 import { SourceComponent } from './components/source/source.component';
 import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
 import { LocationAddComponent } from './components/location-add/location-add.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'konya',
+    component: KonyaComponent,
+  },
+  {
     path: 'historical-artifacts',
     component: HistoricalArtifactsComponent,
   },
@@ -49,18 +54,11 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
   },
-  {
-    path: 'konya',
-    component: KonyaComponent,
-  },
+
   {
     path: 'about-us',
     component: AboutUsComponent,
   },
-  // {
-  //   path: 'virtual-tours',
-  //   component: VirtualTourComponent,
-  // },
   {
     path: 'konya-kitabeleri/:period',
     component: KonyaKitabeComponent,
@@ -74,7 +72,7 @@ const routes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'kitabeler-hakkında',
+    path: 'kitabeler',
     component: KitabeComponent,
   },
   {
@@ -100,11 +98,6 @@ const routes: Routes = [
     component: ArtifactAddComponent,
     canActivate: [AdminGuard, LoginGuard],
   },
-  // {
-  //   path: 'admin/artifact/location/add',
-  //   component: LocationAddComponent,
-  //   canActivate: [AdminGuard, LoginGuard],
-  // },
   {
     path: 'admin/artifact/preview/:id',
     component: ArtifactPreviewComponent,

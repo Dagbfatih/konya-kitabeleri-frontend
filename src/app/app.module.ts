@@ -1,4 +1,3 @@
-import { HomeComponent } from './components/home/home.component';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,8 +13,6 @@ import {
   NgbModule,
   NgbTypeaheadModule,
 } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { KonyaComponent } from './components/konya/konya.component';
 import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -84,6 +81,10 @@ import { EpitaphImageDeleteComponent } from './components/epitaph-image-delete/e
 import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
 import { EpitaphImageUpdateComponent } from './components/epitaph-image-update/epitaph-image-update.component';
 import { SourceComponent } from './components/source/source.component';
+import { HomeComponent } from './components/home/home.component';
+import { KonyaComponent } from './components/konya/konya.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -153,6 +154,7 @@ import { SourceComponent } from './components/source/source.component';
     EpitaphImageAddComponent,
     EpitaphImageUpdateComponent,
     SourceComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
@@ -174,6 +176,7 @@ import { SourceComponent } from './components/source/source.component';
     }),
     BrowserAnimationsModule,
     FontAwesomeModule,
+    NgxAudioPlayerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

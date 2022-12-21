@@ -1,40 +1,39 @@
 import { LanguageService } from './language.service';
 import { Injectable } from '@angular/core';
 import { Language } from '../models/entities/language';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SettingsService {
-  constructor(private languageService: LanguageService) {}
+  defaultLanguageCode: string = 'tr-TR';
 
+  constructor(
+    private languageService: LanguageService,
+    private router: ActivatedRoute
+  ) {}
+
+  getLanguageCodeFromRoute(): string {
+    let code = this.router.snapshot.paramMap.get('code');
+
+    if (code == null) {
+      this.setLanguage(this.defaultLanguageCode);
+      return this.defaultLanguageCode;
+    } else {
+      this.setLanguage(code);
+      return code;
+    }
+  }
+  
   getLanguageCodeFromLocalStorage(): string {
     let code = localStorage.getItem('code');
 
     if (code == null) {
-      return 'tr-TR';
+      return this.defaultLanguageCode;
     } else {
       return code;
     }
-  }
-
-  getCurrentLanguage() {
-    let language: Language = {} as Language;
-    this.languageService
-      .getByCode(this.getLanguageCodeFromLocalStorage())
-      .subscribe(
-        (response) => {
-          language = response.data;
-        },
-        (responseError) => {
-          language = {
-            code: 'en-US',
-            languageName: 'English',
-          };
-        }
-      );
-
-    return language;
   }
 
   setLanguage(languageCode: string) {

@@ -28,10 +28,8 @@ export class RouterService {
       .subscribe((param) => {
         if (param['language']) {
           languageCode = param['language'];
-          console.log('language param', param['language']);
         } else {
           languageCode = this.getLanguageFromBrowser();
-          console.log('language navigator', param['language']);
         }
       })
       .unsubscribe();

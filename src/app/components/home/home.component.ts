@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
-import { ArtifactService } from 'src/app/services/artifact.service';
 import { RandomSlideGeneratorService } from 'src/app/services/random-slide-generator.service';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { allTranslates } from 'src/app/services/translation.service';
@@ -13,7 +12,7 @@ import { allTranslates } from 'src/app/services/translation.service';
 export class HomeComponent implements OnInit {
   constructor(
     private randomSlideGenerator: RandomSlideGeneratorService,
-    private scrollService: ScrollService
+    private scrollService: ScrollService,
   ) {}
   artifacts: ArtifactDetailsDto[] = [];
 

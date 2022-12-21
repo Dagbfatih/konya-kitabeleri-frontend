@@ -1,4 +1,4 @@
-import { RouterService } from './services/router.service';
+import { Router } from '@angular/router';
 import { TranslationService } from './services/translation.service';
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from './services/settings.service';
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,
     private settingsService: SettingsService,
-    private routerService: RouterService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,6 +22,6 @@ export class AppComponent implements OnInit {
   }
 
   getLanguageCode(): string {
-    return this.routerService.getLanguageCode();
+    return this.settingsService.getLanguageCodeFromLocalStorage();
   }
 }
