@@ -1,6 +1,8 @@
+import { socialLinks } from './../../constants/social-links';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { allTranslates } from 'src/app/services/translation.service';
+import { SocialLink } from 'src/app/models/entities/socialLink';
 
 @Component({
   selector: 'app-footer',
@@ -28,6 +30,10 @@ export class FooterComponent implements OnInit {
       top: offsetPosition,
       behavior: 'smooth',
     });
+  }
+
+  getSocialLink(key: string): string {
+    return socialLinks.find((s) => s.key == key)!.link;
   }
 
   getTranslate(key: string) {

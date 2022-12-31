@@ -8,7 +8,7 @@
                         <!-- text-muted -->
                         <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/"
                             aria-label="Bootstrap">
-                            
+
                             <!-- <i class="icon-logo me-2" style="font-size: 32px;"></i> -->
                             <a class="navbar-brand text-white" routerLink="/">
                                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
@@ -35,7 +35,9 @@
                             <a class="link-dark link" routerLink="/konya">Konya</a>
                         </li>
                         <li class="mb-2">
-                            <a class="link-dark link" (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">Konya Kitabeleri</a>
+                            <a class="link-dark link"
+                                (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')">Konya
+                                Kitabeleri</a>
                         </li>
                         <!-- <li class="mb-2">
                             <a class="link-dark link" routerLink="/virtual-tours">Sanal Gezi</a>
@@ -48,11 +50,8 @@
                 <div class="col-6 col-lg-2 mb-3">
                     <h5>{{getTranslate("social")}}</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="link-dark link"
-                                href="https://www.instagram.com/soruluk_/?hl=tr">İnstagram</a></li>
-                        <li class="mb-2"><a class="link-dark link" href="https://twitter.com/Soruluk1">Twitter</a></li>
-                        <li class="mb-2"><a class="link-dark link"
-                                href="https://www.facebook.com/SorulukToplulugu/">Facebook</a></li>
+                        <li class="mb-2"><a class="link-dark link" [href]="getSocialLink('instagram')">İnstagram</a></li>
+                        <li class="mb-2"><a class="link-dark link" [href]="getSocialLink('facebook')">Facebook</a></li>
 
                     </ul>
                 </div>
@@ -81,22 +80,17 @@
                     <!-- <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
                         <i class="fa fa-leaf" style="font-size: 28px;"></i>
                     </a> -->
-                    <span class="text-muted">© 2021 Company, Inc</span>
+                    <span class="text-muted">© 2022 TUBITAK Projesi</span>
                 </div>
 
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                     <li class="ms-3">
-                        <a class="text-muted" href="#">
-                            <i class="fa fa-whatsapp" style="font-size: 24px;"></i>
+                        <a class="text-muted" [href]="getSocialLink('instagram')">
+                            <i class="fa fa-instagram" style="font-size: 24px;"></i>
                         </a>
                     </li>
                     <li class="ms-3">
-                        <a class="text-muted" href="#">
-                            <i class="fa fa-twitter" style="font-size: 24px;"></i>
-                        </a>
-                    </li>
-                    <li class="ms-3">
-                        <a class="text-muted" href="#">
+                        <a class="text-muted" [href]="getSocialLink('facebook')">
                             <i class="fa fa-facebook" style="font-size: 24px;"></i>
                         </a>
                     </li>

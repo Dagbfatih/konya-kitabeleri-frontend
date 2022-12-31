@@ -101,24 +101,18 @@
             <ul class="navbar-nav flex-row flex-wrap ms-md-auto ps-2 align-items-center text-start">
 
                 <!-- Social -->
-                <li class="nav-item col-lg-auto col-6">
-                    <a class="nav-link py-2 px-0 px-lg-2" href="https://facebook.com/" target="_blank" rel="noopener">
-                        <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-                        <small class="d-lg-none ms-2">Facebook</small>
-                    </a>
-                </li>
 
                 <li class="nav-item col-lg-auto col-6">
-                    <a class="nav-link py-2 px-0 px-lg-2" href="https://www.instagram.com/" target="_blank" rel="noopener">
+                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('instagram')" target="_blank" rel="noopener">
                         <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
                         <small class="d-lg-none ms-2">İnstagram</small>
                     </a>
                 </li>
 
-                <li class="nav-item col-lg-auto col-6 me-lg-2">
-                    <a class="nav-link py-2 px-0 px-lg-2" href="https://www.instagram.com/" target="_blank" rel="noopener">
-                        <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-                        <small class="d-lg-none ms-2">Twitter</small>
+                <li class="nav-item col-lg-auto col-6 me-1">
+                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('facebook')" target="_blank" rel="noopener">
+                        <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+                        <small class="d-lg-none ms-2">Facebook</small>
                     </a>
                 </li>
 

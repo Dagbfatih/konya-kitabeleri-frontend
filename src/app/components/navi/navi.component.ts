@@ -26,6 +26,7 @@ import { Artifact } from 'src/app/models/entities/artifact';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
+import { socialLinks } from 'src/app/constants/social-links';
 
 @Component({
   selector: 'app-navi',
@@ -100,6 +101,10 @@ export class NaviComponent implements OnInit {
     $('.navbar-collapse .nav-link-collapse').on('click', function () {
       (<any>$('.navbar-collapse')).collapse('hide');
     });
+  }
+
+  getSocialLink(key: string): string {
+    return socialLinks.find((s) => s.key == key)!.link;
   }
 
   createSearchEngineForm() {
