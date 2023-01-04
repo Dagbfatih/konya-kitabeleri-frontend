@@ -15,14 +15,9 @@ import * as $ from 'jquery';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { allTranslates } from 'src/app/services/translation.service';
 import {
-  faArrowsAlt,
-  faArrowsAltH,
-  faArrowsAltV,
   faCaretDown,
   faCheckCircle,
-  faExpandArrowsAlt,
   faMonument,
-  faPeopleArrows,
 } from '@fortawesome/free-solid-svg-icons';
 import { Track } from 'ngx-audio-player';
 

@@ -1,15 +1,33 @@
 <body>
-    <main class="contact w-100 m-auto">
-        <div class="container d-flex h-100 p-3 mx-auto flex-column mb-5" style="width: 25%;">
+    <main class="contact w-100 m-auto px-4 py-3">
+        <div class="container d-flex h-100 p-3 mx-auto flex-column mb-5 px-4 py-5">
             <div class="mr-auto">
-                <h2>Bize Ulaşın</h2>
-                <p class="mb-3">
-                    Konya tarihi yapıları ve kitabeleri hakkındaki düşünce, görüş ve önerileriniz için bize ulaşabilirsiniz.
-                </p>
+
+                <h1 class="display-5 fw-bold lh-1 mb-3">Bize Ulaşın</h1>
+                <p class="lead mb-3">Konya tarihi yapıları ve kitabeleri hakkındaki düşünce, görüş ve önerileriniz için
+                    bize
+                    ulaşabilirsiniz.
+
                 <ul class="list-unstyled pl-md-5 mb-5">
                     <li class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
-                        <i class="fa fa-envelope bi me-2"></i>
+                        <a class="link-dark me-3" href="mailto: dagbfatih@hotmail.com" target="_blank" rel="noopener">
+                            <fa-icon [icon]="faEnvolpe" style="font-size: 24px;"></fa-icon>
+                        </a>
                         konyakitabeler@gmail.com
+                    </li>
+                    <li class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+                        <a class="link-dark me-3" [href]="getSocialLink('instagram')" target="_blank" rel="noopener">
+                            <fa-icon class="" [icon]="faInstagram" style="font-size: 24px;"></fa-icon>
+                        </a>
+                        <span class="d-none d-lg-block">{{getSocialLink('instagram')}}</span>
+                        <span class="d-lg-none">İnstagram</span>
+                    </li>
+                    <li class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+                        <a class="link-dark me-3" [href]="getSocialLink('facebook')" target="_blank" rel="noopener">
+                            <fa-icon class="" [icon]="faFacebook" style="font-size: 24px;"></fa-icon>
+                        </a>
+                        <span class="d-none d-lg-block">{{getSocialLink('facebook')}}</span>
+                        <span class="d-lg-none">Facebook</span>
                     </li>
                 </ul>
             </div>

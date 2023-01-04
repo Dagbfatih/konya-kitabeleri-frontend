@@ -27,6 +27,7 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 import { socialLinks } from 'src/app/constants/social-links';
+import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-navi',
@@ -34,6 +35,8 @@ import { socialLinks } from 'src/app/constants/social-links';
   styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
+  faFacebook = faFacebook;
+  faInstagram = faInstagram;
   faSearch = faSearch;
   baseUrl = environment.baseUrl;
   searchText = '';
@@ -146,6 +149,12 @@ export class NaviComponent implements OnInit {
         '/' +
         item.item.artifact.id,
     ]);
+
+    this.callCollapseEvent();
+  }
+
+  callCollapseEvent() {
+    (<any>$('.navbar-collapse')).collapse('hide');
   }
 
   runActiveStateManagementScript() {

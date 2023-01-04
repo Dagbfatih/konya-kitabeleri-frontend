@@ -164,9 +164,6 @@ import { SafePipe } from './pipes/safe.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     NgxFileDropModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAeb9alXm-VrEoLJcGojHkH2lAUYig5gms',
-    }),
     NgbModule,
     NgbTypeaheadModule,
     IOCModule,
@@ -176,11 +173,9 @@ import { SafePipe } from './pipes/safe.pipe';
     }),
     BrowserAnimationsModule,
     FontAwesomeModule,
-    NgxAudioPlayerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'fr' },
   ],
   bootstrap: [AppComponent],
 })

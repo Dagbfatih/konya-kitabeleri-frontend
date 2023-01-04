@@ -46,10 +46,10 @@
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
 
         <div class="navbar-header">
-            <a class="navbar-brand text-white d-none d-lg-block" routerLink="/">
+            <a class="navbar-brand text-white d-none d-lg-block" routerLink="/" (click)="callCollapseEvent();">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
             </a>
-            <a class="navbar-brand text-white d-lg-none me-0" routerLink="/">
+            <a class="navbar-brand text-white d-lg-none me-0" routerLink="/" (click)="callCollapseEvent();">
                 <img src="assets/images/logo.png" height="35" class="d-inline-block align-text-top">
             </a>
         </div>
@@ -60,7 +60,12 @@
 
         <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
-
+                <!-- Lg None -->
+                <li class="nav-item d-lg-none col-md-auto">
+                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" routerLink="/">
+                        Ana Sayfa
+                    </a>
+                </li>
                 <li class="nav-item col-md-auto">
                     <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" routerLink="/konya">
                         Konya
@@ -73,8 +78,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li *ngFor="let histPeriod of histPeriods">
+
+                            <!-- lg -->
                             <a class="dropdown-item nav-link-collapse" style="white-space: normal;"
-                                (click)="navigate('/konya-kitabeleri/' + histPeriod.paramName, histPeriod.paramName)">
+                                (click)="navigate('/konya-kitabeleri/' + histPeriod?.paramName, histPeriod.paramName); callCollapseEvent();">
                                 {{histPeriod.name}}
                             </a>
                         </li>
@@ -103,15 +110,17 @@
                 <!-- Social -->
 
                 <li class="nav-item col-lg-auto col-6">
-                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('instagram')" target="_blank" rel="noopener">
-                        <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('instagram')" target="_blank"
+                        rel="noopener">
+                        <fa-icon [icon]="faInstagram" class="fa-lg"></fa-icon>
                         <small class="d-lg-none ms-2">İnstagram</small>
                     </a>
                 </li>
 
                 <li class="nav-item col-lg-auto col-6 me-1">
-                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('facebook')" target="_blank" rel="noopener">
-                        <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+                    <a class="nav-link py-2 px-0 px-lg-2" [href]="getSocialLink('facebook')" target="_blank"
+                        rel="noopener">
+                        <fa-icon [icon]="faFacebook" class="fa-lg"></fa-icon>
                         <small class="d-lg-none ms-2">Facebook</small>
                     </a>
                 </li>
@@ -145,17 +154,17 @@
                         </div>
                     </ng-template>
 
-                    
+
 
                     <div class="search-filter" style="width: 320px;">
-                        <fa-icon [icon]="faSearch" class="fa-icon-search"></fa-icon>
-                        <input id="typeahead-basic" type="search" class="form-control filter-input search-filter-input"
+                        <fa-icon [icon]="faSearch" class="fa-icon-search search-icon"></fa-icon>
+                        <input id="typeahead-basic" type="search" class="form-control" style="padding-left: 2.375rem;"
                             [(ngModel)]="searchText" [resultTemplate]="resultTemplate" [ngbTypeahead]="search"
-                            [inputFormatter]="inputFormatter" [editable]='false' (selectItem)="searchSelected($event)"
+                            [inputFormatter]="inputFormatter" [focusFirst]="true" [editable]='false' (selectItem)="searchSelected($event)"
                             [placeholder]="getTranslate('searchOnArtifacts')" />
                     </div>
 
-                    
+
                 </li>
                 <hr class="d-lg-none text-white-50 w-100">
                 <!-- Language -->

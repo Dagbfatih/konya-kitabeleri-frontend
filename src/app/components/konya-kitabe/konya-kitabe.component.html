@@ -43,15 +43,15 @@
                                     <div
                                         *ngIf="getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName).length > 0">
                                         <button
-                                            class="btn btn-toggle my-btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
+                                            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
                                             data-bs-toggle="collapse"
                                             [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
-                                            aria-expanded="true">
+                                            aria-expanded="false">
                                             {{artifactType.name}}
                                         </button>
                                         <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
                                             <ul
-                                                class="artifact-list my-btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                                class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                                 <li
                                                     *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                     <a class="link-dark d-inline-flex text-decoration-none rounded"
@@ -96,14 +96,14 @@
                                 <div
                                     *ngIf="getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName).length > 0">
                                     <button
-                                        class="btn btn-toggle my-btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
+                                        class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed shadow-none"
                                         data-bs-toggle="collapse"
                                         [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
-                                        aria-expanded="true">
+                                        aria-expanded="false">
                                         {{artifactType.name}}
                                     </button>
                                     <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
-                                        <ul class="artifact-list my-btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <ul class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                             <li
                                                 *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                 <a class="link-dark d-inline-flex text-decoration-none rounded"
@@ -168,25 +168,23 @@
                                     {{getTranslate(currentArtifact.artifact.epitaph!)}}</p>
 
                                 <p class="card-text" style="text-align: justify;"><small
-                                        class="text-muted">{{currentLanguage.languageName}}</small>
+                                        class="text-muted">{{currentLanguage?.languageName}}</small>
                                 </p>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="mb-5 d-none d-lg-block">
+                    <div class="mb-5">
                         <h2 id="approach-4 mb-2">
-                            Sesli Anlatım
+                            Video
                         </h2>
 
                         <div class="">
-                            <ngx-audio-player class="" [playlist]="msaapPlaylist" [displayTitle]="false"
-                                [autoPlay]="false" muted="muted" [displayPlaylist]="false"
-                                (trackEnded)="triggerOnEnded($event)" [displayVolumeControls]="true"
-                                [displayRepeatControls]="true" [disablePositionSlider]="false" [displayArtist]="false"
-                                [displayDuration]="true" [expanded]="false">
-                            </ngx-audio-player>
+                            <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/ifI-PDhtkhs"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
                         </div>
                     </div>
 
@@ -201,23 +199,23 @@
                             Konumu
                         </h2>
 
-                            <div *ngIf="!currentArtifact.artifact.latitude || !currentArtifact.artifact.longitude">
-                                <p class="fs-4 text-muted">Bu esere ait henüz bir konum bulunamadı.</p>
-                            </div>
+                        <div *ngIf="!currentArtifact.artifact.latitude || !currentArtifact.artifact.longitude">
+                            <p class="fs-4 text-muted">Bu esere ait henüz bir konum bulunamadı.</p>
+                        </div>
 
-                            <div *ngIf="currentArtifact.artifact.latitude && currentArtifact.artifact.longitude">
-                                <!-- LG -->
+                        <div *ngIf="currentArtifact.artifact.latitude && currentArtifact.artifact.longitude">
+                            <!-- LG -->
                             <iframe class="d-none d-lg-block"
-                            [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
-                            width="700" height="500" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
+                                width="700" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                             <!-- SM -->
                             <iframe class="d-lg-none"
-                            [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
-                            width="330" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
+                                [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
+                                width="330" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,14 +230,15 @@
                         <use xlink:href="#chevron-expand"></use>
                     </svg>
                 </button> -->
-                <strong class="d-none d-md-block h6 my-2">On this page</strong>
+                <strong class="d-none d-md-block h6 my-2">{{getTranslate('onThisPage')}}</strong>
                 <hr class="d-none d-md-block my-2">
                 <div class="collapse my-toc-collapse" id="tocContents">
                     <nav id="TableOfContents">
                         <ul>
                             <li>
                                 <a class="link"
-                                    (click)="scroll('approach-1')">{{getTranslate(currentArtifact.artifact.name)}}</a>
+                                    (click)="scroll('approach-1')">{{getTranslate(currentArtifact?.artifact?.name ??
+                                    '')}}</a>
                                 <ul>
                                     <li>
                                         <a class="link" (click)="scroll('approach-2')">Hakkında</a>

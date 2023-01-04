@@ -1,0 +1,25 @@
+.blog-post {
+  margin-bottom: 4rem;
+  max-width: 1080px;
+}
+.blog-post-title {
+  font-size: 2.7rem;
+  font-weight: 500;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #727272;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+code{
+  color: #DC4C64;
+}

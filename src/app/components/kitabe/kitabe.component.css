@@ -19,3 +19,7 @@ h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman",
     serif /*rtl:Amiri, Georgia, "Times New Roman", serif*/;
 }
+
+code{
+  color: #DC4C64;
+}

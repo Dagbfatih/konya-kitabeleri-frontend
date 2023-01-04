@@ -16,16 +16,14 @@
                             <span class="fs-5">Konya Kitabelerinin Dili</span>
                         </a>
                         <li class="mb-2">
-                            Bu proje lise öğrencileri araştırma projeleri kapsamında hazırlanmıştır.
+                            Bu proje lise öğrencileri tarafından araştırma projeleri kapsamında 2023 yılında hazırlanmıştır.
                         </li>
-                        <!-- <li class="mb-2">Code licensed <a href="https://github.com/twbs/bootstrap/blob/main/LICENSE"
-                              target="_blank" rel="license noopener">MIT</a>, docs <a
-                              href="https://creativecommons.org/licenses/by/3.0/" target="_blank"
-                              rel="license noopener">CC BY 3.0</a>.</li>
-                      <li class="mb-2">Currently v5.1.0.</li> -->
+                        <li class="mb-2">
+                            Sürüm 1.0.0
+                        </li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-1 offset-lg-1 mb-3">
+                <div class="col-6 col-lg-2 offset-lg-1 mb-3">
                     <h5>{{getTranslate("links")}}</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
@@ -33,6 +31,9 @@
                         </li>
                         <li class="mb-2">
                             <a class="link-dark link" routerLink="/konya">Konya</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="link-dark link" routerLink="/kitabeler">Kitabeler Hakkında</a>
                         </li>
                         <li class="mb-2">
                             <a class="link-dark link"
@@ -47,7 +48,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-2 mb-3">
+                <div class="col-6 col-lg-1 mb-3">
                     <h5>{{getTranslate("social")}}</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a class="link-dark link" [href]="getSocialLink('instagram')">İnstagram</a></li>
@@ -77,26 +78,25 @@
 
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div class="col-md-4 d-flex align-items-center">
-                    <!-- <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <i class="fa fa-leaf" style="font-size: 28px;"></i>
-                    </a> -->
-                    <span class="text-muted">© 2022 TUBITAK Projesi</span>
+                    <span class="text-muted">2023 Arastırma Projesi © Hakları Saklıdır.</span>
                 </div>
 
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3">
+                    <li class="me-3">
                         <a class="text-muted" [href]="getSocialLink('instagram')">
-                            <i class="fa fa-instagram" style="font-size: 24px;"></i>
+                            <fa-icon [icon]="faInstagram" style="font-size: 24px;"></fa-icon>
                         </a>
                     </li>
-                    <li class="ms-3">
+                    <li class="me-3">
                         <a class="text-muted" [href]="getSocialLink('facebook')">
-                            <i class="fa fa-facebook" style="font-size: 24px;"></i>
+                            <fa-icon [icon]="faFacebook" style="font-size: 24px;"></fa-icon>
                         </a>
+                    </li>
+                    <li class="text-muted py-1">
+                        Designed by <a href="mailto: dagbfatih@hotmail.com">Dagbfatih.</a>
                     </li>
                 </ul>
             </div>
-
         </div>
     </div>
 </footer>
