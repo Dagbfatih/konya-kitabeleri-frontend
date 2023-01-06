@@ -81,7 +81,6 @@ import { EpitaphImageUpdateComponent } from './components/epitaph-image-update/e
 import { SourceComponent } from './components/source/source.component';
 import { HomeComponent } from './components/home/home.component';
 import { KonyaComponent } from './components/konya/konya.component';
-import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
