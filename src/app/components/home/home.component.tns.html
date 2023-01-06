@@ -1,0 +1,86 @@
+<StackLayout>
+  <Label text="home works" textWrap="true"></Label>
+  <Label text="This is a migrated component" textWrap="true"></Label>
+  <Label text="Update it to provide the UI elements required in your mobile app" textWrap="true"></Label>
+</StackLayout>
+
+
+Original Web template:
+
+<!- START THE LG  ->
+<div class="container-fluid pe-0 ps-0 w-100">
+
+    <!- Masthead ->
+    <div class="bd-masthead">
+        <!- <div class="container-fluid pe-0 ps-0">
+            <div class="row g-0">
+                <div class="col-12 d-flex justify-content-center">
+                    <img src="assets/images/homepg-1.jpg" class="w-100 h-100" alt="">
+                </div>
+            </div>
+        </div> ->
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-sm-12 col-lg-6 img-shadow">
+                    <img src="assets/images/kitabe.png" class="d-block mx-lg-auto rounded img-fluid" alt="" width="700"
+                        height="500">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">Kitabelerin Dili</h1>
+                    <p class="lead">
+                        {{getTranslate("homeText")}}
+                    </p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <!- <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button> ->
+                        <button type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">Daha
+                            Fazla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!- Overview ->
+    <div class="container marketing mb-5 mt-5" data-bs-spy="scroll" data-bs-target="#myCarousel" data-bs-offset="0"
+        tabindex="0">
+        <div class="row featurette" style="margin-top: 5%;">
+            <div class="col-md-5 order-md-1 d-flex align-items-center">
+                <img src="assets/images/konya.png" alt="" width="500" height="500" class="img-fluid">
+            </div>
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading-2" id="0">
+                    Konyamız
+                </h2>
+                <p class="lead text-muted">
+                    Anadolu’da kervan yolları üzerinde ki konumu, coğrafi özellikleri ve Selçuklu Devleti’nin başkenti
+                    olarak önemini uzun yıllar boyunca sürdürmüş bir kent olan Konya, Türk-İslam mimarisinin yoğun
+                    olarak uygulandığı şehirlerden biridir.
+                </p>
+                <button type="button" class="btn btn-outline-secondary btn-md px-4 me-md-2 fw-bold" (click)="scrollTop('/konya', 'konya')">
+                    Daha Fazla
+                </button>
+            </div>
+
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette" style="margin-top: 5%;">
+            <div class="col-md-5 order-md-2">
+                <img src="assets/images/home-h2.jpeg" alt="" width="500" height="500" class="img-fluid">
+            </div>
+            <div class="col-md-7 order-md-1 pe-5">
+                <h2 class="featurette-heading-2" id="0">
+                    Yapı Tanıtım Kimlik Kartı
+                </h2>
+                <p class="lead text-muted">
+                    Çalışma ile sahip olduğumuz tarihi, edebi ve kültürel zenginliğimize araştırmacıların, yerli ve
+                    yabancı ziyaretçilerin doğru bilgiye hızlı olarak ulaşmalarını sağlamak istedik. Bunun için de “Yapı
+                    Tanıtım Kimlik Kartı” nı tasarladık.
+                </p>
+            </div>
+        </div>
+    </div>
+</div> <!- /.container ->
+<!- END THE LG  ->

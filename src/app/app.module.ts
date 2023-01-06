@@ -65,7 +65,6 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { ArtifactPreviewComponent } from './components/artifact-preview/artifact-preview.component';
 import { ArtifactImageUpdateComponent } from './components/artifact-image-update/artifact-image-update.component';
 import { ArtifactImageDeleteComponent } from './components/artifact-image-delete/artifact-image-delete.component';
-import { AgmCoreModule } from '@agm/core';
 import { LocationComponent } from './components/location/location.component';
 import { LocationAddComponent } from './components/location-add/location-add.component';
 import { LocationDeleteComponent } from './components/location-delete/location-delete.component';
@@ -74,7 +73,6 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { TranslateSearchFilterPipe } from './pipes/translate-search-filter.pipe';
 import { ArtifactFilterPipe } from './pipes/artifact-filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { IOCModule } from './modules/ioc/ioc.module';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EpitaphImageDeleteComponent } from './components/epitaph-image-delete/epitaph-image-delete.component';
@@ -167,7 +165,6 @@ import { SafePipe } from './pipes/safe.pipe';
     NgbModule,
     NgbTypeaheadModule,
     IOCModule,
-    AutocompleteLibModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
