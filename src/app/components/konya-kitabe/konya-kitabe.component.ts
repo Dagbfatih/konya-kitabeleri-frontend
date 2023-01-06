@@ -19,7 +19,6 @@ import {
   faCheckCircle,
   faMonument,
 } from '@fortawesome/free-solid-svg-icons';
-import { Track } from 'ngx-audio-player';
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -40,17 +39,6 @@ export class KonyaKitabeComponent implements OnInit {
   dataLoaded = false;
   latitude = '';
   longitude = '';
-
-  msaapDisplayTitle = true;
-  msaapDisplayPlayList = false;
-  msaapPageSizeOptions = [2, 4, 6];
-  msaapDisplayVolumeControls = true;
-  msaapDisplayRepeatControls = true;
-  msaapDisplayArtist = false;
-  msaapDisplayDuration = true;
-  msaapDisablePositionSlider = false;
-  mapsURL = '';
-  msaapPlaylist: Track[] = [];
 
   constructor(
     private artifactService: ArtifactService,

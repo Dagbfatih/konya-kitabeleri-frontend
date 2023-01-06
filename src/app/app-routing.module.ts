@@ -1,4 +1,3 @@
-import { LanguageGuard } from './guards/language.guard';
 import { SourceComponent } from './components/source/source.component';
 import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
 import { LocationAddComponent } from './components/location-add/location-add.component';
