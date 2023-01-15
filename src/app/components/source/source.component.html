@@ -7,10 +7,10 @@
 
         <p class="text-start">Projemizde kullanılan referanslar.</p>
         <ul class="icon-list ps-0">
-            <li *ngFor="let reference of references" class="d-flex align-items-center mb-1">
-                <fa-icon [icon]="faArrowCircleRight" class="me-2" style="font-size: 24px;"></fa-icon>
-                <a class="text-dark link-dark">
-                    {{reference.link}}
+            <li *ngFor="let reference of references; let i = index;" class="d-flex text-start align-items-center mb-1">
+                <fa-icon [icon]="faArrowCircleRight" class="me-3" style="font-size: 24px;"></fa-icon>
+                <a class="text-dark link-dark text-decoration-none">
+                    {{references[i].reference}}
                 </a>
             </li>
         </ul>
