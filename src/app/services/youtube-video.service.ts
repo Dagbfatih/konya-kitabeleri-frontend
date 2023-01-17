@@ -13,6 +13,6 @@ export class YoutubeVideoService extends ServiceRepositoryBase<YoutubeVideo> {
   }
 
   getVideoIdFromLink(link: string): string {
-    return getVideoId(link).id!;
+    return getVideoId(link).id ?? '';
   }
 }
