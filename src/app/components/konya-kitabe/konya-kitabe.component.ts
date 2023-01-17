@@ -1,3 +1,4 @@
+import { YoutubeVideoService } from './../../services/youtube-video.service';
 import { Language } from './../../models/entities/language';
 import { LanguageService } from './../../services/language.service';
 import { SettingsService } from './../../services/settings.service';
@@ -49,7 +50,8 @@ export class KonyaKitabeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private settingsService: SettingsService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private youtubeVideoService: YoutubeVideoService
   ) {}
 
   ngOnInit(): void {
@@ -141,6 +143,12 @@ export class KonyaKitabeComponent implements OnInit {
     }
 
     return false;
+  }
+
+  getCurrentVideoId():string {
+    return this.youtubeVideoService.getVideoIdFromLink(
+      this.currentArtifact.youtubeVideo.link
+    );
   }
 
   getAllArtifactTypes() {

@@ -81,6 +81,8 @@ import { SourceComponent } from './components/source/source.component';
 import { HomeComponent } from './components/home/home.component';
 import { KonyaComponent } from './components/konya/konya.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { YoutubeVideoAddComponent } from './components/youtube-video-add/youtube-video-add.component';
+import { YoutubeVideoUpdateComponent } from './components/youtube-video-update/youtube-video-update.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +153,8 @@ import { SafePipe } from './pipes/safe.pipe';
     EpitaphImageUpdateComponent,
     SourceComponent,
     SafePipe,
+    YoutubeVideoAddComponent,
+    YoutubeVideoUpdateComponent,
   ],
   imports: [
     BrowserModule,

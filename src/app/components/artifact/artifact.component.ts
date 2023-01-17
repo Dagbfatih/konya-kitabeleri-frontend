@@ -1,3 +1,4 @@
+import { YoutubeVideoUpdateComponent } from './../youtube-video-update/youtube-video-update.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArtifactUpdateService } from './../../services/artifact-update.service';
 import { ArtifactUpdateComponent } from './../artifact-update/artifact-update.component';
@@ -16,6 +17,7 @@ import {
   faRedoAlt,
   faImages,
   faSearch,
+  faLink,
 } from '@fortawesome/free-solid-svg-icons';
 import { allTranslates } from 'src/app/services/translation.service';
 
@@ -31,7 +33,8 @@ export class ArtifactComponent implements OnInit {
   faRedoAlt = faRedoAlt;
   faImages = faImages;
   faSearch = faSearch;
-  
+  faLink = faLink;
+
   filterForm: FormGroup;
   filterText = '';
   artifacts: ArtifactDetailsDto[] = [];
@@ -79,6 +82,13 @@ export class ArtifactComponent implements OnInit {
   goImageUpdateForm(artifact: ArtifactDetailsDto) {
     this.artifactUpdateService.setArtifact(artifact);
     this.router.navigate(['admin/artifact/upload-images']);
+  }
+
+  goYoutubeVideoUpdateForm(artifact:ArtifactDetailsDto){
+    var modalReferance = this.modalService.open(YoutubeVideoUpdateComponent, {
+      size: 'm',
+    });
+    modalReferance.componentInstance.artifact = artifact;
   }
 
   goPreview(artifact: ArtifactDetailsDto) {

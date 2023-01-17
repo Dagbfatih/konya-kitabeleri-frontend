@@ -1,3 +1,4 @@
+import { YoutubeVideo } from './../entities/youtubeVideo';
 import { EpitaphImage } from './../entities/epitaphImage';
 import { HistPeriod } from './../entities/histPeriod';
 import { ArtifactType } from './../entities/artifactType';
@@ -12,4 +13,5 @@ export interface ArtifactDetailsDto {
   artifactImages: ArtifactImage[];
   translates: Translate[];
   epitaphImage: EpitaphImage;
+  youtubeVideo: YoutubeVideo;
 }

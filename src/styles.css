@@ -55,6 +55,11 @@ a:active {
   transition: 0.2s;
 }
 
+.fa-icon-link:hover {
+  color: rgb(0, 102, 255);
+  transition: 0.2s;
+}
+
 .fa-icon-trash:hover {
   color: red;
   transition: 0.2s;
