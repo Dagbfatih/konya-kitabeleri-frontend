@@ -9,10 +9,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HistoricalArtifactsComponent } from './components/historical-artifacts/historical-artifacts.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { FooterComponent } from './components/footer/footer.component';
-import {
-  NgbModule,
-  NgbTypeaheadModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -83,6 +80,7 @@ import { KonyaComponent } from './components/konya/konya.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { YoutubeVideoAddComponent } from './components/youtube-video-add/youtube-video-add.component';
 import { YoutubeVideoUpdateComponent } from './components/youtube-video-update/youtube-video-update.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -174,6 +172,7 @@ import { YoutubeVideoUpdateComponent } from './components/youtube-video-update/y
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })

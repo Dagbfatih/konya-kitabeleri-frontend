@@ -27,7 +27,7 @@ import { ArtifactUpdateComponent } from './components/artifact-update/artifact-u
 export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
   anchorScrolling: 'enabled',
-  useHash: true,
+  useHash: false,
 };
 
 const routes: Routes = [
