@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && cp ./.htaccess ./docs/.htaccess",
+    "build": "ng build --base-href / && cp ./.htaccess ./docs/.htaccess",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
