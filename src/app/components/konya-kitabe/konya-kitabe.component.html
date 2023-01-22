@@ -179,11 +179,11 @@
                             Video
                         </h2>
 
-                        <div *ngIf="!currentArtifact.youtubeVideo">
+                        <div *ngIf="currentArtifact.youtubeVideo.link.length <= 1">
                             <p class="fs-4 text-muted">Bu esere ait henüz bir video bulunamadı.</p>
                         </div>
 
-                        <div *ngIf="currentArtifact.youtubeVideo" class="ratio ratio-16x9">
+                        <div *ngIf="currentArtifact.youtubeVideo.link.length>1" class="ratio ratio-16x9">
                             <iframe [src]="'https://www.youtube.com/embed/'+getCurrentVideoId() | safe"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
