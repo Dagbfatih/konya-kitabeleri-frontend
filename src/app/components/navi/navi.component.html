@@ -76,7 +76,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Kitabeler
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                    <ul *ngIf="histPeriods" class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li *ngFor="let histPeriod of histPeriods">
 
                             <!-- lg -->
@@ -86,6 +86,12 @@
                             </a>
                         </li>
                     </ul>
+
+                    <div *ngIf="!histPeriods" class="d-flex justify-content-center">
+                        <div class="spinner-border text-light" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </li>
                 <!-- <li class="nav-item col-md-auto">
                     <a class="nav-link nav-link-custom disabled nav-link-collapse text-white-50" routerLink="/virtual-tours">
@@ -160,8 +166,8 @@
                         <fa-icon [icon]="faSearch" class="fa-icon-search search-icon"></fa-icon>
                         <input id="typeahead-basic" type="search" class="form-control" style="padding-left: 2.375rem;"
                             [(ngModel)]="searchText" [resultTemplate]="resultTemplate" [ngbTypeahead]="search"
-                            [inputFormatter]="inputFormatter" [focusFirst]="true" [editable]='false' (selectItem)="searchSelected($event)"
-                            [placeholder]="getTranslate('searchOnArtifacts')" />
+                            [inputFormatter]="inputFormatter" [focusFirst]="true" [editable]='false'
+                            (selectItem)="searchSelected($event)" [placeholder]="getTranslate('searchOnArtifacts')" />
                     </div>
 
 

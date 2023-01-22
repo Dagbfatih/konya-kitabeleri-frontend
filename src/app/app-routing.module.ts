@@ -1,10 +1,6 @@
 import { SourceComponent } from './components/source/source.component';
-import { EpitaphImageAddComponent } from './components/epitaph-image-add/epitaph-image-add.component';
-import { LocationAddComponent } from './components/location-add/location-add.component';
 import { ArtifactImageUpdateComponent } from './components/artifact-image-update/artifact-image-update.component';
 import { ArtifactPreviewComponent } from './components/artifact-preview/artifact-preview.component';
-import { ArtifactAddConfirmationComponent } from './components/artifact-add-confirmation/artifact-add-confirmation.component';
-import { ArtifactImageAddComponent } from './components/artifact-image-add/artifact-image-add.component';
 import { ArtifactAddComponent } from './components/artifact-add/artifact-add.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
@@ -14,7 +10,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { KitabeComponent } from './components/kitabe/kitabe.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
 import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
 import { KonyaComponent } from './components/konya/konya.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -28,6 +23,7 @@ export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
   anchorScrolling: 'enabled',
   useHash: false,
+  initialNavigation: 'enabledBlocking',
 };
 
 const routes: Routes = [

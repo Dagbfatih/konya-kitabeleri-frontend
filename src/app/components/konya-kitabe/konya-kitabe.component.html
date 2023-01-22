@@ -206,17 +206,18 @@
                             <p class="fs-4 text-muted">Bu esere ait henüz bir konum bulunamadı.</p>
                         </div>
 
-                        <div *ngIf="currentArtifact.artifact.latitude && currentArtifact.artifact.longitude">
+                        <div *ngIf="currentArtifact.artifact.latitude && currentArtifact.artifact.longitude"
+                            class="ratio ratio-16x9">
                             <!-- LG -->
                             <iframe class="d-none d-lg-block"
                                 [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
-                                width="700" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                                style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                             <!-- SM -->
                             <iframe class="d-lg-none"
                                 [src]="'//maps.google.com/maps?q=' +currentArtifact.artifact.latitude +',' + currentArtifact.artifact.longitude + '&z=15&output=embed' | safe"
-                                width="330" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>

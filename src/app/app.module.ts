@@ -155,7 +155,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     YoutubeVideoUpdateComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
