@@ -163,7 +163,7 @@
 
                         <div *ngIf="currentArtifact.artifact.epitaph" id="epitaphTranslation">
                             <div class="card border-secondary card-body">
-                                <p class="card-text" style="text-align: justify;">
+                                <p class="card-text" style="white-space: pre-wrap; text-align: justify;">
                                     {{getTranslate(currentArtifact.artifact.epitaph!)}}</p>
 
                                 <p class="card-text" style="text-align: justify;"><small
@@ -175,7 +175,7 @@
                     </div>
 
                     <div class="mb-5">
-                        <h2 id="approach-4 mb-2">
+                        <h2 id="approach-4">
                             Video
                         </h2>
 
@@ -256,9 +256,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li *ngIf="false">
-                                        <a class="link" (click)="scroll('approach-4')">Sanal
-                                            Gezisi</a>
+                                    <li>
+                                        <a class="link" (click)="scroll('approach-4')">Video</a>
                                     </li>
                                     <li>
                                         <a class="link" (click)="scroll('approach-5')">Konumu</a>

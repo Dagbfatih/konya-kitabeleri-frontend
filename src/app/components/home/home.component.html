@@ -2,18 +2,12 @@
 <div class="container-fluid pe-0 ps-0 w-100">
 
     <!-- Masthead -->
-    <div class="bd-masthead">
-        <!-- <div class="container-fluid pe-0 ps-0">
-            <div class="row g-0">
-                <div class="col-12 d-flex justify-content-center">
-                    <img src="assets/images/homepg-1.jpg" class="w-100 h-100" alt="">
-                </div>
-            </div>
-        </div> -->
-        <div class="container col-xxl-8 px-4 py-5">
+    <div class="masthead">
+
+        <!-- <div class="container col-xxl-8 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col-sm-12 col-lg-6 img-shadow">
-                    <img src="assets/images/kitabe.webp" class="d-block mx-lg-auto rounded img-fluid" alt="" width="700"
+                    <img src="assets/images/kitabe-2.webp" class="d-block mx-lg-auto rounded img-fluid" alt="" width="700"
                         height="500">
                 </div>
                 <div class="col-lg-6">
@@ -22,13 +16,56 @@
                         {{getTranslate("homeText")}}
                     </p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <!-- <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button> -->
                         <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">Daha
                             Fazla</a>
                     </div>
                 </div>
             </div>
+        </div> -->
+        <div class="container-xxl bd-gutter">
+            <div class="px-4 py-5 mb-5 col-md-8 mx-auto text-center">
+                <img class="d-block mx-auto mb-3" src="assets/images/logo.webp" alt="" width="165" height="165">
+                <h1 class="display-3 fw-semibold" style="margin-bottom: 1rem;">Konya Kitabeleri ile
+                    Dilediğin Eseri Keşfet</h1>
+                <div class="col-lg-12 mx-auto">
+                    <p class="lead mb-4" style="font-weight: 400;">
+                        <!-- Kitabe; yapının veya sanat eserinin yapım ve onarım sürecine katkısı bulunan kimseleri, sanat
+                        eserinin türünü, yapılış amacını, tarihini, dua istekleri vb. duyguları ifade etmek üzere
+                        yazılan her tür yazı olarak tanımlanabilir. -->
+                        Bu proje, istediğiniz tarihi eser ile kitabesine hızlı ve kolay bir şekilde ulaşmanızı hedefler.
+                        Her geçen gün yeni eserler ekleyerek büyüttüğümüz projemizi ziyaret edin ve kitabeler, Konya ve
+                        daha fazlası hakkında bilgi edinin.
+                    </p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">
+                            Kitabeler Hakkında
+                        </a>
+                        <a type="button" routerLink="/konya-kitabeleri/selcuklu-donemi"
+                            class="btn btn-light btn-lg px-4">
+                            Tarihi Eserler
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- <div class="container-xxl bd-gutter">
+            <div class="px-4 mb-5 col-md-8 mx-auto text-center">
+                <fa-icon class="d-block mx-auto mb-3" size="6x" [icon]="faComments"></fa-icon>
+                <h1 class="display-6 fw-semibold" style="margin-bottom: 1rem;">Geri Bildiriminiz ile Projemize Katkıda Bulunun</h1>
+                <div class="col-lg-12 mx-auto">
+                    <p class="lead mb-4" style="font-weight: 400;">
+                        Projemizdeki tarihi eserler ve kitabeler hakkında önemli görüş ve önerileriniz bizim için çok
+                        değerli. Önerilerinizi ve görüşlerinizi bizimle paylaşın ve projemize destek olun.
+                    </p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">
+                            Destek Ol
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
     </div>
 
@@ -41,14 +78,15 @@
             </div>
             <div class="col-md-7 order-md-2">
                 <h2 class="featurette-heading-2" id="0">
-                    Konyamız
+                    Konya
                 </h2>
                 <p class="lead text-muted">
                     Anadolu’da kervan yolları üzerinde ki konumu, coğrafi özellikleri ve Selçuklu Devleti’nin başkenti
                     olarak önemini uzun yıllar boyunca sürdürmüş bir kent olan Konya, Türk-İslam mimarisinin yoğun
                     olarak uygulandığı şehirlerden biridir.
                 </p>
-                <a type="button" class="btn btn-outline-secondary btn-md px-4 me-md-2 fw-bold" (click)="scrollTop('/konya', 'konya')">
+                <a type="button" class="btn btn-outline-secondary btn-md px-4 me-md-2 fw-bold"
+                    (click)="scrollTop('/konya', 'konya')">
                     Daha Fazla
                 </a>
             </div>

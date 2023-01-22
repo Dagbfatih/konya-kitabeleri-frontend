@@ -164,7 +164,7 @@
 
                     <div class="search-filter" style="width: 320px;">
                         <fa-icon [icon]="faSearch" class="fa-icon-search search-icon"></fa-icon>
-                        <input id="typeahead-basic" type="search" class="form-control" style="padding-left: 2.375rem;"
+                        <input id="typeahead-basic" type="search" class="form-control rounded-2" style="padding-left: 2.375rem;"
                             [(ngModel)]="searchText" [resultTemplate]="resultTemplate" [ngbTypeahead]="search"
                             [inputFormatter]="inputFormatter" [focusFirst]="true" [editable]='false'
                             (selectItem)="searchSelected($event)" [placeholder]="getTranslate('searchOnArtifacts')" />

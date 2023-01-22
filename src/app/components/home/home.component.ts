@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { allTranslates } from 'src/app/services/translation.service';
@@ -9,9 +10,9 @@ import { allTranslates } from 'src/app/services/translation.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private scrollService: ScrollService,
-  ) {}
+  faComments = faComments;
+
+  constructor(private scrollService: ScrollService) {}
   artifacts: ArtifactDetailsDto[] = [];
 
   ngOnInit(): void {}
