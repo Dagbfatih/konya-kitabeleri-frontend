@@ -177,15 +177,17 @@ export class NaviComponent implements OnInit {
   }
 
   scroll(id: string) {
-    var element = document.getElementById(id);
-    var headerOffset = 135;
-    var elementPosition = element!.getBoundingClientRect().top;
-    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    setTimeout(() => {
+      var element = document.getElementById(id);
+      var headerOffset = 135;
+      var elementPosition = element!.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }, 1);
   }
 
   getLanguageFlagCode(code: string): string {

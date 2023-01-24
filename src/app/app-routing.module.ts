@@ -48,9 +48,12 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
   },
-
   {
     path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
+    path: 'about-us/:anchorid',
     component: AboutUsComponent,
   },
   {

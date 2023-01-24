@@ -81,6 +81,18 @@ export class KonyaKitabeComponent implements OnInit {
       });
   }
 
+  checkVideoExists(): boolean {
+    if (this.currentArtifact.youtubeVideo) {
+      if (this.currentArtifact.youtubeVideo.link.length <= 1) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
+    return true;
+  }
+
   setLocation() {
     this.latitude = this.currentArtifact.artifact.latitude?.toString()!;
     this.longitude = this.currentArtifact.artifact.longitude?.toString()!;
@@ -145,7 +157,7 @@ export class KonyaKitabeComponent implements OnInit {
     return false;
   }
 
-  getCurrentVideoId():string {
+  getCurrentVideoId(): string {
     return this.youtubeVideoService.getVideoIdFromLink(
       this.currentArtifact.youtubeVideo.link
     );
