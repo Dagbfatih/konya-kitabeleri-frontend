@@ -9,7 +9,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HistoricalArtifactsComponent } from './components/historical-artifacts/historical-artifacts.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { KonyaKitabeComponent } from './components/konya-kitabe/konya-kitabe.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -163,6 +163,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     NgxFileDropModule,
     NgbModule,
     NgbTypeaheadModule,
+    NgbTooltipModule,
     IOCModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

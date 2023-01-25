@@ -165,6 +165,10 @@ export class NaviComponent implements OnInit {
           if (val === event.url) {
             $(this).addClass('active');
           }
+
+          if (event.url === '/about-us/construction-promotion-id-card') {
+            $('.about-us').addClass('active');
+          }
         });
       }
     });

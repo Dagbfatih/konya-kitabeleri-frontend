@@ -54,7 +54,7 @@
                                                 <li
                                                     *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                     <a class="link-dark d-inline-flex text-decoration-none rounded"
-                                                        data-bs-dismiss="offcanvas"
+                                                        data-bs-dismiss="offcanvas" (click)="scroll('approach-1')"
                                                         routerLink="/konya-kitabeleri/{{histPeriod.paramName}}/{{artifactType.id}}/{{artifact.artifact.id}}">
                                                         {{getTranslate(artifact.artifact.name)}}
                                                     </a>
@@ -131,8 +131,18 @@
 
             <!-- Data -->
             <div *ngIf="dataLoaded && currentArtifact" class="my-content ps-lg-2">
-                <div class="d-md-flex text-start align-items-center justify-content-start pt-2">
-                    <h1 class="my-title mb-0" id="approach-1">{{getTranslate(currentArtifact.artifact.name)}}</h1>
+                <div class="d-md-flex flex-md-row-reverse align-items-center justify-content-between pt-2">
+                    <ng-template #tipContent>
+                        <p class="text-start mb-1 fw-light fs-6 lh-base">{{currentArtifact.artifactType.description}}
+                        </p>
+                    </ng-template>
+
+                    <a class="btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
+                        style="min-width: 110px;" placement="bottom auto" [ngbTooltip]="tipContent"
+                        triggers="click:blur" [closeDelay]="500">
+                        {{currentArtifact.artifactType.name + ' Hakkında'}}
+                    </a>
+                    <h1 class="my-title mb-0" id="approach-1" style="max-width: 600px;">{{getTranslate(currentArtifact.artifact.name)}}</h1>
                 </div>
                 <p class="my-lead">
                     {{getTranslate(currentArtifact.artifact.summary!)}}

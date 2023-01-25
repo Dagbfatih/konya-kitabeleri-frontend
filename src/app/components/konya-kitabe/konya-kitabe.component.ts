@@ -20,6 +20,9 @@ import {
   faCheckCircle,
   faMonument,
 } from '@fortawesome/free-solid-svg-icons';
+import Popper from 'popper.js';
+import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+export declare var bootstrap: any;
 
 @Component({
   selector: 'app-konya-kitabe',
@@ -27,6 +30,7 @@ import {
   styleUrls: ['./konya-kitabe.component.css'],
 })
 export class KonyaKitabeComponent implements OnInit {
+  private popper: Popper;
   faCheckCircle = faCheckCircle;
   faCaret = faCaretDown;
   faMonument = faMonument;
@@ -51,8 +55,10 @@ export class KonyaKitabeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private settingsService: SettingsService,
     private languageService: LanguageService,
-    private youtubeVideoService: YoutubeVideoService
-  ) {}
+    private youtubeVideoService: YoutubeVideoService,
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.getAllArtifactsDetails();
@@ -192,7 +198,17 @@ export class KonyaKitabeComponent implements OnInit {
   }
 
   scroll(id: string) {
-    this.scrollService.scroll(id, 75);
+    setTimeout(() => {
+      var element = document.getElementById(id);
+      var headerOffset = 135;
+      var elementPosition = element!.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }, 1);
   }
 
   getTranslate(key?: string) {
