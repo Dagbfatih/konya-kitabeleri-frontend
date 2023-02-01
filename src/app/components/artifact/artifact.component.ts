@@ -67,6 +67,10 @@ export class ArtifactComponent implements OnInit {
     });
   }
 
+  getArtifactVideoCount(): number {
+    return this.artifacts.filter((a) => a.youtubeVideo !== null).length;
+  }
+
   openDeleteForm(artifact: Artifact) {
     var modalReferance = this.modalService.open(ArtifactDeleteComponent, {
       size: 'm',
@@ -84,7 +88,7 @@ export class ArtifactComponent implements OnInit {
     this.router.navigate(['admin/artifact/upload-images']);
   }
 
-  goYoutubeVideoUpdateForm(artifact:ArtifactDetailsDto){
+  goYoutubeVideoUpdateForm(artifact: ArtifactDetailsDto) {
     var modalReferance = this.modalService.open(YoutubeVideoUpdateComponent, {
       size: 'm',
     });

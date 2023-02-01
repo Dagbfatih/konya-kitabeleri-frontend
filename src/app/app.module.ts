@@ -1,3 +1,4 @@
+import { CountUpDirective } from './directives/count-up.directive';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -97,6 +98,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     ContactComponent,
     KitabeComponent,
     RegisterComponent,
+    CountUpDirective,
     LoginComponent,
     AdminComponent,
     UserComponent,

@@ -1,3 +1,5 @@
+import { CountOfArtifactData } from './../../models/entities/countOfArtifactData';
+import { ArtifactService } from 'src/app/services/artifact.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
@@ -11,17 +13,30 @@ import { allTranslates } from 'src/app/services/translation.service';
 })
 export class HomeComponent implements OnInit {
   faComments = faComments;
+  artifactCountData: CountOfArtifactData;
 
-  constructor(private scrollService: ScrollService, private router: Router) {}
+  constructor(
+    private scrollService: ScrollService,
+    private router: Router,
+    private artifactService: ArtifactService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getArtifactCount();
+  }
+
+  getArtifactCount() {
+    this.artifactService.getArtifactCount().subscribe((response) => {
+      this.artifactCountData = response.data;
+    });
+  }
 
   scrollTop(url: string, id: string) {
     this.scrollService.navigate(url, id, 0);
   }
 
   navigate(url: string, id: string) {
-    this.router.navigateByUrl("")
+    this.router.navigateByUrl('');
   }
 
   getTranslate(key: string) {

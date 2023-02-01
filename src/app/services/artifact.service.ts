@@ -1,3 +1,4 @@
+import { CountOfArtifactData } from './../models/entities/countOfArtifactData';
 import { ArtifactImage } from './../models/entities/artifactImage';
 import { ItemResponseModel } from './../core/models/responseModels/ItemResponseModel';
 import { ArtifactModelForPost } from './../models/entities/artifactModelForPost';
@@ -76,6 +77,12 @@ export class ArtifactService extends ServiceRepositoryBase<Artifact> {
   ): Observable<ItemResponseModel<ArtifactDetailsDto>> {
     return this.httpClient.get<ItemResponseModel<ArtifactDetailsDto>>(
       this.apiUrl + 'getdetailsbyid?id=' + id
+    );
+  }
+
+  getArtifactCount(): Observable<ItemResponseModel<CountOfArtifactData>> {
+    return this.httpClient.get<ItemResponseModel<CountOfArtifactData>>(
+      this.apiUrl + 'getartifactcount'
     );
   }
 
