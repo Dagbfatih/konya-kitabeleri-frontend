@@ -31,7 +31,7 @@
         <tr *ngFor="let artifactType of artifactTypes; let i = index;">
             <th scope="row">{{i+1}}</th>
             <td>{{artifactType.name}}</td>
-            <td>{{artifactType.description}}</td>
+            <td><span class="d-inline-block text-truncate" style="max-width: 650px;">{{artifactType.description}}</span></td>
             <td class="text-end">
                 <button class="btn shadow-none me-3" (click)="openUpdateForm(artifactType)">
                     <fa-icon [icon]="faEdit" size="1x" class="fa-icon-edit me-2"></fa-icon>

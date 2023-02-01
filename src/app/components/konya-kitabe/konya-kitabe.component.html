@@ -132,21 +132,47 @@
             <!-- Data -->
             <div *ngIf="dataLoaded && currentArtifact" class="my-content ps-lg-2">
                 <div class="d-md-flex flex-md-row-reverse align-items-center justify-content-between pt-2">
-                    <ng-template #tipContent>
-                        <p class="text-start mb-1 fw-light fs-6 lh-base">{{currentArtifact.artifactType.description}}
-                        </p>
-                    </ng-template>
 
-                    <a class="btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
-                        style="min-width: 110px;" placement="bottom auto" [ngbTooltip]="tipContent"
-                        triggers="click:blur" [closeDelay]="500">
+                    <a class="d-none d-lg-block btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
+                        style="min-width: 110px;" data-bs-toggle="collapse" data-bs-target="#collapseLarge"
+                        aria-expanded="false" aria-controls="collapseLarge">
                         {{currentArtifact.artifactType.name + ' Hakkında'}}
                     </a>
-                    <h1 class="my-title mb-0" id="approach-1" style="max-width: 600px;">{{getTranslate(currentArtifact.artifact.name)}}</h1>
+                    <a class="d-lg-none btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
+                        style="min-width: 110px;" data-bs-toggle="collapse" data-bs-target="#collapseNative"
+                        aria-expanded="false" aria-controls="collapseNative">
+                        {{currentArtifact.artifactType.name + ' Hakkında'}}
+                    </a>
+                    <!-- For Native -->
+                    <div class="collapse mb-3" id="collapseNative">
+                        <div>
+                            <div class="card card-body">
+                                <h5 class="card-title">
+                                    {{currentArtifact.artifactType.name + ' Nedir?'}}
+                                </h5>
+                                {{currentArtifact.artifactType.description}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h1 class="my-title mb-0" id="approach-1" style="max-width: 600px;">
+                        {{getTranslate(currentArtifact.artifact.name)}}</h1>
+
                 </div>
                 <p class="my-lead">
                     {{getTranslate(currentArtifact.artifact.summary!)}}
                 </p>
+                <!-- For Large -->
+                <div class="collapse mb-3" id="collapseLarge">
+                    <div>
+                        <div class="card card-body">
+                            <h5 class="card-title">
+                                {{currentArtifact.artifactType.name + ' Nedir?'}}
+                            </h5>
+                            {{currentArtifact.artifactType.description}}
+                        </div>
+                    </div>
+                </div>
 
                 <div class="bd-content pt-5">
                     <div class="mb-5">
