@@ -1,6 +1,5 @@
 import { ResponseModel } from './../core/models/responseModels/responseModel';
 import { LanguageService } from './language.service';
-import { TranslateDbService } from '../database/translate-db.service';
 import { Translate } from './../models/entities/translate';
 import { Injectable } from '@angular/core';
 import { ServiceRepositoryLocalBase } from '../core/services/local-database/service.repository.base.local';

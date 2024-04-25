@@ -3,9 +3,6 @@ import { ResponseModel } from './../core/models/responseModels/responseModel';
 import { Observable } from 'rxjs';
 import { ArtifactImage } from './../models/entities/artifactImage';
 import { Injectable } from '@angular/core';
-import { ServiceRepositoryLocalBase } from '../core/services/local-database/service.repository.base.local';
-import { ArtifactImageDbService } from '../database/artifact-image-db.service';
-import { ServiceRepositoryBase } from '../core/services/service.repository.base';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
