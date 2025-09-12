@@ -82,6 +82,7 @@ import { SafePipe } from './pipes/safe.pipe';
 import { YoutubeVideoAddComponent } from './components/youtube-video-add/youtube-video-add.component';
 import { YoutubeVideoUpdateComponent } from './components/youtube-video-update/youtube-video-update.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { VisualSearchComponent } from './components/visual-search/visual-search.component';
 
 @NgModule({
   declarations: [
@@ -155,6 +156,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     SafePipe,
     YoutubeVideoAddComponent,
     YoutubeVideoUpdateComponent,
+    VisualSearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

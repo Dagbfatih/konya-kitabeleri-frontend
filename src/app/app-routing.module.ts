@@ -18,6 +18,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ArtifactUpdateComponent } from './components/artifact-update/artifact-update.component';
+import { VisualSearchComponent } from './components/visual-search/visual-search.component';
 
 export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
@@ -113,6 +114,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'visual-search',
+    component: VisualSearchComponent,
   },
 ];
 
