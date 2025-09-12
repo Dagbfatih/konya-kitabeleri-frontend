@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44365/api/',
-  baseUrl: 'https://localhost:44365/',
+  apiUrl: 'https://konyakitabeleriapii.com.tr/api/',
+  baseUrl: 'https://konyakitabeleriapii.com.tr/',
 };
 
 /*

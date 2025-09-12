@@ -4,4 +4,12 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-visual-search',
   templateUrl: './visual-search.component.html',
 })
-export class VisualSearchComponent {}
+export class VisualSearchComponent {
+
+  isbuttonPressed: boolean = false;
+
+  onButtonClick() {
+    this.isbuttonPressed = !this.isbuttonPressed;
+  }
+
+}
