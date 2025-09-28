@@ -12,4 +12,7 @@ export class VisualSearchComponent {
     this.isbuttonPressed = !this.isbuttonPressed;
   }
 
+  onKitabeEkleClick() {
+   window.open('https://padlet.com/ardaaydin27283/kitabe-y-kleme-iqqllbn9z3jc6rx5', '_blank'); 
+  } 
 }
