@@ -6,7 +6,7 @@
             <a class="d-flex align-items-center link-dark text-decoration-none">
                 <!-- <img src="http://localhost:4200/assets/images/logo.png" class="me-2" width="30"> -->
                 <fa-icon [icon]="faMonument" size="2x" class="me-2 text-success"></fa-icon>
-                <span class="fs-5 fw-semibold">Kitabeler</span>
+                <span class="fs-5 fw-semibold">{{ getTranslate('inscriptions') || 'Kitabeler' }}</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -23,7 +23,7 @@
                 aria-labelledby="histPeriodOffcanvasLabel">
                 <div class="offcanvas-header">
                     <fa-icon [icon]="faMonument" size="2x" class="me-2 text-success"></fa-icon>
-                    <h5 class="offcanvas-title" id="histPeriodOffcanvasLabel">Kitabeler</h5>
+                    <h5 class="offcanvas-title" id="histPeriodOffcanvasLabel">{{ getTranslate('inscriptions') || 'Kitabeler' }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
@@ -35,7 +35,7 @@
                         <div *ngIf="checkHistPeriodContainsArtifact(histPeriod.paramName)">
                             <h6
                                 class="sidebar-heading d-flex justify-content-between align-items-center mt-2 mb-1 text-muted text-uppercase">
-                                {{histPeriod.name}}
+                                {{getTranslate(histPeriod.name) || histPeriod.name}}
                             </h6>
                             <ul class="artifact-type-list list-unstyled ps-0">
 
@@ -47,7 +47,7 @@
                                             data-bs-toggle="collapse"
                                             [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
                                             aria-expanded="false">
-                                            {{artifactType.name}}
+                                            {{getTranslate(artifactType.name) || artifactType.name}}
                                         </button>
                                         <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
                                             <ul class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -55,7 +55,7 @@
                                                     *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                     <a class="link-dark d-inline-flex text-decoration-none rounded"
                                                         data-bs-dismiss="offcanvas" (click)="scroll('approach-1')"
-                                                        routerLink="/konya-kitabeleri/{{histPeriod.paramName}}/{{artifactType.id}}/{{artifact.artifact.id}}">
+                                                        [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya-kitabeleri', histPeriod.paramName, artifactType.id, artifact.artifact.id]">
                                                         {{getTranslate(artifact.artifact.name)}}
                                                     </a>
                                                 </li>
@@ -77,9 +77,9 @@
         <aside class="my-sidebar d-none d-md-block">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-transparent">
 
-                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                <a [routerLink]="['/' + getCurrentLanguageShortCode()]" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                     <img src="assets/images/logo.webp" class="me-2" width="30">
-                    <span class="fs-5 fw-semibold">Kitabeler</span>
+                    <span class="fs-5 fw-semibold">{{ getTranslate('inscriptions') || 'Kitabeler' }}</span>
                 </a>
 
                 <!-- Historical Periods -->
@@ -87,7 +87,7 @@
                     <div *ngIf="checkHistPeriodContainsArtifact(histPeriod.paramName)">
                         <h6
                             class="sidebar-heading d-flex justify-content-between align-items-center mt-2 mb-1 text-muted text-uppercase">
-                            {{histPeriod.name}}
+                            {{getTranslate(histPeriod.name) || histPeriod.name}}
                         </h6>
                         <ul class="artifact-type-list list-unstyled ps-0">
 
@@ -99,14 +99,14 @@
                                         data-bs-toggle="collapse"
                                         [attr.data-bs-target]="'#c'+'hist-period-'+i+'artifact-type-'+j"
                                         aria-expanded="false">
-                                        {{artifactType.name}}
+                                        {{getTranslate(artifactType.name) || artifactType.name}}
                                     </button>
                                     <div class="collapse" [id]="'c'+'hist-period-'+i+'artifact-type-'+j">
                                         <ul class="artifact-list btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                             <li
                                                 *ngFor="let artifact of getArtifactsByTypeAndPeriod(artifactType.id, histPeriod.paramName)">
                                                 <a class="link-dark d-inline-flex text-decoration-none rounded"
-                                                    routerLink="/konya-kitabeleri/{{histPeriod.paramName}}/{{artifactType.id}}/{{artifact.artifact.id}}">
+                                                    [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya-kitabeleri', histPeriod.paramName, artifactType.id, artifact.artifact.id]">
                                                     {{getTranslate(artifact.artifact.name)}}
                                                 </a>
                                             </li>
@@ -136,21 +136,21 @@
                     <a class="d-none d-lg-block btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
                         style="min-width: 110px;" data-bs-toggle="collapse" data-bs-target="#collapseLarge"
                         aria-expanded="false" aria-controls="collapseLarge">
-                        {{currentArtifact.artifactType.name + ' Hakkında'}}
+                        {{getTranslate(currentArtifact.artifactType.name) + ' ' + (getTranslate('about') || 'Hakkında')}}
                     </a>
                     <a class="d-lg-none btn btn-sm btn-outline-secondary mb-3 mb-md-0 rounded-2" type="button"
                         style="min-width: 110px;" data-bs-toggle="collapse" data-bs-target="#collapseNative"
                         aria-expanded="false" aria-controls="collapseNative">
-                        {{currentArtifact.artifactType.name + ' Hakkında'}}
+                        {{getTranslate(currentArtifact.artifactType.name) + ' ' + (getTranslate('about') || 'Hakkında')}}
                     </a>
                     <!-- For Native -->
                     <div class="collapse mb-3" id="collapseNative">
                         <div>
                             <div class="card card-body">
                                 <h5 class="card-title">
-                                    {{currentArtifact.artifactType.name + ' Nedir?'}}
+                                    {{getTranslate(currentArtifact.artifactType.name) + ' ' + (getTranslate('whatIs') || 'Nedir?')}}
                                 </h5>
-                                {{currentArtifact.artifactType.description}}
+                                {{getTranslate(currentArtifact.artifactType.description) || currentArtifact.artifactType.description}}
                             </div>
                         </div>
                     </div>
@@ -167,9 +167,9 @@
                     <div>
                         <div class="card card-body">
                             <h5 class="card-title">
-                                {{currentArtifact.artifactType.name + ' Nedir?'}}
+                                {{getTranslate(currentArtifact.artifactType.name) + ' ' + (getTranslate('whatIs') || 'Nedir?')}}
                             </h5>
-                            {{currentArtifact.artifactType.description}}
+                            {{getTranslate(currentArtifact.artifactType.description) || currentArtifact.artifactType.description}}
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="bd-content pt-5">
                     <div class="mb-5">
                         <h2 id="approach-2">
-                            Hakkında
+                            {{ getTranslate('about') || 'Hakkında' }}
                         </h2>
                         <img *ngIf="currentArtifact && currentArtifact.artifactImages.length > 0"
                             [src]="baseUrl+currentArtifact.artifactImages[0].path" alt="" class="img-fluid mb-3"
@@ -188,7 +188,7 @@
                     </div>
                     <div class="mb-5">
                         <h2 id="approach-3">
-                            Kitabesi
+                            {{ getTranslate('inscription') || 'Kitabesi' }}
                         </h2>
                         <img *ngIf="currentArtifact?.epitaphImage" [src]="baseUrl+currentArtifact.epitaphImage.path"
                             alt="" width="500" height="500" class="img-fluid">
@@ -212,11 +212,11 @@
 
                     <div class="mb-5">
                         <h2 id="approach-4">
-                            Video
+                            {{ getTranslate('video') || 'Video' }}
                         </h2>
 
                         <div *ngIf="!checkVideoExists()">
-                            <p class="fs-4 text-muted">Bu esere ait henüz bir video bulunamadı.</p>
+                            <p class="fs-4 text-muted">{{ getTranslate('noVideoFound') || 'Bu esere ait henüz bir video bulunamadı.' }}</p>
                         </div>
 
                         <div *ngIf="checkVideoExists()" class="ratio ratio-16x9">
@@ -235,11 +235,11 @@
 
                     <div class="mb-5">
                         <h2 id="approach-5">
-                            Konumu
+                            {{ getTranslate('location') || 'Konumu' }}
                         </h2>
 
                         <div *ngIf="!currentArtifact.artifact.latitude || !currentArtifact.artifact.longitude">
-                            <p class="fs-4 text-muted">Bu esere ait henüz bir konum bulunamadı.</p>
+                            <p class="fs-4 text-muted">{{ getTranslate('noLocationFound') || 'Bu esere ait henüz bir konum bulunamadı.' }}</p>
                         </div>
 
                         <div *ngIf="currentArtifact.artifact.latitude && currentArtifact.artifact.longitude"
@@ -276,27 +276,26 @@
                     <nav id="TableOfContents">
                         <ul>
                             <li>
-                                <a class="link"
+                                <a class="link" style="cursor: pointer;"
                                     (click)="scroll('approach-1')">{{getTranslate(currentArtifact?.artifact?.name ??
                                     '')}}</a>
                                 <ul>
                                     <li>
-                                        <a class="link" (click)="scroll('approach-2')">Hakkında</a>
+                                        <a class="link" style="cursor: pointer;" (click)="scroll('approach-2')">{{ getTranslate('about') || 'Hakkında' }}</a>
                                     </li>
                                     <li>
-                                        <a class="link" (click)="scroll('approach-3')">Kitabesi</a>
+                                        <a class="link" style="cursor: pointer;" (click)="scroll('approach-3')">{{ getTranslate('inscription') || 'Kitabesi' }}</a>
                                         <ul>
                                             <li>
-                                                <a class="link" (click)="scroll('epitaphTranslation')">Kitabe
-                                                    Çevirisi</a>
+                                                <a class="link" style="cursor: pointer;" (click)="scroll('epitaphTranslation')">{{ getTranslate('inscriptionTranslation') || 'Kitabe Çevirisi' }}</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a class="link" (click)="scroll('approach-4')">Video</a>
+                                        <a class="link" style="cursor: pointer;" (click)="scroll('approach-4')">{{ getTranslate('video') || 'Video' }}</a>
                                     </li>
                                     <li>
-                                        <a class="link" (click)="scroll('approach-5')">Konumu</a>
+                                        <a class="link" style="cursor: pointer;" (click)="scroll('approach-5')">{{ getTranslate('location') || 'Konumu' }}</a>
                                     </li>
                                 </ul>
                             </li>

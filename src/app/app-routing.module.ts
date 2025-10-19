@@ -24,100 +24,132 @@ export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
   anchorScrolling: 'enabled',
   useHash: false,
-  initialNavigation: 'enabledBlocking',
+  initialNavigation: 'enabled', // 'enabledBlocking' yerine 'enabled' yaptık
 };
 
 const routes: Routes = [
+  // Dil parametresi olmayan route'lar için redirect (varsayılan dile yönlendir)
   {
     path: '',
+    redirectTo: '/tr',
     pathMatch: 'full',
-    component: HomeComponent,
   },
+  // Dil parametreli ana route'lar
+  {
+    path: ':lang',
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'konya',
+        component: KonyaComponent,
+      },
+      {
+        path: 'historical-artifacts',
+        component: HistoricalArtifactsComponent,
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+      },
+      {
+        path: 'about-us',
+        component: AboutUsComponent,
+      },
+      {
+        path: 'about-us/:anchorid',
+        component: AboutUsComponent,
+      },
+      {
+        path: 'konya-kitabeleri/:period',
+        component: KonyaKitabeComponent,
+      },
+      {
+        path: 'konya-kitabeleri/:period/:artifactType/:id',
+        component: KonyaKitabeComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      {
+        path: 'kitabeler',
+        component: KitabeComponent,
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'admin/:currentPage',
+        component: AdminComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'source',
+        component: SourceComponent,
+      },
+      {
+        path: 'admin/artifact/add',
+        component: ArtifactAddComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'admin/artifact/preview/:id',
+        component: ArtifactPreviewComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'admin/artifact/upload-images',
+        component: ArtifactImageUpdateComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'admin/artifact/update',
+        component: ArtifactUpdateComponent,
+        canActivate: [AdminGuard, LoginGuard],
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+      {
+        path: 'visual-search',
+        component: VisualSearchComponent,
+      },
+    ],
+  },
+  // Eski URL'ler için redirect (geriye dönük uyumluluk)
   {
     path: 'home',
-    component: HomeComponent,
+    redirectTo: '/tr/home',
+    pathMatch: 'full',
   },
   {
     path: 'konya',
-    component: KonyaComponent,
-  },
-  {
-    path: 'historical-artifacts',
-    component: HistoricalArtifactsComponent,
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent,
+    redirectTo: '/tr/konya',
+    pathMatch: 'full',
   },
   {
     path: 'about-us',
-    component: AboutUsComponent,
-  },
-  {
-    path: 'about-us/:anchorid',
-    component: AboutUsComponent,
-  },
-  {
-    path: 'konya-kitabeleri/:period',
-    component: KonyaKitabeComponent,
-  },
-  {
-    path: 'konya-kitabeleri/:period/:artifactType/:id',
-    component: KonyaKitabeComponent,
+    redirectTo: '/tr/about-us',
+    pathMatch: 'full',
   },
   {
     path: 'contact',
-    component: ContactComponent,
-  },
-  {
-    path: 'kitabeler',
-    component: KitabeComponent,
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'admin/:currentPage',
-    component: AdminComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'source',
-    component: SourceComponent,
-  },
-  {
-    path: 'admin/artifact/add',
-    component: ArtifactAddComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'admin/artifact/preview/:id',
-    component: ArtifactPreviewComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'admin/artifact/upload-images',
-    component: ArtifactImageUpdateComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'admin/artifact/update',
-    component: ArtifactUpdateComponent,
-    canActivate: [AdminGuard, LoginGuard],
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: 'visual-search',
-    component: VisualSearchComponent,
+    redirectTo: '/tr/contact',
+    pathMatch: 'full',
   },
 ];
 

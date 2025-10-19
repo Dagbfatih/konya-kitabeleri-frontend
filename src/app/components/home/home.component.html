@@ -16,7 +16,7 @@
                         {{getTranslate("homeText")}}
                     </p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">Daha
+                        <a type="button" [routerLink]="['/' + getCurrentLanguageShortCode(), 'kitabeler']" class="btn btn-outline-dark btn-lg px-4">Daha
                             Fazla</a>
                     </div>
                 </div>
@@ -26,22 +26,19 @@
             <div class="px-4 py-5 mb-5 col-md-8 mx-auto text-center">
                 <img class="d-block mx-auto mb-3" src="assets/images/logo.webp" alt="" height="165">
                 <h1 class="display-3 fw-semibold" style="margin-bottom: 1rem; max-width: 800px;">
-                    Konya Kitabelerinin Kültürel Kodları
+                    {{ getTranslate('mainTitle') || 'Konya Kitabelerinin Kültürel Kodları' }}
                 </h1>
                 <div class="col-lg-12 mx-auto">
                     <p class="lead mb-4" style="font-weight: 400;">
-                        Bu çalışma, Konya'daki tarihi eser ile kitabelere hızlı ve kolay bir şekilde ulaşmanızı
-                        hedefler.
-                        Her geçen gün yeni eserler ekleyerek büyüttüğümüz web sitemizi ziyaret edin. Konya tarihi, Konya
-                        kitabeleri ve daha fazlası hakkında bilgi edinin.
+                        {{ getTranslate('mainDescription') || 'Bu çalışma, Konya\'daki tarihi eser ile kitabelere hızlı ve kolay bir şekilde ulaşmanızı hedefler. Her geçen gün yeni eserler ekleyerek büyüttüğümüz web sitemizi ziyaret edin. Konya tarihi, Konya kitabeleri ve daha fazlası hakkında bilgi edinin.' }}
                     </p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">
-                            Kitabeler Hakkında
+                        <a type="button" [routerLink]="['/' + getCurrentLanguageShortCode(), 'kitabeler']" class="btn btn-outline-dark btn-lg px-4">
+                            {{ getTranslate('aboutInscriptions') || 'Kitabeler Hakkında' }}
                         </a>
-                        <a type="button" routerLink="/konya-kitabeleri/selcuklu-donemi"
+                        <a type="button" [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya-kitabeleri', 'selcuklu-donemi']"
                             class="btn btn-light btn-lg px-4">
-                            Tarihi Eserler
+                            {{ getTranslate('historicalArtifacts') || 'Tarihi Eserler' }}
                         </a>
                     </div>
                 </div>
@@ -55,10 +52,10 @@
                         <h1 [countUp]="artifactCountData.artifactCount" class="display-3 fw-semibold"
                             style="margin-bottom: 1rem; color: #997404;"></h1>
                         <p class="d-none d-lg-block lead mb-4 fs-3" style="font-weight: 400;">
-                            Eklenen Tarihi Eserler
+                            {{ getTranslate('addedHistoricalArtifacts') || 'Eklenen Tarihi Eserler' }}
                         </p>
                         <p class="d-lg-none lead mb-4" style="font-weight: 400;">
-                            Tarihi Eserler
+                            {{ getTranslate('historicalArtifacts') || 'Tarihi Eserler' }}
                         </p>
                     </div>
 
@@ -66,10 +63,10 @@
                         <h1 [countUp]="artifactCountData.videoCount" class="display-3 fw-semibold"
                             style="margin-bottom: 1rem; color: #997404;"></h1>
                         <p class="d-none d-lg-block lead mb-4 fs-3" style="font-weight: 400;">
-                            Sesli Anlatım
+                            {{ getTranslate('audioNarration') || 'Sesli Anlatım' }}
                         </p>
                         <p class="d-lg-none lead mb-4" style="font-weight: 400;">
-                            Sesli Anlatım
+                            {{ getTranslate('audioNarration') || 'Sesli Anlatım' }}
                         </p>
                     </div>
 
@@ -77,10 +74,10 @@
                         <h1 [countUp]="artifactCountData.visualContentCount" class="display-3 fw-semibold"
                             style="margin-bottom: 1rem; color: #997404;"></h1>
                         <p class="d-none d-lg-block lead mb-4 fs-3" style="font-weight: 400;">
-                            Görsel İçerik
+                            {{ getTranslate('visualContent') || 'Görsel İçerik' }}
                         </p>
                         <p class="d-lg-none lead mb-4" style="font-weight: 400;">
-                            Görsel İçerik
+                            {{ getTranslate('visualContent') || 'Görsel İçerik' }}
                         </p>
                     </div>
                 </div>
@@ -100,7 +97,7 @@
                         değerli. Önerilerinizi ve görüşlerinizi bizimle paylaşın ve projemize destek olun.
                     </p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <a type="button" routerLink="/kitabeler" class="btn btn-outline-dark btn-lg px-4">
+                        <a type="button" [routerLink]="['/' + getCurrentLanguageShortCode(), 'kitabeler']" class="btn btn-outline-dark btn-lg px-4">
                             Destek Ol
                         </a>
                     </div>
@@ -119,16 +116,14 @@
             </div>
             <div class="col-md-7 order-md-2">
                 <h2 class="featurette-heading-2" id="0">
-                    Konya
+                    {{ getTranslate('konya') || 'Konya' }}
                 </h2>
                 <p class="lead text-muted">
-                    Anadolu’da kervan yolları üzerinde ki konumu, coğrafi özellikleri ve Selçuklu Devleti’nin başkenti
-                    olarak önemini uzun yıllar boyunca sürdürmüş bir kent olan Konya, Türk-İslam mimarisinin yoğun
-                    olarak uygulandığı şehirlerden biridir.
+                    {{ getTranslate('konyaDescription') || 'Anadolu\'da kervan yolları üzerinde ki konumu, coğrafi özellikleri ve Selçuklu Devleti\'nin başkenti olarak önemini uzun yıllar boyunca sürdürmüş bir kent olan Konya, Türk-İslam mimarisinin yoğun olarak uygulandığı şehirlerden biridir.' }}
                 </p>
                 <a type="button" class="btn btn-outline-secondary btn-md px-4 me-md-2 fw-bold"
-                    (click)="scrollTop('/konya', 'konya')">
-                    Daha Fazla
+                    (click)="scrollTop('/konya', 'konya')" style="cursor: pointer;">
+                    {{ getTranslate('readMore') || 'Daha Fazla' }}
                 </a>
             </div>
 
@@ -142,16 +137,14 @@
             </div>
             <div class="col-md-7 order-md-1 pe-5">
                 <h2 class="featurette-heading-2" id="0">
-                    Yapı Tanıtım Kimlik Kartı
+                    {{ getTranslate('constructionIdCard') || 'Yapı Tanıtım Kimlik Kartı' }}
                 </h2>
                 <p class="lead text-muted">
-                    Çalışma ile sahip olduğumuz tarihi, edebi ve kültürel zenginliğimize araştırmacıların, yerli ve
-                    yabancı ziyaretçilerin doğru bilgiye hızlı olarak ulaşmalarını sağlamak istedik. Bunun için de “Yapı
-                    Tanıtım Kimlik Kartı” nı tasarladık.
+                    {{ getTranslate('constructionIdCardDescription') || 'Çalışma ile sahip olduğumuz tarihi, edebi ve kültürel zenginliğimize araştırmacıların, yerli ve yabancı ziyaretçilerin doğru bilgiye hızlı olarak ulaşmalarını sağlamak istedik. Bunun için de "Yapı Tanıtım Kimlik Kartı" nı tasarladık.' }}
                 </p>
                 <a type="button" class="btn btn-light btn-md px-4 me-md-2 fw-bold"
-                    routerLink="/about-us/construction-promotion-id-card">
-                    Daha Fazla
+                    [routerLink]="['/' + getCurrentLanguageShortCode(), 'about-us', 'construction-promotion-id-card']">
+                    {{ getTranslate('readMore') || 'Daha Fazla' }}
                 </a>
             </div>
         </div>

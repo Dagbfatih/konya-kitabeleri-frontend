@@ -8,11 +8,11 @@
             <!-- text-muted -->
             <a
               class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none"
-              href="/"
+              [routerLink]="['/' + getCurrentLanguageShortCode()]"
               aria-label="Bootstrap"
             >
               <!-- <i class="icon-logo me-2" style="font-size: 32px;"></i> -->
-              <a class="navbar-brand text-white me-2" routerLink="/">
+              <a class="navbar-brand text-white me-2" [routerLink]="['/' + getCurrentLanguageShortCode()]">
                 <img
                   src="assets/images/logo.webp"
                   height="35"
@@ -22,43 +22,45 @@
               <span class="fs-5">Konya Kitabeleri</span>
             </a>
             <li class="mb-2">
-              Bu çalışma Selçuklu Bilim ve Sanat Merkezi öğrencileri tarafından
-              2022 yılında hazırlanmıştır. 
+              {{ getTranslate('footerDescription') || 'Bu çalışma Selçuklu Bilim ve Sanat Merkezi öğrencileri tarafından 2022 yılında hazırlanmıştır.' }}
             </li>
-            <li class="mb-2">Sürüm 1.0.0</li>
+            <li class="mb-2">{{ getTranslate('version') || 'Sürüm' }} 1.0.0</li>
           </ul>
         </div>
         <div class="col-6 col-lg-2 offset-lg-1 mb-3">
           <h5>{{ getTranslate("links") }}</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a class="link-dark link" routerLink="/">Anasayfa</a>
+              <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode()]">
+                {{ getTranslate('homePage') || 'Anasayfa' }}
+              </a>
             </li>
             <li class="mb-2">
-              <a class="link-dark link" routerLink="/konya">Konya</a>
+              <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya']">
+                {{ getTranslate('konya') || 'Konya' }}
+              </a>
             </li>
             <li class="mb-2">
-              <a class="link-dark link" routerLink="/kitabeler"
-                >Kitabeler Hakkında</a
-              >
+              <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode(), 'kitabeler']">
+                {{ getTranslate('aboutInscriptions') || 'Kitabeler Hakkında' }}
+              </a>
             </li>
             <li class="mb-2">
               <a
                 class="link-dark link"
-                (click)="
-                  navigate(
-                    '/konya-kitabeleri/selcuklu-donemi',
-                    'selcuklu-donemi'
-                  )
-                "
-                >Konya Kitabeleri</a
+                (click)="navigate('/konya-kitabeleri/selcuklu-donemi', 'selcuklu-donemi')"
+                style="cursor: pointer;"
               >
+                {{ getTranslate('konyaInscriptions') || 'Konya Kitabeleri' }}
+              </a>
             </li>
             <!-- <li class="mb-2">
-                            <a class="link-dark link" routerLink="/virtual-tours">Sanal Gezi</a>
+                            <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode(), 'virtual-tours']">Sanal Gezi</a>
                         </li> -->
             <li class="mb-2">
-              <a class="link-dark link" routerLink="/source">Kaynakça</a>
+              <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode(), 'source']">
+                {{ getTranslate('bibliography') || 'Kaynakça' }}
+              </a>
             </li>
           </ul>
         </div>
@@ -69,19 +71,21 @@
               <a
                 class="link-dark link"
                 [href]="getSocialLink('instagram')"
-                rel="”nofollow”"
-                target="”_blank”"
-                >İnstagram</a
+                rel="nofollow"
+                target="_blank"
               >
+                {{ getTranslate('instagram') || 'İnstagram' }}
+              </a>
             </li>
             <li class="mb-2">
               <a
                 class="link-dark link"
                 [href]="getSocialLink('facebook')"
-                rel="”nofollow”"
-                target="”_blank”"
-                >Facebook</a
+                rel="nofollow"
+                target="_blank"
               >
+                {{ getTranslate('facebook') || 'Facebook' }}
+              </a>
             </li>
           </ul>
         </div>
@@ -100,9 +104,9 @@
           <h5>{{ getTranslate("aboutUs") }}</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a class="link-dark link" routerLink="/about-us">{{
-                getTranslate("whoAreWe")
-              }}</a>
+              <a class="link-dark link" [routerLink]="['/' + getCurrentLanguageShortCode(), 'about-us']">
+                {{ getTranslate("whoAreWe") }}
+              </a>
             </li>
           </ul>
         </div>
@@ -112,9 +116,9 @@
         class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
       >
         <div class="col-md-4 d-flex align-items-center">
-          <span class="text-muted"
-            >2023 Arastırma Projesi © Hakları Saklıdır.</span
-          >
+          <span class="text-muted">
+            {{ getTranslate('copyright') || '2023 Arastırma Projesi © Hakları Saklıdır.' }}
+          </span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -122,8 +126,8 @@
             <a
               class="text-muted"
               [href]="getSocialLink('instagram')"
-              rel="”nofollow”"
-              target="”_blank”"
+              rel="nofollow"
+              target="_blank"
             >
               <fa-icon [icon]="faInstagram" style="font-size: 24px"></fa-icon>
             </a>
@@ -132,20 +136,19 @@
             <a
               class="text-muted"
               [href]="getSocialLink('facebook')"
-              rel="”nofollow”"
-              target="”_blank”"
+              rel="nofollow"
+              target="_blank"
             >
               <fa-icon [icon]="faFacebook" style="font-size: 24px"></fa-icon>
             </a>
           </li>
           <li class="text-muted py-1">
-            Designed by
+            {{ getTranslate('designedBy') || 'Designed by' }}
             <a
               href="https://dagbfatih.com/"
-              rel="”nofollow”"
-              target="”_blank”"
-              >Dagbfatih.</a
-            >
+              rel="nofollow"
+              target="_blank"
+            >Dagbfatih.</a>
           </li>
         </ul>
       </div>

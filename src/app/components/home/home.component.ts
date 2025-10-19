@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { allTranslates } from 'src/app/services/translation.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private scrollService: ScrollService,
     private router: Router,
-    private artifactService: ArtifactService
+    private artifactService: ArtifactService,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,13 @@ export class HomeComponent implements OnInit {
   }
 
   navigate(url: string, id: string) {
-    this.router.navigateByUrl('');
+    const currentLang = this.settingsService.getCurrentLanguageShortCode();
+    const fullUrl = `/${currentLang}${url}`;
+    this.router.navigate([fullUrl]);
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 
   getTranslate(key: string) {

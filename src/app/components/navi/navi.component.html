@@ -46,10 +46,10 @@
     <div class="container-xxl bd-gutter flex-wrap flex-lg-nowrap d-flex justify-content-between">
 
         <div class="navbar-header">
-            <a class="navbar-brand text-white d-none d-lg-block" routerLink="/" (click)="callCollapseEvent();">
+            <a class="navbar-brand text-white d-none d-lg-block" [routerLink]="['/' + getCurrentLanguageShortCode()]" (click)="callCollapseEvent();">
                 <img src="assets/images/logo.webp" height="35" class="d-inline-block align-text-top">
             </a>
-            <a class="navbar-brand text-white d-lg-none me-0" routerLink="/" (click)="callCollapseEvent();">
+            <a class="navbar-brand text-white d-lg-none me-0" [routerLink]="['/' + getCurrentLanguageShortCode()]" (click)="callCollapseEvent();">
                 <img src="assets/images/logo.webp" height="35" class="d-inline-block align-text-top">
             </a>
         </div>
@@ -62,27 +62,28 @@
             <ul class="navbar-nav flex-wrap bd-navbar-nav pt-2 py-md-0 text-start text-custom">
                 <!-- Lg None -->
                 <li class="nav-item d-lg-none col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" routerLink="/">
-                        Ana Sayfa
+                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" [routerLink]="['/' + getCurrentLanguageShortCode()]">
+                        {{ getTranslate('homePage') || 'Ana Sayfa' }}
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" routerLink="/konya">
-                        Konya
+                    <a class="nav-link nav-link-custom nav-link-collapse" aria-current="page" [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya']">
+                        {{ getTranslate('konya') || 'Konya' }}
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Kitabeler
+                        {{ getTranslate('inscriptions') || 'Kitabeler' }}
                     </a>
                     <ul *ngIf="histPeriods" class="dropdown-menu dropdown-menu-dark" style="min-width: 228px;" aria-labelledby="navbarDropdown">
                         <li *ngFor="let histPeriod of histPeriods">
 
                             <!-- lg -->
                             <a class="dropdown-item nav-link-collapse" style="white-space: normal;"
-                                (click)="navigate('/konya-kitabeleri/' + histPeriod?.paramName, histPeriod.paramName); callCollapseEvent();">
-                                {{histPeriod.name}}
+                                [routerLink]="['/' + getCurrentLanguageShortCode(), 'konya-kitabeleri', histPeriod?.paramName]"
+                                [fragment]="histPeriod.paramName" (click)="callCollapseEvent();">
+                                {{getTranslate(histPeriod.name) || histPeriod.name}}
                             </a>
                         </li>
                     </ul>
@@ -94,23 +95,23 @@
                     </div>
                 </li>
                 <!-- <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom disabled nav-link-collapse text-white-50" routerLink="/virtual-tours">
+                    <a class="nav-link nav-link-custom disabled nav-link-collapse text-white-50" [routerLink]="['/' + getCurrentLanguageShortCode(), 'virtual-tours']">
                         Sanal Gezi
                     </a>
                 </li> -->
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse about-us" routerLink="/about-us">
-                        Hakkımızda
+                    <a class="nav-link nav-link-custom nav-link-collapse about-us" [routerLink]="['/' + getCurrentLanguageShortCode(), 'about-us']">
+                        {{ getTranslate('aboutUs') || 'Hakkımızda' }}
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse" routerLink="/contact">
-                        İletişim
+                    <a class="nav-link nav-link-custom nav-link-collapse" [routerLink]="['/' + getCurrentLanguageShortCode(), 'contact']">
+                        {{ getTranslate('contact') || 'İletişim' }}
                     </a>
                 </li>
                 <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse" routerLink="/visual-search">
-                        Asistan
+                    <a class="nav-link nav-link-custom nav-link-collapse" [routerLink]="['/' + getCurrentLanguageShortCode(), 'visual-search']">
+                        {{ getTranslate('assistant') || 'Asistan' }}
                     </a>
                 </li>
             </ul>
@@ -189,7 +190,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li *ngFor="let language of languages">
-                            <a class="dropdown-item" (click)="setLanguage(language.code!)">
+                            <a class="dropdown-item" (click)="setLanguage(language.code!)" style="cursor: pointer;">
                                 <span
                                     class="flag-icon flag-icon-{{getLanguageFlagCode(language.code!)}} flag-icon-squared"></span>
                                 {{language.languageName}}
@@ -207,13 +208,13 @@
                     </a>
 
                     <ul class="dropdown-menu text-small dropdown-menu-dark" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" routerLink="/admin">Admin</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin']">Admin</a></li>
                         <li><a class="dropdown-item disabled">{{getTranslate('settings')}}</a></li>
                         <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" (click)="signOut()">{{getTranslate('signOut')}}</a></li>
+                        <li><a class="dropdown-item" (click)="signOut()" style="cursor: pointer;">{{getTranslate('signOut')}}</a></li>
                     </ul>
 
                 </li>

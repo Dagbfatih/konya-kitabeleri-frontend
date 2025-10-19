@@ -76,6 +76,10 @@ export class KonyaKitabeComponent implements OnInit {
     });
   }
 
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
+  }
+
   getAllArtifactsDetails() {
     this.dataLoaded = false;
     this.artifactService
