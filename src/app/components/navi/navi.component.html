@@ -100,6 +100,12 @@
                     </a>
                 </li> -->
                 <li class="nav-item col-md-auto">
+                    <a class="nav-link nav-link-custom nav-link-collapse" [routerLink]="['/' + getCurrentLanguageShortCode(), 'visual-search']">
+                        {{ getTranslate('assistant') || 'Asistan' }}
+                    </a>
+                </li>
+                
+                <li class="nav-item col-md-auto">
                     <a class="nav-link nav-link-custom nav-link-collapse about-us" [routerLink]="['/' + getCurrentLanguageShortCode(), 'about-us']">
                         {{ getTranslate('aboutUs') || 'Hakkımızda' }}
                     </a>
@@ -109,11 +115,7 @@
                         {{ getTranslate('contact') || 'İletişim' }}
                     </a>
                 </li>
-                <li class="nav-item col-md-auto">
-                    <a class="nav-link nav-link-custom nav-link-collapse" [routerLink]="['/' + getCurrentLanguageShortCode(), 'visual-search']">
-                        {{ getTranslate('assistant') || 'Asistan' }}
-                    </a>
-                </li>
+                
             </ul>
 
             <hr class="d-lg-none text-white-50">
