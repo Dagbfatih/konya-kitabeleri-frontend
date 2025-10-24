@@ -15,6 +15,7 @@ import { LoginModel } from 'src/app/models/entities/loginModel';
 import { Token } from 'src/app/models/entities/token';
 import { RefreshTokenService } from 'src/app/services/refresh-token.service';
 import { allTranslates } from 'src/app/services/translation.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private tokenService: TokenService,
-    private refreshTokenService: RefreshTokenService
+    private refreshTokenService: RefreshTokenService,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +79,9 @@ export class LoginComponent implements OnInit {
 
   getTranslate(key: string) {
     return allTranslates.get(key);
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 }

@@ -20,7 +20,7 @@
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-success" type="submit" (click)="login()">Giriş Yap</button>
-            <p class="mt-2 mb-3 text-muted">Üye Değil misin? <a routerLink="/register">Üye ol</a></p>
+            <p class="mt-2 mb-3 text-muted">Üye Değil misin? <a [routerLink]="['/' + getCurrentLanguageShortCode(), 'register']">Üye ol</a></p>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
         </form>
     </main>

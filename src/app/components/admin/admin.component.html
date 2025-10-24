@@ -3,7 +3,7 @@
     <div class="container-fluid my-gutter my-md-4 my-layout">
         <aside class="my-sidebar">
             <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 link-dark text-decoration-none">
+                <a [routerLink]="['/' + getCurrentLanguageShortCode()]" class="d-flex align-items-center mb-3 mb-md-0 link-dark text-decoration-none">
                     <fa-icon [icon]="faGauge" size="2x" class="me-2"></fa-icon>
                     <span class="fs-4">Kitabelerin Dili</span>
                 </a>
@@ -11,49 +11,49 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-users', 'manage-users')" class="nav-link link-dark"
-                            routerLinkActive="active" routerLink="/admin/manage-users">
+                            routerLinkActive="active" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-users']">
                             <fa-icon [icon]="faUsersCog" size="1x" class="fa me-2"></fa-icon>
                             Kullanıcılar
                         </a>
                     </li>
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-claims', 'manage-claims')" routerLinkActive="active"
-                            routerLink="/admin/manage-claims" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-claims']" class="nav-link link-dark">
                             <fa-icon [icon]="faClipboardList" size="1x" class="fa me-2"></fa-icon>
                             Yetkiler
                         </a>
                     </li>
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-translates', 'manage-translates')" routerLinkActive="active"
-                            routerLink="/admin/manage-translates" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-translates']" class="nav-link link-dark">
                             <fa-icon [icon]="faLanguage" size="1x" class="fa me-2"></fa-icon>
                             Çeviriler
                         </a>
                     </li>
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-languages', 'manage-languages')" routerLinkActive="active"
-                            routerLink="/admin/manage-languages" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-languages']" class="nav-link link-dark">
                             <fa-icon [icon]="faGlobe" size="1x" class="fa me-2"></fa-icon>
                             Diller
                         </a>
                     </li>
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-content', 'manage-content')" routerLinkActive="active"
-                            routerLink="/admin/manage-content" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-content']" class="nav-link link-dark">
                             <fa-icon [icon]="faCogs" size="1x" class="fa me-2"></fa-icon>
                             İçerikler
                         </a>
                     </li>
                     <li class="nav-item">
                         <a (click)="navigate('/admin/manage-images', 'manage-images')" routerLinkActive="active"
-                            routerLink="/admin/manage-images" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-images']" class="nav-link link-dark">
                             <fa-icon [icon]="faImages" size="1x" class="fa me-2"></fa-icon>
                             Resimler
                         </a>
                     </li>
                     <!-- <li class="nav-item">
                         <a (click)="navigate('/admin/manage-artifacts', 'manage-artifacts')" routerLinkActive="active"
-                            routerLink="/admin/manage-artifacts" class="nav-link link-dark">
+                            [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-artifacts']" class="nav-link link-dark">
                             <fa-icon [icon]="faLandmark" size="1x" class="fa me-2"></fa-icon>
                             Tarihi Eserler
                         </a>
@@ -68,28 +68,28 @@
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li>
                                     <a (click)="navigate('/admin/manage-artifacts', 'manage-artifacts')"
-                                        routerLinkActive="active" routerLink="/admin/manage-artifacts"
+                                        routerLinkActive="active" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-artifacts']"
                                         class="nav-link link-dark d-inline-flex text-decoration-none rounded">
                                         Tarihi Eserler
                                     </a>
                                 </li>
                                 <li>
                                     <a (click)="navigate('/admin/manage-historical-periods', 'manage-historical-periods')"
-                                        routerLinkActive="active" routerLink="/admin/manage-historical-periods"
+                                        routerLinkActive="active" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-historical-periods']"
                                         class="nav-link link-dark d-inline-flex text-decoration-none rounded">
                                         Tarihi Dönemler
                                     </a>
                                 </li>
                                 <li>
                                     <a (click)="navigate('/admin/manage-artifact-types', 'manage-artifact-types')"
-                                        routerLinkActive="active" routerLink="/admin/manage-artifact-types"
+                                        routerLinkActive="active" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-artifact-types']"
                                         class="nav-link link-dark d-inline-flex text-decoration-none rounded">
                                         Eser Türleri
                                     </a>
                                 </li>
                                 <li>
                                     <a (click)="navigate('/admin/manage-virtual-tours', 'manage-virtual-tours')"
-                                        routerLinkActive="active" routerLink="/admin/manage-virtual-tours"
+                                        routerLinkActive="active" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'manage-virtual-tours']"
                                         class="nav-link disabled link-dark d-inline-flex text-decoration-none rounded">
                                         Sanal Geziler
                                     </a>

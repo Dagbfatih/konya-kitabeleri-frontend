@@ -15,6 +15,7 @@ import { UserComponent } from './../user/user.component';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { SettingsService } from 'src/app/services/settings.service';
 import {
   faClipboardList,
   faCogs,
@@ -52,7 +53,8 @@ export class AdminComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -71,9 +73,13 @@ export class AdminComponent implements OnInit {
   }
 
   navigate(url: string, id: string) {
-    this.router.navigate([url]).then(() => {
-      this.scroll(id);
-    });
+    const currentLang = this.settingsService.getCurrentLanguageShortCode();
+    const fullUrl = `/${currentLang}${url}`;
+    this.router.navigate([fullUrl]);
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 
   runActiveStateManagementScript() {
