@@ -10,6 +10,7 @@ import { ArtifactService } from './../../services/artifact.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Artifact } from './../../models/entities/artifact';
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 import {
   faEye,
   faTrash,
@@ -45,7 +46,8 @@ export class ArtifactComponent implements OnInit {
     private artifactService: ArtifactService,
     private router: Router,
     private artifactUpdateService: ArtifactUpdateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -105,5 +107,9 @@ export class ArtifactComponent implements OnInit {
 
   getTranslate(key: string) {
     return allTranslates.get(key);
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 }

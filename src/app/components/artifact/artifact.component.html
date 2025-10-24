@@ -19,7 +19,10 @@
                 <fa-icon [icon]="faRedoAlt" size="1x" class="fa fa-icon-refresh" (click)="getAllArtifacts();">
                 </fa-icon>
             </button>
-            <button type="button" class="btn btn-outline-secondary" routerLink="/admin/artifact/add">Ekle</button>
+            <button type="button" class="btn btn-outline-secondary" 
+        [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin', 'artifact', 'add']">
+    Ekle
+</button>
             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
         </div>
         <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">

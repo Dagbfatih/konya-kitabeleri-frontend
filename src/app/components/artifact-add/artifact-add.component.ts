@@ -16,6 +16,7 @@ import { HistPeriod } from './../../models/entities/histPeriod';
 import { ArtifactType } from './../../models/entities/artifactType';
 import { ArtifactService } from './../../services/artifact.service';
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 import {
   AbstractControl,
   FormArray,
@@ -56,7 +57,8 @@ export class ArtifactAddComponent implements OnInit {
     private artifactUpdateService: ArtifactUpdateService,
     private errorService: ErrorService,
     private artifactAddService: ArtifactAddService,
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -197,5 +199,9 @@ export class ArtifactAddComponent implements OnInit {
 
   goBack() {
     history.back();
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 }

@@ -7,6 +7,7 @@ import { ArtifactImageService } from './../../services/artifact-image.service';
 import { ArtifactAddService } from './../../services/artifact-add.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SettingsService } from 'src/app/services/settings.service';
 import {
   faArrowLeft,
   faImage,
@@ -41,7 +42,8 @@ export class ArtifactImageAddComponent implements OnInit {
     private artifactAddService: ArtifactAddService,
     private artifactImageService: ArtifactImageService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -102,5 +104,9 @@ export class ArtifactImageAddComponent implements OnInit {
 
   goBack() {
     history.back();
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 }

@@ -3,6 +3,7 @@ import { ArtifactAddService } from './../../services/artifact-add.service';
 import { Location } from './../../models/entities/location';
 import { LocationService } from './../../services/location.service';
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 import {
   AbstractControl,
   FormBuilder,
@@ -32,7 +33,8 @@ export class LocationAddComponent implements OnInit {
     private errorService: ErrorService,
     private locationService: LocationService,
     private artifactAddService: ArtifactAddService,
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -84,5 +86,9 @@ export class LocationAddComponent implements OnInit {
 
   getTranslate(key: string) {
     return allTranslates.get(key);
+  }
+
+  getCurrentLanguageShortCode(): string {
+    return this.settingsService.getCurrentLanguageShortCode();
   }
 }
