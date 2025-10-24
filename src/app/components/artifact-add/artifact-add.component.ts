@@ -120,37 +120,54 @@ export class ArtifactAddComponent implements OnInit {
   }
 
   add() {
-    this.submitted = true;
-    if (this.artifactAddForm.valid) {
-      let artifactModel: Artifact = Object.assign(
-        {},
-        this.artifactAddForm.value
-      );
-      artifactModel.artifactTypeId = +artifactModel.artifactTypeId;
-      artifactModel.histPeriodId = +artifactModel.histPeriodId;
-      artifactModel.latitude = +artifactModel.latitude!;
-      artifactModel.longitude = +artifactModel.longitude!;
-      let artifactTranslateModels = this.getArtifactTranslates();
+  this.submitted = true;
+  if (this.artifactAddForm.valid) {
+    let artifactModel: Artifact = Object.assign(
+      {},
+      this.artifactAddForm.value
+    );
+    artifactModel.artifactTypeId = +artifactModel.artifactTypeId;
+    artifactModel.histPeriodId = +artifactModel.histPeriodId;
+    artifactModel.latitude = +artifactModel.latitude!;
+    artifactModel.longitude = +artifactModel.longitude!;
+    let artifactTranslateModels = this.getArtifactTranslates();
 
-      this.artifactService
-        .addWithDetails(artifactModel, artifactTranslateModels)
-        .subscribe(
-          (response) => {
-            artifactModel.id = response.data;
-            this.setArtifactAddModels(artifactModel, artifactTranslateModels);
-            this.toastrService.success(
-              response.message,
-              this.getTranslate('successful')
-            );
-            this.router.navigate(['/admin/artifact/upload-images']);
-          },
-          (responseError) => {
-            this.errorService.writeErrorMessages(responseError);
-          }
-        );
-    } else {
-    }
+    this.artifactService
+      .addWithDetails(artifactModel, artifactTranslateModels)
+      .subscribe(
+        (response) => {
+          artifactModel.id = response.data;
+          this.setArtifactAddModels(artifactModel, artifactTranslateModels);
+          this.toastrService.success(
+            response.message,
+            this.getTranslate('successful')
+          );
+          
+          // YENİ: Önce yeni artifact'ı artifactUpdateService'e set et
+          // ArtifactDetailsDto formatında obje oluştur
+          const newArtifactDetails: any = {
+            artifact: artifactModel,
+            artifactType: this.artifactTypes.find(t => t.id === artifactModel.artifactTypeId),
+            historicalPeriod: this.histPeriods.find(p => p.id === artifactModel.histPeriodId),
+            artifactImages: [],
+            epitaphImage: null,
+            youtubeVideo: null
+          };
+          
+          // Yeni artifact'ı service'e kaydet
+          this.artifactUpdateService.setArtifact(newArtifactDetails);
+          
+          // Sonra dil parametresiyle navigate et
+          const currentLang = this.settingsService.getCurrentLanguageShortCode();
+          this.router.navigate([`/${currentLang}/admin/artifact/upload-images`]);
+        },
+        (responseError) => {
+          this.errorService.writeErrorMessages(responseError);
+        }
+      );
+  } else {
   }
+}
 
   setArtifactAddModels(
     artifact: Artifact,

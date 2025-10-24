@@ -81,13 +81,15 @@ export class ArtifactComponent implements OnInit {
   }
 
   goUpdateForm(artifact: ArtifactDetailsDto) {
+    const currentLang = this.settingsService.getCurrentLanguageShortCode();
     this.artifactUpdateService.setArtifact(artifact);
-    this.router.navigate(['admin/artifact/update']);
+    this.router.navigate([`/${currentLang}/admin/artifact/update`]);
   }
 
   goImageUpdateForm(artifact: ArtifactDetailsDto) {
+    const currentLang = this.settingsService.getCurrentLanguageShortCode();
     this.artifactUpdateService.setArtifact(artifact);
-    this.router.navigate(['admin/artifact/upload-images']);
+    this.router.navigate([`/${currentLang}/admin/artifact/upload-images`]);
   }
 
   goYoutubeVideoUpdateForm(artifact: ArtifactDetailsDto) {
@@ -98,7 +100,8 @@ export class ArtifactComponent implements OnInit {
   }
 
   goPreview(artifact: ArtifactDetailsDto) {
-    this.router.navigate(['admin/artifact/preview/' + artifact.artifact.id]);
+    const currentLang = this.settingsService.getCurrentLanguageShortCode();
+    this.router.navigate([`/${currentLang}/admin/artifact/preview/${artifact.artifact.id}`]);
   }
 
   filter() {
