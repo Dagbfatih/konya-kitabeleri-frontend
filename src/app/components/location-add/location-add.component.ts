@@ -64,7 +64,8 @@ export class LocationAddComponent implements OnInit {
             response.message,
             this.getTranslate('successful')
           );
-          this.router.navigate(['admin/artifact/add']);
+          const currentLang = this.settingsService.getCurrentLanguageShortCode();
+          this.router.navigate([`/${currentLang}/admin/artifact/add`]);
         },
         (responseError) => {
           this.errorService.writeErrorMessages(responseError);
