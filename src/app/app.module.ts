@@ -83,6 +83,8 @@ import { YoutubeVideoAddComponent } from './components/youtube-video-add/youtube
 import { YoutubeVideoUpdateComponent } from './components/youtube-video-update/youtube-video-update.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { VisualSearchComponent } from './components/visual-search/visual-search.component';
+import { ArtifactCheckinLocalComponent } from './components/artifact-checkin-local/artifact-checkin-local.component';
+import { UserStatsComponent } from './components/user-stats/user-stats.component';
 
 @NgModule({
   declarations: [
@@ -157,6 +159,8 @@ import { VisualSearchComponent } from './components/visual-search/visual-search.
     YoutubeVideoAddComponent,
     YoutubeVideoUpdateComponent,
     VisualSearchComponent,
+    ArtifactCheckinLocalComponent,
+    UserStatsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

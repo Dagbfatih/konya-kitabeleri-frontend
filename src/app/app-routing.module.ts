@@ -19,6 +19,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ArtifactUpdateComponent } from './components/artifact-update/artifact-update.component';
 import { VisualSearchComponent } from './components/visual-search/visual-search.component';
+import { UserStatsComponent } from './components/user-stats/user-stats.component';
 
 export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
@@ -128,6 +129,10 @@ const routes: Routes = [
         path: 'visual-search',
         component: VisualSearchComponent,
       },
+      {
+       path: 'stats',
+        component: UserStatsComponent,
+      }
     ],
   },
   // Eski URL'ler için redirect (geriye dönük uyumluluk)
