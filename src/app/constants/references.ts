@@ -3,11 +3,11 @@ import { Reference } from '../models/entities/reference';
 export const references: Reference[] = [
   {
     reference:
-      'APA, G., (2012). “Hacı Fe11ah Cami”, Konya Ansiklopedisi, C.4, Konya, s. 77.',
+      'APA, G., (2012). “Hacı Fettah Cami”, Konya Ansiklopedisi, C.4, Konya, s. 77.',
   },
   {
     reference:
-      'BAKIRKR, Ö.(1969). “Hacı Ferruh Mescidi”, Vakıflar Dergisi, S:9, Ankara',
+      'BAKIRER, Ö.(1969). “Hacı Ferruh Mescidi”, Vakıflar Dergisi, S:9, Ankara',
   },
   { reference: 'BİLDİRİCİ, M. (1994). Tarihi Su Yapıları, Ankara.' },
   {
@@ -36,11 +36,11 @@ export const references: Reference[] = [
   },
   {
     reference:
-      'KARADEMİR, M. (2012). “Fa1ma Hanım Çeşmesi”, Konya Ansiklopedisi, C.3, Konya, s.295.',
+      'KARADEMİR, M. (2012). “Fatma Hanım Çeşmesi”, Konya Ansiklopedisi, C.3, Konya, s.295.',
   },
   {
     reference:
-      'KARPUZ, H. (2009) Türk Kül1ür Varlıkları Envanteri Konya, Ankara.',
+      'KARPUZ, H. (2009) Türk Kültür Varlıkları Envanteri Konya, Ankara.',
   },
   {
     reference:
@@ -52,16 +52,16 @@ export const references: Reference[] = [
   },
   {
     reference:
-      'Kunt, İ. (2019). Konya Merkezinde Bulunan Karamanoğlu Beyliği Dönemine Ait Kitabeler, Konya Selçuklu Medeniyeti Araştırmaları Dergisi, Yıl:4 Sayı:4, 151-188',
+      'KUNT, İ. (2019). Konya Merkezinde Bulunan Karamanoğlu Beyliği Dönemine Ait Kitabeler, Konya Selçuklu Medeniyeti Araştırmaları Dergisi, Yıl:4 Sayı:4, 151-188',
   },
   { reference: "ÖGEL, S. (1994). Anadolu'nun Selçuklu Çehresi, İstanbul" },
   {
     reference:
-      'ÖNDER, Mehme1 (1971), Mevlâna Şehri Konya (Tarihi Kılavuz), Konya.',
+      'ÖNDER, MEHMET (1971), Mevlâna Şehri Konya (Tarihi Kılavuz), Konya.',
   },
   {
     reference:
-      'SÖNMEZ, M.. AKMAYDALI, H. (1987), “Konya Çeşmeleri”, Rölöve ve Restorasyon Dergisi, S. VI, Ankara, s. 135-166.',
+      'SÖNMEZ, M. AKMAYDALI, H. (1987), “Konya Çeşmeleri”, Rölöve ve Restorasyon Dergisi, S. VI, Ankara, s. 135-166.',
   },
   { reference: 'SÖZEN, M. (1972).  Anadolu Medreseleri II, İstanbul.' },
   {
