@@ -1,1 +1,46 @@
-<p>artifact-checkin-local works!</p>
+<div class="card mt-4 border-primary">
+  <div class="card-body">
+    <h5 class="card-title d-flex align-items-center">
+      <fa-icon [icon]="faMapMarkerAlt" class="me-2 text-primary"></fa-icon>
+      Ziyaret Kaydı
+    </h5>
+    
+    <p class="card-text text-muted">
+      Bu eseri ziyaret ederek puan kazanın!
+    </p>
+
+    <!-- Zaten ziyaret edilmiş -->
+    <div *ngIf="isAlreadyVisited" class="alert alert-success d-flex align-items-center">
+      <fa-icon [icon]="faCheckCircle" class="me-2"></fa-icon>
+      Bu eseri zaten ziyaret ettiniz! ✅
+    </div>
+
+    <!-- Check-in butonu -->
+    <button 
+      *ngIf="!isAlreadyVisited"
+      class="btn btn-primary btn-lg w-100" 
+      (click)="checkIn()"
+      [disabled]="isCheckinInProgress">
+      
+      <span *ngIf="!isCheckinInProgress">
+        <fa-icon [icon]="faMapMarkerAlt" class="me-2"></fa-icon>
+        Buradayım! (+10 Puan)
+      </span>
+      
+      <span *ngIf="isCheckinInProgress">
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        Konum Kontrol Ediliyor...
+      </span>
+    </button>
+
+    <small class="text-muted d-block mt-2">
+      * Eserin 100 metre yakınında olmanız gerekmektedir
+    </small>
+
+    <div class="alert alert-warning mt-3 mb-0" role="alert">
+      <small>
+        ⚠️ Bu sistem demo amaçlıdır. Veriler sadece tarayıcınızda saklanır.
+      </small>
+    </div>
+  </div>
+</div>

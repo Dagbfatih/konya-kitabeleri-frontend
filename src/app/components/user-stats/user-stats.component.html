@@ -1,1 +1,124 @@
-<p>user-stats works!</p>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      
+      <h1 class="mb-4">
+        <fa-icon [icon]="faTrophy" class="text-warning me-2"></fa-icon>
+        İstatistiklerim
+      </h1>
+
+      <!-- Puan Kartları -->
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="card text-center border-primary">
+            <div class="card-body">
+              <h2 class="display-4 text-primary mb-0">{{userPoints.totalPoints}}</h2>
+              <p class="text-muted mb-2">Toplam Puan</p>
+              <span class="badge" [style.background-color]="currentRank.color">
+                {{currentRank.name}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center border-success">
+            <div class="card-body">
+              <h2 class="display-4 text-success mb-0">{{userPoints.visitedCount}}</h2>
+              <p class="text-muted mb-0">Ziyaret Edilen Eser</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center border-warning">
+            <div class="card-body">
+              <h2 class="display-4 text-warning mb-0">{{userPoints.achievements.length}}</h2>
+              <p class="text-muted mb-0">Kazanılan Başarım</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- İlerleme Çubuğu -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Bir Sonraki Rütbe</h5>
+          <div class="d-flex justify-content-between mb-2">
+            <span>{{currentRank.name}}</span>
+            <span>{{nextRank.name}}</span>
+          </div>
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+                 [style.width.%]="progressPercent"
+                 role="progressbar">
+              {{userPoints.totalPoints}} / {{nextRank.minPoints}}
+            </div>
+          </div>
+          <small class="text-muted mt-2 d-block">
+            <fa-icon [icon]="faStar"></fa-icon>
+            {{pointsToNextRank}} puan daha kazanman gerekiyor!
+          </small>
+        </div>
+      </div>
+
+      <!-- Son Ziyaretler -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <fa-icon [icon]="faMapMarkedAlt" class="me-2"></fa-icon>
+            Son Ziyaretlerim
+          </h5>
+        </div>
+        <div *ngIf="recentVisits.length === 0" class="card-body text-center text-muted">
+          <p>Henüz ziyaret ettiğiniz eser yok</p>
+          <small>Eserleri ziyaret ederek puan kazanmaya başlayın!</small>
+        </div>
+        <div *ngIf="recentVisits.length > 0" class="list-group list-group-flush">
+          <div *ngFor="let visit of recentVisits" class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="mb-1">{{visit.artifactName}}</h6>
+                <small class="text-muted">
+                  {{visit.visitDate | date:'dd MMMM yyyy, HH:mm'}}
+                </small>
+              </div>
+              <span class="badge bg-success">+{{visit.pointsEarned}} puan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tüm Rütbeler -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Rütbe Sistemi</h5>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let rank of allRanks" class="d-flex align-items-center mb-3 pb-3 border-bottom">
+            <div class="me-3" style="width: 40px; height: 40px; border-radius: 50%;" 
+                 [style.background-color]="rank.color">
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-0">{{rank.name}}</h6>
+              <small class="text-muted">{{rank.minPoints}}+ puan</small>
+            </div>
+            <div *ngIf="userPoints.totalPoints >= rank.minPoints">
+              <fa-icon [icon]="faTrophy" class="text-warning"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sıfırlama Butonu (Test için) -->
+      <div class="alert alert-danger mt-4" role="alert">
+        <h6 class="alert-heading">Dikkat!</h6>
+        <p>Aşağıdaki buton tüm verilerinizi siler. Bu işlem geri alınamaz.</p>
+        <button class="btn btn-danger btn-sm" (click)="resetData()">
+          Tüm Verileri Sıfırla
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
