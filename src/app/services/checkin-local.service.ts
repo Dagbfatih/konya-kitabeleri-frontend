@@ -163,7 +163,7 @@ export class CheckinLocalService {
       { name: 'Tarih Meraklısı', minPoints: 100, color: '#28a745' },
       { name: 'Kültür Elçisi', minPoints: 500, color: '#17a2b8' },
       { name: 'Miras Koruyucusu', minPoints: 1000, color: '#ffc107' },
-      { name: 'Tarih Uzmanı', minPoints: 2500, color: '#fd7e14' },
+      { name: 'Tarih Sevdalısı', minPoints: 2500, color: '#fd7e14' },
       { name: 'Miras Ustası', minPoints: 5000, color: '#6f42c1' }
     ];
 
