@@ -82,3 +82,27 @@ a.link:hover {
 a.unlink {
   text-decoration: none;
 }
+
+.responsive-logo {
+  max-height: 165px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Mobil cihazlarda daha küçük */
+@media (max-width: 576px) {
+  .responsive-logo {
+    max-height: 80px;
+    max-width: 90%;
+  }
+}
+
+/* Tablet için orta boy */
+@media (min-width: 577px) and (max-width: 992px) {
+  .responsive-logo {
+    max-height: 120px;
+    max-width: 95%;
+  }
+}
