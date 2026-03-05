@@ -20,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ArtifactUpdateComponent } from './components/artifact-update/artifact-update.component';
 import { VisualSearchComponent } from './components/visual-search/visual-search.component';
 import { UserStatsComponent } from './components/user-stats/user-stats.component';
+import { RoutePlannerComponent } from './components/route-planner/route-planner.component';
 
 export const routerOptions: ExtraOptions = {
   onSameUrlNavigation: 'reload',
@@ -130,9 +131,13 @@ const routes: Routes = [
         component: VisualSearchComponent,
       },
       {
-       path: 'stats',
+        path: 'stats',
         component: UserStatsComponent,
-      }
+      },
+      {
+        path: 'route-planner',
+        component: RoutePlannerComponent,
+      },
     ],
   },
   // Eski URL'ler için redirect (geriye dönük uyumluluk)

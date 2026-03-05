@@ -1,0 +1,25 @@
+.route-planner {
+  max-width: 960px;
+}
+
+.route-planner .card {
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.route-planner .list-group-item {
+  border-left: none;
+  border-right: none;
+}
+
+.route-planner .list-group-item:first-child {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.route-planner .list-group-item:last-child {
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+

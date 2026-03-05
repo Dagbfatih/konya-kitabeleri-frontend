@@ -1,0 +1,196 @@
+<div class="container-xxl py-4 route-planner">
+  <div class="row mb-4">
+    <div class="col-lg-8">
+      <h1 class="h3 mb-2">Rota Planlayıcı</h1>
+      <p class="text-muted mb-0">
+        Sistemdeki tarihi eserlerin konum bilgilerini kullanarak,
+        seçtiğiniz süre ve ulaşım türüne göre size uygun bir ziyaret
+        rotası öneriyoruz.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label fw-semibold">Süre</label>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedDurationId"
+            name="duration"
+          >
+            <option
+              *ngFor="let option of durationOptions"
+              [value]="option.id"
+            >
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label fw-semibold">Bölge</label>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedRegionId"
+            name="region"
+          >
+            <option
+              *ngFor="let option of regionOptions"
+              [value]="option.id"
+            >
+              {{ option.label }}
+            </option>
+          </select>
+          <small class="text-muted d-block mt-1">
+            {{ selectedRegionDescription }}
+          </small>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label fw-semibold d-block">Ulaşım</label>
+          <div class="btn-group w-100" role="group">
+            <button
+              *ngFor="let option of transportOptions"
+              type="button"
+              class="btn"
+              [ngClass]="{
+                'btn-dark': selectedTransportId === option.id,
+                'btn-outline-dark': selectedTransportId !== option.id
+              }"
+              (click)="selectedTransportId = option.id"
+            >
+              {{ option.label }}
+            </button>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 text-md-end">
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            (click)="generateRoute()"
+            [disabled]="loading || !hasCoordinateData"
+          >
+            <span
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+              *ngIf="loading"
+            ></span>
+            Rota Oluştur
+          </button>
+
+          <small
+            *ngIf="!hasCoordinateData && !loading"
+            class="text-muted d-block mt-1"
+          >
+            Konum bilgisi bulunan eserler yüklendiğinde rota oluşturabilirsiniz.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div
+    *ngIf="!loading && !errorMessage && currentRoute.length === 0 && hasCoordinateData"
+    class="alert alert-info"
+  >
+    Tercihlerinize göre bir rota oluşturmak için yukarıdan seçim yapıp "Rota Oluştur" butonuna tıklayın.
+  </div>
+
+  <div *ngIf="!loading && routes.length > 0">
+    <div
+      class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+    >
+      <div class="mb-2 mb-md-0">
+        <h2 class="h5 mb-1">
+          Önerilen Rotalar
+        </h2>
+        <div class="text-muted small" *ngIf="routes.length > 1">
+          {{ routes.length }} farklı rota önerisi
+        </div>
+      </div>
+      <div class="text-muted small text-md-end">
+        {{ currentRoute.length }} durak ·
+        ~{{ getCurrentRouteTotalDistance() | number: '1.1-1' }} km
+      </div>
+    </div>
+
+    <ul
+      class="nav nav-pills mb-3"
+      *ngIf="routes.length > 1"
+    >
+      <li
+        class="nav-item"
+        *ngFor="let route of routes; let i = index"
+      >
+        <button
+          class="nav-link"
+          [ngClass]="{ active: i === selectedRouteIndex }"
+          (click)="changeRoute(i)"
+          type="button"
+        >
+          Rota {{ i + 1 }}
+        </button>
+      </li>
+    </ul>
+
+    <div class="list-group shadow-sm">
+      <a
+        *ngFor="let artifact of currentRoute; let i = index"
+        class="list-group-item list-group-item-action py-3"
+        [routerLink]="getArtifactLink(artifact)"
+      >
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <span class="badge bg-dark me-2">{{ i + 1 }}</span>
+            <span class="fw-semibold">
+              {{ getArtifactName(artifact) }}
+            </span>
+          </div>
+          <small
+            *ngIf="segmentDistancesKmList[selectedRouteIndex]?.[i]"
+            class="text-muted"
+          >
+            ~{{
+              segmentDistancesKmList[selectedRouteIndex][i]
+                | number: '1.1-1'
+            }}
+            km
+          </small>
+        </div>
+        <p class="mb-1 text-muted small">
+          {{ artifact.historicalPeriod.name }} ·
+          {{ artifact.artifactType.name }}
+        </p>
+      </a>
+    </div>
+
+    <div
+      class="mt-4"
+      *ngIf="getMapUrlForCurrentRoute() as mapUrl"
+    >
+      <h3 class="h6 mb-2">
+        Harita Görünümü
+      </h3>
+      <a
+        class="btn btn-outline-primary"
+        [href]="mapUrl"
+        target="_blank"
+        rel="noopener"
+      >
+        Google Haritalar'da rotayı aç
+      </a>
+      <small class="text-muted d-block mt-1">
+        Rota yeni bir sekmede açılacaktır.
+      </small>
+    </div>
+  </div>
+</div>
+

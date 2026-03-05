@@ -85,6 +85,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { VisualSearchComponent } from './components/visual-search/visual-search.component';
 import { ArtifactCheckinLocalComponent } from './components/artifact-checkin-local/artifact-checkin-local.component';
 import { UserStatsComponent } from './components/user-stats/user-stats.component';
+import { RoutePlannerComponent } from './components/route-planner/route-planner.component';
 
 @NgModule({
   declarations: [
@@ -161,6 +162,7 @@ import { UserStatsComponent } from './components/user-stats/user-stats.component
     VisualSearchComponent,
     ArtifactCheckinLocalComponent,
     UserStatsComponent,
+    RoutePlannerComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
