@@ -12,8 +12,8 @@
 
   <div class="card mb-4">
     <div class="card-body">
-      <div class="row g-3 align-items-end">
-        <div class="col-md-4">
+      <div class="row g-3">
+        <div class="col-md-4 mb-2 mb-md-0">
           <label class="form-label fw-semibold">Süre</label>
           <select
             class="form-select"
@@ -29,7 +29,7 @@
           </select>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2 mb-md-0">
           <label class="form-label fw-semibold">Bölge</label>
           <select
             class="form-select"
@@ -48,7 +48,7 @@
           </small>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2 mb-md-0">
           <label class="form-label fw-semibold d-block">Ulaşım</label>
           <div class="btn-group w-100" role="group">
             <button
@@ -65,11 +65,13 @@
             </button>
           </div>
         </div>
+      </div>
 
-        <div class="col-12 col-md-4 text-md-end">
+      <div class="row mt-3">
+        <div class="col-12 text-md-end">
           <button
             type="button"
-            class="btn btn-primary w-100"
+            class="btn btn-primary"
             (click)="generateRoute()"
             [disabled]="loading || !hasCoordinateData"
           >
