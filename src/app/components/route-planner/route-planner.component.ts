@@ -534,7 +534,7 @@ export class RoutePlannerComponent implements OnInit {
 
     const path = parts.join('/');
 
-    return `//www.google.com/maps/dir/${path}/`;
+    return `https://www.google.com/maps/dir/${path}/`;
   }
 
   private getNearestTransitDistance(artifact: ArtifactDetailsDto): number {
