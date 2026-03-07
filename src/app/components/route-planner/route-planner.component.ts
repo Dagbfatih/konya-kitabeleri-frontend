@@ -86,6 +86,10 @@ export class RoutePlannerComponent implements OnInit {
   selectedRegionId: string = 'center';
 
   loading = false;
+  isManualMode = false;
+  manualStops: ArtifactDetailsDto[] = [];
+  manualSearchText = '';
+
   routes: ArtifactDetailsDto[][] = [];
   segmentDistancesKmList: number[][] = [];
   totalDistanceKmList: number[] = [];
@@ -220,6 +224,79 @@ export class RoutePlannerComponent implements OnInit {
       return 0;
     }
     return this.totalDistanceKmList[this.selectedRouteIndex] ?? 0;
+  }
+
+  getFilteredArtifactsForCurrentFilters(): ArtifactDetailsDto[] {
+    if (!this.hasCoordinateData) {
+      return [];
+    }
+
+    const regionArtifacts = this.filterByRegion(
+      this.candidateArtifacts,
+      this.selectedRegionId
+    );
+
+    if (!regionArtifacts.length) {
+      return [];
+    }
+
+    const transportFiltered = this.filterByTransport(
+      regionArtifacts,
+      this.selectedTransportId
+    );
+
+    let result =
+      transportFiltered.length >= 1 ? transportFiltered : regionArtifacts;
+
+    const search = this.manualSearchText?.trim().toLowerCase();
+    if (search && search.length > 0) {
+      result = result.filter((a) =>
+        this.getArtifactName(a).toLowerCase().includes(search)
+      );
+    }
+
+    return result;
+  }
+
+  isInManualRoute(artifact: ArtifactDetailsDto): boolean {
+    return this.manualStops.some(
+      (a) => a.artifact.id === artifact.artifact.id
+    );
+  }
+
+  addToManualRoute(artifact: ArtifactDetailsDto): void {
+    if (this.isInManualRoute(artifact)) {
+      return;
+    }
+    this.manualStops = [...this.manualStops, artifact];
+  }
+
+  removeFromManualRoute(artifactId: number): void {
+    this.manualStops = this.manualStops.filter(
+      (a) => a.artifact.id !== artifactId
+    );
+  }
+
+  moveManualStopUp(index: number): void {
+    if (index <= 0 || index >= this.manualStops.length) {
+      return;
+    }
+    const updated = [...this.manualStops];
+    const tmp = updated[index - 1];
+    updated[index - 1] = updated[index];
+    updated[index] = tmp;
+    this.manualStops = updated;
+  }
+
+  moveManualStopDown(index: number): void {
+    if (index < 0 || index >= this.manualStops.length - 1) {
+      return;
+    }
+    const updated = [...this.manualStops];
+    const tmp = updated[index + 1];
+    updated[index + 1] = updated[index];
+    updated[index] = tmp;
+    this.manualStops = updated;
   }
 
   getMaxStops(
@@ -528,6 +605,21 @@ export class RoutePlannerComponent implements OnInit {
     }
 
     const parts = route.map((a) => {
+      const { lat, lng } = this.getLatLng(a);
+      return `${lat},${lng}`;
+    });
+
+    const path = parts.join('/');
+
+    return `https://www.google.com/maps/dir/${path}/`;
+  }
+
+  getMapUrlForManualRoute(): string | null {
+    if (!this.manualStops || this.manualStops.length < 2) {
+      return null;
+    }
+
+    const parts = this.manualStops.map((a) => {
       const { lat, lng } = this.getLatLng(a);
       return `${lat},${lng}`;
     });

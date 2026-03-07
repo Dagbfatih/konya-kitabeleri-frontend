@@ -92,6 +92,31 @@
           </small>
         </div>
       </div>
+
+      <hr class="mt-4 mb-3" />
+
+      <ul class="nav nav-pills mb-3">
+        <li class="nav-item">
+          <button
+            type="button"
+            class="nav-link"
+            [ngClass]="{ active: !isManualMode }"
+            (click)="isManualMode = false"
+          >
+            Otomatik Rota
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            type="button"
+            class="nav-link"
+            [ngClass]="{ active: isManualMode }"
+            (click)="isManualMode = true"
+          >
+            Manuel Rota
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -100,13 +125,14 @@
   </div>
 
   <div
-    *ngIf="!loading && !errorMessage && currentRoute.length === 0 && hasCoordinateData"
+    *ngIf="!loading && !errorMessage && !isManualMode && currentRoute.length === 0 && hasCoordinateData"
     class="alert alert-info"
   >
     Tercihlerinize göre bir rota oluşturmak için yukarıdan seçim yapıp "Rota Oluştur" butonuna tıklayın.
   </div>
 
-  <div *ngIf="!loading && routes.length > 0">
+  <!-- Otomatik rota modu -->
+  <div *ngIf="!loading && !isManualMode && routes.length > 0">
     <div
       class="d-flex flex-wrap justify-content-between align-items-center mb-3"
     >
@@ -187,11 +213,134 @@
         target="_blank"
         rel="noopener"
       >
-        Google Haritalar'da rotayı aç
+        Rotayı Haritalar'da görüntüle
       </a>
       <small class="text-muted d-block mt-1">
         Rota yeni bir sekmede açılacaktır.
       </small>
+    </div>
+  </div>
+
+  <!-- Manuel rota modu -->
+  <div *ngIf="!loading && isManualMode">
+    <div class="row">
+      <div class="col-lg-6 mb-3 mb-lg-0">
+        <h2 class="h6 mb-3">
+          Eserler
+        </h2>
+        <div class="mb-2">
+          <input
+            type="search"
+            class="form-control form-control-sm"
+            [(ngModel)]="manualSearchText"
+            placeholder="Eser ara..."
+          />
+        </div>
+
+        <div class="list-group shadow-sm">
+          <button
+            type="button"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            *ngFor="let artifact of getFilteredArtifactsForCurrentFilters()"
+            [disabled]="isInManualRoute(artifact)"
+            (click)="addToManualRoute(artifact)"
+          >
+            <div>
+              <div class="fw-semibold">
+                {{ getArtifactName(artifact) }}
+              </div>
+              <div class="small text-muted">
+                {{ artifact.historicalPeriod.name }} ·
+                {{ artifact.artifactType.name }}
+              </div>
+            </div>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-secondary': isInManualRoute(artifact),
+                'bg-primary': !isInManualRoute(artifact)
+              }"
+            >
+              {{ isInManualRoute(artifact) ? 'Eklendi' : 'Ekle' }}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2 class="h6 mb-3">
+          Seçili Duraklar
+        </h2>
+
+        <div
+          *ngIf="manualStops.length === 0"
+          class="alert alert-info py-2"
+        >
+          Soldaki listeden durak ekleyerek kendi rotanızı oluşturabilirsiniz.
+        </div>
+
+        <div
+          class="list-group shadow-sm mb-3"
+          *ngIf="manualStops.length > 0"
+        >
+          <div
+            class="list-group-item d-flex justify-content-between align-items-center"
+            *ngFor="let stop of manualStops; let i = index"
+          >
+            <div>
+              <div class="fw-semibold">
+                <span class="badge bg-dark me-2">{{ i + 1 }}</span>
+                {{ getArtifactName(stop) }}
+              </div>
+              <div class="small text-muted">
+                {{ stop.historicalPeriod.name }} ·
+                {{ stop.artifactType.name }}
+              </div>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="moveManualStopUp(i)"
+                [disabled]="i === 0"
+              >
+                ↑
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="moveManualStopDown(i)"
+                [disabled]="i === manualStops.length - 1"
+              >
+                ↓
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                (click)="removeFromManualRoute(stop.artifact.id!)"
+              >
+                Sil
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="manualStops.length >= 2">
+          <p class="small text-muted mb-2">
+            {{ manualStops.length }} durak seçildi.
+          </p>
+
+          <a
+            *ngIf="getMapUrlForManualRoute() as manualMapUrl"
+            class="btn btn-outline-primary"
+            [href]="manualMapUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            Rotayı Haritalar'da görüntüle
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
