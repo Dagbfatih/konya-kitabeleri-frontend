@@ -17,6 +17,12 @@ interface TransportOption {
   label: string;
 }
 
+interface FilterOption {
+  id: string;
+  name: string;
+  selected: boolean;
+}
+
 interface RegionOption {
   id: string;
   label: string;
@@ -41,7 +47,9 @@ export class RoutePlannerComponent implements OnInit {
 
   durationOptions: DurationOption[] = [
     { id: '1d', days: 1, label: '1 Günlük Gezi' },
+    { id: '2d', days: 2, label: '2 Günlük Gezi' },
     { id: '3d', days: 3, label: '3 Günlük Gezi' },
+    { id: '4d', days: 4, label: '4 Günlük Gezi' },
     { id: '5d', days: 5, label: '5 Günlük Gezi' },
   ];
 
@@ -49,6 +57,29 @@ export class RoutePlannerComponent implements OnInit {
     { id: 'walking', label: 'Yaya' },
     { id: 'driving', label: 'Araç' },
     { id: 'public', label: 'Toplu Taşıma' },
+  ];
+
+  eraOptions: FilterOption[] = [
+    { id: 'bizans', name: 'Bizans', selected: false },
+    { id: 'selcuklu', name: 'Selçuklu', selected: false },
+    { id: 'karamanogullari', name: 'Karamanoğulları', selected: false },
+    { id: 'osmanli', name: 'Osmanlı', selected: false },
+    { id: 'cumhuriyet', name: 'Cumhuriyet', selected: false },
+  ];
+
+  typeOptions: FilterOption[] = [
+    { id: 'camii', name: 'Camii', selected: false },
+    { id: 'hamam', name: 'Hamam', selected: false },
+    { id: 'cesme', name: 'Çeşme', selected: false },
+    { id: 'kilise', name: 'Kilise', selected: false },
+    { id: 'medrese', name: 'Medrese', selected: false },
+    { id: 'su_deposu', name: 'Su Deposu', selected: false },
+    { id: 'banka', name: 'Banka', selected: false },
+    { id: 'kapi', name: 'Kapı', selected: false },
+    { id: 'tekke', name: 'Tekke', selected: false },
+    { id: 'turbe', name: 'Türbe', selected: false },
+    { id: 'mescit', name: 'Mescit', selected: false },
+    { id: 'hankah', name: 'Hankah', selected: false },
   ];
 
   regionOptions: RegionOption[] = [
@@ -156,9 +187,24 @@ export class RoutePlannerComponent implements OnInit {
       this.selectedRegionId
     );
 
-    if (!regionArtifacts.length) {
+    const selectedEras = this.eraOptions.filter(o => o.selected).map(o => o.name.toLowerCase());
+    const selectedTypes = this.typeOptions.filter(o => o.selected).map(o => o.name.toLowerCase());
+
+    const periodFiltered = regionArtifacts.filter(a => {
+      if (selectedEras.length === 0) return true;
+      const artifactEra = (a.historicalPeriod?.name || '').toLowerCase();
+      return selectedEras.some(era => artifactEra.includes(era) || era.includes(artifactEra));
+    });
+
+    const typeFiltered = periodFiltered.filter(a => {
+      if (selectedTypes.length === 0) return true;
+      const artifactType = (a.artifactType?.name || '').toLowerCase();
+      return selectedTypes.some(type => artifactType.includes(type) || type.includes(artifactType));
+    });
+
+    if (!typeFiltered.length) {
       this.errorMessage =
-        'Seçilen bölge için konum bilgisi bulunan eser bulunamadı.';
+        'Seçilen filtrelere (Bölge, Dönem, Yapı Türü) uygun konum bilgisi bulunan eser bulunamadı.';
       this.routes = [];
       this.segmentDistancesKmList = [];
       this.totalDistanceKmList = [];
@@ -170,12 +216,12 @@ export class RoutePlannerComponent implements OnInit {
     )!;
     // Ulaşım tipine göre eserleri filtrele (yaya / toplu taşıma için ek kısıtlar)
     const transportFiltered = this.filterByTransport(
-      regionArtifacts,
+      typeFiltered,
       this.selectedTransportId
     );
 
     const workingArtifacts =
-      transportFiltered.length >= 2 ? transportFiltered : regionArtifacts;
+      transportFiltered.length >= 2 ? transportFiltered : typeFiltered;
 
     const maxStops = this.getMaxStops(
       duration.days,
@@ -236,17 +282,32 @@ export class RoutePlannerComponent implements OnInit {
       this.selectedRegionId
     );
 
-    if (!regionArtifacts.length) {
+    const selectedEras = this.eraOptions.filter(o => o.selected).map(o => o.name.toLowerCase());
+    const selectedTypes = this.typeOptions.filter(o => o.selected).map(o => o.name.toLowerCase());
+
+    const periodFiltered = regionArtifacts.filter(a => {
+      if (selectedEras.length === 0) return true;
+      const artifactEra = (a.historicalPeriod?.name || '').toLowerCase();
+      return selectedEras.some(era => artifactEra.includes(era) || era.includes(artifactEra));
+    });
+
+    const typeFiltered = periodFiltered.filter(a => {
+      if (selectedTypes.length === 0) return true;
+      const artifactType = (a.artifactType?.name || '').toLowerCase();
+      return selectedTypes.some(type => artifactType.includes(type) || type.includes(artifactType));
+    });
+
+    if (!typeFiltered.length) {
       return [];
     }
 
     const transportFiltered = this.filterByTransport(
-      regionArtifacts,
+      typeFiltered,
       this.selectedTransportId
     );
 
     let result =
-      transportFiltered.length >= 1 ? transportFiltered : regionArtifacts;
+      transportFiltered.length >= 1 ? transportFiltered : typeFiltered;
 
     const search = this.manualSearchText?.trim().toLowerCase();
     if (search && search.length > 0) {

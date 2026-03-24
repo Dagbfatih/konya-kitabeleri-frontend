@@ -43,7 +43,7 @@
               {{ option.label }}
             </option>
           </select>
-          <small class="text-muted d-block mt-1">
+          <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">
             {{ selectedRegionDescription }}
           </small>
         </div>
@@ -63,6 +63,46 @@
             >
               {{ option.label }}
             </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-1">
+        <div class="col-md-6 mb-2 mb-md-0">
+          <label class="form-label fw-semibold">Dönem</label>
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              Seçiniz
+            </button>
+            <ul class="dropdown-menu w-100 p-2 shadow" style="max-height: 250px; overflow-y: auto;">
+              <li *ngFor="let option of eraOptions; let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [value]="option.id" [id]="'era_'+i" [(ngModel)]="option.selected">
+                  <label class="form-check-label w-100" style="cursor: pointer;" [for]="'era_'+i">
+                    {{ option.name }}
+                  </label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2 mb-md-0">
+          <label class="form-label fw-semibold">Yapı Türü</label>
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              Seçiniz
+            </button>
+            <ul class="dropdown-menu w-100 p-2 shadow" style="max-height: 250px; overflow-y: auto;">
+              <li *ngFor="let option of typeOptions; let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [value]="option.id" [id]="'type_'+i" [(ngModel)]="option.selected">
+                  <label class="form-check-label w-100" style="cursor: pointer;" [for]="'type_'+i">
+                    {{ option.name }}
+                  </label>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
