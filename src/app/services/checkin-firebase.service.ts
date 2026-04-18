@@ -5,7 +5,8 @@ import {
   collection, 
   doc, 
   getDoc, 
-  setDoc, 
+  setDoc,
+  getDocs,
   updateDoc, 
   arrayUnion,
   increment,
@@ -72,6 +73,23 @@ export class CheckinFirebaseService {
         achievements: []
       };
     }
+  }
+
+  // Tüm kullanıcıların puanlarını getir (Admin paneli için)
+  async getAllUsersData(): Promise<Record<string, UserPoints & { rankName?: string }>> {
+    if(!this.db) return {};
+    const colRef = collection(this.db, "user_points");
+    const snapshot = await getDocs(colRef);
+    
+    let allData: Record<string, UserPoints & { rankName?: string }> = {};
+    snapshot.forEach(docSnap => {
+      let data = docSnap.data() as UserPoints;
+      // İsteğe bağlı olarak rütbeleri de hesapla
+      let rank = this.getRank(data.totalPoints);
+      allData[docSnap.id] = { ...data, rankName: rank.name };
+    });
+    
+    return allData;
   }
 
   // Check-in yap

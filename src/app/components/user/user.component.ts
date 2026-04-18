@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from './../../models/entities/user';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { CheckinFirebaseService } from 'src/app/services/checkin-firebase.service';
 import {
   faCircle,
   faClipboardCheck,
@@ -26,12 +27,14 @@ export class UserComponent implements OnInit {
   faRedoAlt = faRedoAlt;
   faDotCircle = faCircle;
   dataLoaded = false;
+  userPointsMap: Record<string, any> = {};
 
   private tooltipList = new Array<any>();
 
   constructor(
     private userService: UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private checkinService: CheckinFirebaseService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +57,16 @@ export class UserComponent implements OnInit {
 
   getAllUsers() {
     this.dataLoaded = false;
-    this.userService.getAll().subscribe((response) => {
+    this.userService.getAll().subscribe(async (response) => {
       this.users = response.data;
+      
+      // Fetch points
+      try {
+          this.userPointsMap = await this.checkinService.getAllUsersData();
+      } catch (e) {
+          console.error("Firebase puanlari alinamadi:", e);
+      }
+
       this.dataLoaded = true;
     });
   }

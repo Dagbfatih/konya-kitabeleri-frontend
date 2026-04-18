@@ -22,6 +22,7 @@
             <th scope="col">İsim</th>
             <th scope="col">Soy İsim</th>
             <th scope="col">Email</th>
+            <th scope="col">Puan & Rütbe</th>
             <th scope="col">Durum</th>
             <th></th>
         </tr>
@@ -32,6 +33,10 @@
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
+            <td>
+                <strong>{{userPointsMap[user.id]?.totalPoints || 0}}</strong> Puan<br>
+                <small class="text-muted">{{userPointsMap[user.id]?.rankName || 'Acemi Gezgin'}}</small>
+            </td>
             <td>
                 <button class="btn shadow-none">
                     <fa-icon *ngIf="user.status" [icon]="faDotCircle" size="1x" class="fa fa-icon-dot text-success">
