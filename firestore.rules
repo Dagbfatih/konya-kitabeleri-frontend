@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // `user_points` koleksiyonu kuralları
+    match /user_points/{userId} {
+      
+      // DİKKAT: Custom Auth kurulmadığı için şu an mecburen herkese okuma/yazma izni veriyoruz.
+      // Firebase, kullanıcının .NET sisteminizdeki girişini kendisi doğrulayamaz.
+      allow read: if true; 
+      
+      // Yazma işlemi için sadece veri yapısının doğru olmasını (veri bütünlüğünü) zorlayabiliriz:
+      allow write: if 
+        // Gönderilen veride totalPoints, visitedCount ve visits olmalı
+        request.resource.data.keys().hasAll(['totalPoints', 'visitedCount', 'visits']) &&
+        // totalPoints ve visitedCount sayı olmalı
+        request.resource.data.totalPoints is number &&
+        request.resource.data.visitedCount is number &&
+        // Puanlar eksiye düşemez
+        request.resource.data.totalPoints >= 0 &&
+        request.resource.data.visitedCount >= 0;
+    }
+    
+  }
+}

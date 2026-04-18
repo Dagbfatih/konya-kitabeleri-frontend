@@ -7,6 +7,7 @@ import { TokenService } from './../../services/token.service';
 import { Router } from '@angular/router';
 import { ErrorService } from './../../services/error.service';
 import { AuthService } from './../../services/auth.service';
+import { SettingsService } from 'src/app/services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -37,7 +38,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private toastrService: ToastrService,
-    private mailService: MailService
+    private mailService: MailService,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +80,8 @@ export class RegisterComponent implements OnInit {
           //   this.getTranslate('redirectToLoginPage'),
           //   this.getTranslate('info')
           // );
-          this.router.navigate(['/login']);
+          let currentLang = this.settingsService.getCurrentLanguageShortCode();
+          this.router.navigate(['/' + currentLang, 'login']);
         },
         (responseError) => {
           this.errorService.writeErrorMessages(responseError);

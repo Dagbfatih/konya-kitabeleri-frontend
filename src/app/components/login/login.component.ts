@@ -58,7 +58,13 @@ export class LoginComponent implements OnInit {
             ? this.setTokenOnLocal(response.data)
             : this.setTokenOnSession(response.data);
           this.toastrService.success(response.message, this.getTranslate('successful'));
-          this.router.navigate(['/admin']);
+          let roles = this.tokenService.getUserRolesWithJWT();
+          let currentLang = this.getCurrentLanguageShortCode();
+          if (roles.includes('admin') || roles.includes('Admin')) {
+            this.router.navigate(['/' + currentLang, 'admin']);
+          } else {
+            this.router.navigate(['/' + currentLang, 'home']);
+          }
         },
         (responseError) => {
           this.errorService.writeErrorMessages(responseError);

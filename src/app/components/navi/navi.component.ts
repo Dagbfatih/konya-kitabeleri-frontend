@@ -222,6 +222,11 @@ export class NaviComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  isAdmin() {
+    let roles = this.tokenService.getUserRolesWithJWT();
+    return roles.includes('admin') || roles.includes('Admin');
+  }
+
   signOut() {
     this.authService.signOut();
     sessionStorage.removeItem('adminCurrentPage');

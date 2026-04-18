@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckinLocalService } from 'src/app/services/checkin-local.service';
+import { CheckinFirebaseService, UserPoints } from 'src/app/services/checkin-firebase.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { faTrophy, faStar, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,7 +30,7 @@ export class UserStatsComponent implements OnInit {
   ];
 
   constructor(
-    private checkinService: CheckinLocalService,
+    private checkinService: CheckinFirebaseService,
     private settingsService: SettingsService
   ) {}
 
@@ -38,10 +38,14 @@ export class UserStatsComponent implements OnInit {
     this.loadUserData();
   }
 
-  loadUserData() {
-    this.userPoints = this.checkinService.getUserPoints();
+  async loadUserData() {
+    this.userPoints = await this.checkinService.getUserData();
+    if(!this.userPoints) {
+       // Not logged in or error
+       return;
+    }
     this.currentRank = this.checkinService.getRank(this.userPoints.totalPoints);
-    this.recentVisits = this.checkinService.getRecentVisits(10);
+    this.recentVisits = await this.checkinService.getRecentVisits(10);
 
     // Bir sonraki rütbeyi bul
     const currentRankIndex = this.allRanks.findIndex(r => r.name === this.currentRank.name);
@@ -64,10 +68,9 @@ export class UserStatsComponent implements OnInit {
   }
 
   resetData() {
-    if (confirm('Tüm verileriniz silinecek. Emin misiniz?')) {
-      this.checkinService.resetAllData();
-      this.loadUserData();
-      alert('Veriler sıfırlandı!');
+    if (confirm('Tüm verileriniz silinecek (Henüz Firebase silme entegre değil). Emin misiniz?')) {
+      // this.checkinService.resetAllData();
+      alert('Firebase üzerinden sıfırlama işlemi manuel yapılmalıdır.');
     }
   }
 

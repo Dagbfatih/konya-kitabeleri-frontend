@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ArtifactDetailsDto } from 'src/app/models/dtos/artifactDetailsDto';
-import { CheckinLocalService } from 'src/app/services/checkin-local.service';
+import { CheckinFirebaseService } from 'src/app/services/checkin-firebase.service';
 import { ToastrService } from 'ngx-toastr';
 import { faMapMarkerAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,7 +21,7 @@ export class ArtifactCheckinLocalComponent implements OnInit {
   MAX_DISTANCE_METERS = 100;
 
   constructor(
-    private checkinService: CheckinLocalService,
+    private checkinService: CheckinFirebaseService,
     private toastrService: ToastrService
   ) {}
 
@@ -29,8 +29,8 @@ export class ArtifactCheckinLocalComponent implements OnInit {
     this.checkIfAlreadyVisited();
   }
 
-  checkIfAlreadyVisited() {
-    this.isAlreadyVisited = this.checkinService.hasVisited(this.artifact.artifact.id!);
+  async checkIfAlreadyVisited() {
+    this.isAlreadyVisited = await this.checkinService.hasVisited(this.artifact.artifact.id!);
   }
 
   async checkIn() {
@@ -69,7 +69,7 @@ export class ArtifactCheckinLocalComponent implements OnInit {
       }
 
       // Check-in yap
-      const result = this.checkinService.checkIn(
+      const result = await this.checkinService.checkIn(
         this.artifact.artifact.id!,
         this.artifact.artifact.name,
         userLat,
@@ -84,15 +84,17 @@ export class ArtifactCheckinLocalComponent implements OnInit {
         );
         
         // Toplam puanı göster
-        const userData = this.checkinService.getUserPoints();
-        const rank = this.checkinService.getRank(userData.totalPoints);
-        
-        setTimeout(() => {
-          this.toastrService.info(
-            `Toplam: ${userData.totalPoints} puan - Rütbe: ${rank.name}`,
-            'İstatistikler'
-          );
-        }, 1000);
+        const userData = await this.checkinService.getUserData();
+        if(userData) {
+          const rank = this.checkinService.getRank(userData.totalPoints);
+          
+          setTimeout(() => {
+            this.toastrService.info(
+              `Toplam: ${userData.totalPoints} puan - Rütbe: ${rank.name}`,
+              'İstatistikler'
+            );
+          }, 1000);
+        }
       } else {
         this.toastrService.info(result.message, 'Ziyaret Kaydı');
       }

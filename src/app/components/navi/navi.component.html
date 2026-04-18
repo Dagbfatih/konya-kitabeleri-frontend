@@ -213,22 +213,25 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown dropdown-menu-end ms-2" *ngIf="isAuthenticated()">
+                <li class="nav-item ms-2 align-self-center mt-2 mt-lg-0" *ngIf="!isAuthenticated()">
+                    <a class="btn btn-sm btn-outline-light me-2" [routerLink]="['/' + getCurrentLanguageShortCode(), 'login']">{{getTranslate('signIn') || 'Giriş Yap'}}</a>
+                    <a class="btn btn-sm btn-light" [routerLink]="['/' + getCurrentLanguageShortCode(), 'register']">{{getTranslate('signUp') || 'Kayıt Ol'}}</a>
+                </li>
 
-                    <a class="nav-link d-block link-light text-decoration-none dropdown-toggle" role="button"
+                <li class="nav-item dropdown dropdown-menu-end ms-2 align-self-center mt-2 mt-lg-0" *ngIf="isAuthenticated()">
+                    <a class="nav-link btn btn-sm btn-outline-light d-inline-block text-decoration-none dropdown-toggle" role="button"
                         id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <!-- <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32"> -->
-                        {{getUser().firstName + ' ' + getUser().lastName}}
+                        <i class="fa fa-user me-1 text-white"></i>
+                        <span class="text-white">{{getUser().firstName + ' ' + getUser().lastName}}</span>
                     </a>
 
                     <ul class="dropdown-menu text-small dropdown-menu-dark" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin']">Admin</a></li>
-                        <li><a class="dropdown-item disabled">{{getTranslate('settings')}}</a></li>
-                        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                        <li *ngIf="isAdmin()"><a class="dropdown-item" [routerLink]="['/' + getCurrentLanguageShortCode(), 'admin']">Admin Paneli</a></li>
+                        <li *ngIf="!isAdmin()"><a class="dropdown-item" [routerLink]="['/' + getCurrentLanguageShortCode(), 'stats']">Profil / Puanlarım</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" (click)="signOut()" style="cursor: pointer;">{{getTranslate('signOut')}}</a></li>
+                        <li><a class="dropdown-item" (click)="signOut()" style="cursor: pointer;">{{getTranslate('signOut') || 'Çıkış Yap'}}</a></li>
                     </ul>
 
                 </li>
